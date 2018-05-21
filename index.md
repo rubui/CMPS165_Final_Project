@@ -1,37 +1,11 @@
-## Welcome to GitHub Pages
+## Careguide For Houseplants
+A visulization on house plant maintenance
+### Project Objective
+The objective of this project is just to provide an easily navigable and way to easily identify visualization for house plants. The visualization will focus largely on basic information on housplant care such as being a quick reference on how much watering a particular houseplant requires or the amount of sunlight a specific houseplant may need. This visulization can then double as a quick reference guide for all plant lovers and maintaining their plants or serve as a simple visualization displaying what houseplant may be more suited towards your lifestyle.
 
-You can use the [editor on GitHub](https://github.com/rubui/CMPS165_Final_Project/edit/master/index.md) to maintain and preview the content for your website in Markdown files.
-
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
-
-### Markdown
-
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
-
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/rubui/CMPS165_Final_Project/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
+### Potential Data Sources
+1. USDA [PLANTS Database](https://plants.usda.gov/java/).
++ Currently there exists a number of websites hosting information on various plant care, so a potential obstacle may be finding a way to extract this information.
 ### Support or Contact
 
 Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
