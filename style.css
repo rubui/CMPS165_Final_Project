@@ -1,15 +1,10 @@
-font {
-  cursor: default;
-  font-size: 12px;  
-  font-family: sans-serif;
+html *{
+   font-family: sans-serif !important;
 }
 
-h1 {
-  font-weight: bold;
+h1,h2,h3 {
   color:green;
 }
 
-h2 {
-  font-weight: bold;
-  color:green;
-}
+
+
