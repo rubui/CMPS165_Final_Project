@@ -1,0 +1,10 @@
+text {
+  cursor: default;
+  font-size: 12px;  
+  font-family: sans-serif;
+}
+
+h1 {
+  font-weight: 400;
+  color:green;
+}
