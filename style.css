@@ -1,8 +1,8 @@
-html *{
-   font-family: sans-serif !important;
+* {
+   font-family:sans-serif;
 }
 
-h1,h2,h3 {
+h1, h2, h3 {
   color:green;
 }
 
