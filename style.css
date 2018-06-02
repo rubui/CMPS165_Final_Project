@@ -15,6 +15,21 @@
 h1, h2 {
   color:green;
 }
+.node circle {
+        stroke: #3a403d;
+        stroke-width: .5px;
+      }
 
 
 
+.titlesX{
+    font-size: 21px;
+    fill: #aaa;
+    cursor: default;
+}
+
+.titlesY{
+    font-size: 21px;
+    fill: #aaa;
+    cursor: default;
+}

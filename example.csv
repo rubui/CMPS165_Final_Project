@@ -1,0 +1,13 @@
+country,gdp,continent,amount
+Afghanistan,18.4,Asia,high
+Albania,12.14,Europe,medium
+Algeria,168.32,Africa,low
+Angola,91.94,Africa,low
+Afghanistan,18.4,Asia,high
+Albania,12.14,Europe,low
+Algeria,168.32,Africa,low
+Angola,91.94,Africa,low
+Afghanistan,18.4,Asia,medium
+Albania,12.14,Europe,medium
+Algeria,168.32,Africa,high
+Angola,91.94,Africa,high
