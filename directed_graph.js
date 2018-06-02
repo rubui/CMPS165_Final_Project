@@ -10,6 +10,14 @@ function directed_graph(data, svg){
         center = {x:width/2,y:height/2},
         g = svg.append("g").attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
 
+//var x = d3.scaleLinear()
+//    .domain(padExtent([1,5]))
+//    .range(padExtent([0, width/2]));
+//    
+//var y = d3.scaleLinear()
+//    .domain(padExtent([1,5]))
+//    .range(padExtent([height/2, 0]));
+    
     var titlesX = {
         low: 160,
         medium: width/2,
@@ -54,7 +62,8 @@ function directed_graph(data, svg){
             country: d.country,
             gdp: d.gdp,
             continent: d.continent,
-            amount: d.amount,
+            sun: d.sun,
+            water: d.water,
             radius: radius
         };
     }); 
@@ -64,10 +73,10 @@ function directed_graph(data, svg){
 
 //functions called once for each node-- provides the approriate x and y for nodes
     function nodeXPos(d){
-        return amountCentersX[d.amount].x;
+        return amountCentersX[d.sun].x;
     }
     function nodeYPos(d){
-        return amountCentersY[d.amount].y;
+        return amountCentersY[d.water].y;
 
     }
 //    simulation.force('x', d3.forceX().strength(forceStrength).x(nodeXPos));
@@ -115,7 +124,13 @@ var bubblesE = bubbles.append("circle")
             .attr('x',function(d){return titlesX[d];})
             .attr('y',40)
             .attr('text-anchor','middle')
-            .text(function(d){return d;})
+            .text(function(d){
+//                if(d == 'medium')
+//                        {
+//                            return "Lots";
+//                        }
+                return d;
+            });
     
         svg.selectAll('.titlesY')
         .data(myData)
@@ -124,7 +139,13 @@ var bubblesE = bubbles.append("circle")
             .attr('x',40)
             .attr('y',function(d){return titlesY[d];})
             .attr('text-anchor','beginning')
-            .text(function(d){return d;})
+            .text(function(d){
+//                if(d == 'medium')
+//                        {
+//                            return "low Lots";
+//                        }
+                return d;
+            });
     
     //updates the x and y each tick-- 'x' and 'y' are for images 
     //while cx and cy are for the bubbles
@@ -177,8 +198,24 @@ var bubblesE = bubbles.append("circle")
         
 //        d3.select(".food-overview").classed("hidden", true);
     };
-
     
+//    g.append("g")
+//      .attr("class", "x axis")
+//      .attr("transform", "translate(0," +  + ")")
+//      .call(d3.axisBottom(x).ticks(0));
+//
+//  g.append("g")
+//      .attr("class", "y axis")
+//      .attr("transform", "translate(" + 0 + ", 0)")
+//      .call(d3.axisLeft(y).ticks(0));
+//
+//    
+//    function padExtent(e, p) {
+//        if (p === undefined) p = 1;
+//        return ([e[0] - p, e[1] + p]);
+//    }
+//
+//    
 //    var n = 100,
 //    nodes = d3.range(n).map(function(i) { return {index: 1}; }),
 //    links = d3.range(n).map(function(i) { return {source: i, target: (i + 3) % n}; });
