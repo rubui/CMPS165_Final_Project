@@ -76,6 +76,8 @@ function directed_graph(data, svg){
 //    var node = svg.selectAll('.scale-node')
 //        .data(nodes,function(d){return d.id})
     
+    
+//the following code basically creates a 'folder' for both image and circle
     var bubbles = svg.selectAll('.bubble')
         .data(nodes,function(d){return d.id})
         .enter()
@@ -103,6 +105,7 @@ var bubblesE = bubbles.append("circle")
 //    bubble.
 
 
+//adding the axis titles
     var myData = d3.keys(titlesX);
     
     svg.selectAll('.titlesX')
@@ -123,6 +126,8 @@ var bubblesE = bubbles.append("circle")
             .attr('text-anchor','beginning')
             .text(function(d){return d;})
     
+    //updates the x and y each tick-- 'x' and 'y' are for images 
+    //while cx and cy are for the bubbles
     function ticked(){
         svg.selectAll(".bubble")
             .attr("x", function(d) { return +d.x - (radius * 4/3); })
@@ -131,6 +136,7 @@ var bubblesE = bubbles.append("circle")
             .attr("cy", function(d) { return +d.y; });
     }
     
+    //we can modify the get specific images later on
     bubbles.append("image")
       .attr("xlink:href", function (d){ return "apple.png"; })
       .attr("class", "bubble")
@@ -139,7 +145,7 @@ var bubblesE = bubbles.append("circle")
     
     simulation.nodes(nodes);
 
-    
+    //tells the simulation to start again
     start();
     
      function start(){
