@@ -36,7 +36,7 @@ function directed_graph(data, svg){
     
     //collision organic (we can also use .collision force)
     function charge(d){
-        return -Math.pow(d.radius+8, 2.0) * forceStrength;
+        return -Math.pow(d.radius+13, 2.0) * forceStrength;
     }
     
     var simulation = d3.forceSimulation()
