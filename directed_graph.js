@@ -11,21 +11,21 @@ function directed_graph(data, svg){
         g = svg.append("g").attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
 
     var titlesX = {
-        high : 160,
+        low: 160,
         medium: width/2,
-        low: width - 160        
+        high: width - 160        
     };
     
     var titlesY = {
-        high : 160,
+        high: 160,
         medium: height/2+50,
         low: height-100        
     };
     
     var amountCentersX = {
-        high: {x:width/4},
+        low: {x:width/4},
         medium:{x:width/2},
-        low:{x:2*(width/3)+80}
+        high:{x:2*(width/3)+80}
     };
     
     var amountCentersY = {
