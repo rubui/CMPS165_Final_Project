@@ -1,8 +1,8 @@
 function directed_graph(data, svg){
 //    http://bl.ocks.org/ericandrewlewis/dc79d22c74b8046a5512
 //    http://vallandingham.me/bubble_charts_with_d3v4.html
-    
-    
+
+
     var radius = 15,
         nodePadding = 2.5,
         forceStrength = .03,
@@ -27,7 +27,7 @@ function directed_graph(data, svg){
         .attr('d', 'M 0,-5 L 10 ,0 L 0,5')
         .attr('fill', '#999')
         .style('stroke','none');
-    
+
     svg.append('defs').append('marker')
         .attr('id','arrowhead_top')
             .attr('viewBox','-0 -5 10 10')
@@ -41,7 +41,7 @@ function directed_graph(data, svg){
         .attr('d', 'M 0,-5 L 10 ,0 L 0,5')
         .attr('fill', '#999')
         .style('stroke','none');
-    
+
     svg.append('defs').append('marker')
         .attr('id','arrowhead_left')
             .attr('viewBox','-0 -5 10 10')
@@ -55,7 +55,7 @@ function directed_graph(data, svg){
         .attr('d', 'M 0,-5 L 10 ,0 L 0,5')
         .attr('fill', '#999')
         .style('stroke','none');
-    
+
     svg.append('defs').append('marker')
         .attr('id','arrowhead_bottom')
             .attr('viewBox','-0 -5 10 10')
@@ -69,7 +69,7 @@ function directed_graph(data, svg){
         .attr('d', 'M 0,-5 L 10 ,0 L 0,5')
         .attr('fill', '#999')
         .style('stroke','none');
-    
+
     var x = d3.scaleLinear()
         .domain(padExtent([]))
         .range(padExtent([0, width-axisPad]));
@@ -77,19 +77,19 @@ function directed_graph(data, svg){
     var y = d3.scaleLinear()
         .domain(padExtent([]))
         .range(padExtent([height-axisPad, 0]));
-    
+
     var titlesX = {
         low: 160,
         medium: width/2,
-        high: width - 160        
+        high: width - 160
     };
-    
+
     var titlesY = {
         high: 160,
         medium: height/2+50,
-        low: height-100        
+        low: height-100
     };
-    
+
     var amountCentersX = {
         low: {x:width/4},
         medium:{x:width/2},
@@ -99,9 +99,9 @@ function directed_graph(data, svg){
         "Full sun to part shade":{x:4*width/7},
         "Part sun to part shade":{x:3*width/7},
         "Part shade":{x:2*width/7},
-        "Part shade to full shade":{x:width/7} 
+        "Part shade to full shade":{x:width/7}
     };
-    
+
     var amountCentersY = {
         high: {y:height/3-50},
         medium:{y:height/2},
@@ -111,20 +111,20 @@ function directed_graph(data, svg){
         "Slightly dry":{y:2*height/5},
         "Never dry":{y:height/5}
     };
-    
-    var moistureRadius = {                
+
+    var moistureRadius = {
         "Low":{radius: 15},
         "Low to medium":{radius: 20},
         "Medium":{radius: 25},
         "Medium to high":{radius: 30},
         "High":{radius: 35}
     }
-    
+
     //collision organic (we can also use .collision force)
     function charge(d){
         return -Math.pow(d.radius+8, 2.0) * forceStrength;
     }
-    
+
     var simulation = d3.forceSimulation()
         .velocityDecay(0.2)
         .force('x', d3.forceX().strength(forceStrength).x(center.x))
@@ -137,25 +137,25 @@ function directed_graph(data, svg){
         //we want the simulation to pause until nodes exist
 //        .stop();
     simulation.stop();
-    
-    
+
+
     // Map data from CSV
     var nodes = data.map(function(d){
         return{
             sci_name: d.Scientific_Name,
-            nickname: d.Common_Name,             
+            nickname: d.Common_Name,
             sun: d.Sunlight,
             water: d.Moisture,
             soil_ind: d.Soil_Indicator,
-            plant_spread: d.Plant_Spread, 
-            plant_height: d.Plant_Height, 
-            toxic_dogs: d.Toxic_Dogs, 
-            toxic_cats: d.Toxic_Cats, 
-            radius: radius//moistureRadius[d.Moisture].radius             
+            plant_spread: d.Plant_Spread,
+            plant_height: d.Plant_Height,
+            toxic_dogs: d.Toxic_Dogs,
+            toxic_cats: d.Toxic_Cats,
+            radius: radius//moistureRadius[d.Moisture].radius
         };
-    }); 
-    
-    
+    });
+
+
 //        console.log(nodes);
 
 //functions called once for each node-- provides the approriate x and y for nodes
@@ -164,16 +164,16 @@ function directed_graph(data, svg){
     }
     function nodeYPos(d){
         return amountCentersY[d.soil_ind].y;
-//        console.log(amountCentersSoilY[d.soil_ind]); 
-//        return amountCentersSoilY[d.soil_ind].y; 
+//        console.log(amountCentersSoilY[d.soil_ind]);
+//        return amountCentersSoilY[d.soil_ind].y;
     }
 //    simulation.force('x', d3.forceX().strength(forceStrength).x(nodeXPos));
 //    simulation.force('y', d3.forceY().strength(forceStrength).y(nodeYPos));
 //    simulation.alpha(1).restart();
 //    var node = svg.selectAll('.scale-node')
 //        .data(nodes,function(d){return d.id})
-    
-    
+
+
 //the following code basically creates a 'folder' for both image and circle
     var bubbles = svg.selectAll('.bubble')
         .data(nodes,function(d){return d.id})
@@ -183,7 +183,7 @@ function directed_graph(data, svg){
         .on("mouseover", mouseover)
         .on("mouseout", mouseout)
         .on("click", function (d) {console.log(d)});
-    
+
 var bubblesE = bubbles.append("circle")
     .classed('bubble',true)
     .attr("r", 0)
@@ -193,14 +193,14 @@ var bubblesE = bubbles.append("circle")
     .transition()
             .duration(2000)
             .attr('r',function(d){return d.radius});
-    
+
 
     var bubble = bubbles.merge(bubblesE);
 
 
 //adding the axis titles
     var myData = d3.keys(titlesX);
-    
+
 //    svg.selectAll('.titlesX')
 //        .data(myData)
 //        .enter().append('text')
@@ -215,7 +215,7 @@ var bubblesE = bubbles.append("circle")
 ////                        }
 //                return d;
 //            });
-//    
+//
 //        svg.selectAll('.titlesY')
 //        .data(myData)
 //        .enter().append('text')
@@ -230,8 +230,8 @@ var bubblesE = bubbles.append("circle")
 ////                        }
 //                return d;
 //            });
-    
-    //updates the x and y each tick-- 'x' and 'y' are for images 
+
+    //updates the x and y each tick-- 'x' and 'y' are for images
     //while cx and cy are for the bubbles
     function ticked(){
         svg.selectAll(".bubble")
@@ -240,42 +240,42 @@ var bubblesE = bubbles.append("circle")
             .attr("cx", function(d) { return +d.x; })
             .attr("cy", function(d) { return +d.y; });
     }
-    
+
     //we can modify the get specific images later on
     bubbles.append("image")
       .attr("xlink:href", function (d){ return "apple.png"; })
       .attr("class", "bubble")
       .attr("width", radius*2)
       .attr("height", radius*2);
-    
+
     simulation.nodes(nodes);
 
     //tells the simulation to start again
     start();
-    
+
      function start(){
         simulation.force('x', d3.forceX().strength(forceStrength).x(nodeXPos));
         simulation.force('y', d3.forceY().strength(forceStrength).y(nodeYPos));
-         
-        simulation.alpha(1).restart();       
+
+        simulation.alpha(1).restart();
     }
     var temp = radius;
-    
+
     function mouseover(d)
     {
-//        console.log(d);    
+//        console.log(d);
         var dd = d3.select(this)[0];
         d3.select(this)
             .select("circle")
             .transition()
             .duration(150)
             .attr("r", radius*1.3);
-        
+
 //        var temp = radius;
 //        radius = radius*5;
-        
-        simulation.stop();
-            
+
+        // simulation.stop();
+
         d3.select(this).select('image')
             .transition()
             .duration(150)
@@ -283,10 +283,10 @@ var bubblesE = bubbles.append("circle")
             .attr("height", 50)
             .attr("x", function(d) { return +d.x - (radius*1.3); })
             .attr("y", function(d) { return +d.y - (radius*1.3); });
-            
+
 //        getOverview(data,d.index);
     };
-    
+
     function mouseout()
     {
 //        radius = temp;
@@ -304,7 +304,7 @@ var bubblesE = bubbles.append("circle")
             .attr("height", radius*2)
             .attr("x", function(d) { return +d.x - (radius); })
             .attr("y", function(d) { return +d.y - (radius); });
-        
+
 //        d3.select(".food-overview").classed("hidden", true);
     };
 
@@ -328,13 +328,13 @@ var bubblesE = bubbles.append("circle")
 
 
 
-    
+
     function padExtent(e, p) {
         if (p === undefined) p = 1;
         return ([e[0] - p, e[1] + p]);
     }
 //
-//    
+//
 //    var n = 100,
 //    nodes = d3.range(n).map(function(i) { return {index: 1}; }),
 //    links = d3.range(n).map(function(i) { return {source: i, target: (i + 3) % n}; });
@@ -386,21 +386,21 @@ var bubblesE = bubbles.append("circle")
 //    .style("fill",function(d){return color(d.x)})
 //    .style("stroke",function(d){return color(d.y)})
 //    .on("mouseover",function(d){
-//      
+//
 //        d3.select(this)
 //            .select("circle")
 //            .transition()
 //            .duration(150)
 //            .attr("r", radius*1.3);
-//      
-//      
+//
+//
 ////        console.log(d);
 //    })
 //    .call(d3.drag()
 //              .on("start", dragstarted)
 //              .on("drag", dragged)
 //              .on("end", dragended));
-//    
+//
 //    });
 //
 //    function dragstarted(d) {
@@ -419,6 +419,6 @@ var bubblesE = bubbles.append("circle")
 //      d.fx = null;
 //      d.fy = null;
 //    }
-    
-   
+
+
 }
