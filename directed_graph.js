@@ -97,14 +97,14 @@ function directed_graph(data, svg){
     };
     
     var amountCentersY = {
-        high: {y:height/3},
+        high: {y:height/3-50},
         medium:{y:height/2},
         low:{y:2*(height/3)}
     };
     
     //collision organic (we can also use .collision force)
     function charge(d){
-        return -Math.pow(d.radius+13, 2.0) * forceStrength;
+        return -Math.pow(d.radius+8, 2.0) * forceStrength;
     }
     
     var simulation = d3.forceSimulation()
@@ -112,6 +112,9 @@ function directed_graph(data, svg){
         .force('x', d3.forceX().strength(forceStrength).x(center.x))
         .force('y', d3.forceY().strength(forceStrength).y(center.y))
         .force('charge',d3.forceManyBody().strength(charge))
+//        .force("collide", d3.forceCollide(function(d) {
+//            return d.radius+5
+//        }))
         .on('tick',ticked);
         //we want the simulation to pause until nodes exist
 //        .stop();
@@ -235,38 +238,50 @@ var bubblesE = bubbles.append("circle")
          
         simulation.alpha(1).restart();       
     }
-    
+var temp = radius;
     function mouseover(d)
     {
+        
         var dd = d3.select(this)[0];
         d3.select(this)
             .select("circle")
             .transition()
             .duration(150)
-            .attr("r", radius*1.5);
+            .attr("r", radius*1.3);
+        
+//        var temp = radius;
+//        radius = radius*5;
+        
+        simulation.stop();
             
         d3.select(this).select('image')
             .transition()
             .duration(150)
             .attr("width", 50)
-            .attr("height", 50);
+            .attr("height", 50)
+            .attr("x", function(d) { return +d.x - (radius*1.3); })
+            .attr("y", function(d) { return +d.y - (radius*1.3); });
             
 //        getOverview(data,d.index);
     };
     
     function mouseout()
     {
+//        radius = temp;
+
         d3.select(this)
             .select("circle")
             .transition()
             .duration(150)
             .attr("r", radius);
-        
+
         d3.select(this).select('image')
             .transition()
             .duration(150)
             .attr("width", radius*2)
-            .attr("height", radius*2);
+            .attr("height", radius*2)
+            .attr("x", function(d) { return +d.x - (radius); })
+            .attr("y", function(d) { return +d.y - (radius); });
         
 //        d3.select(".food-overview").classed("hidden", true);
     };
