@@ -1,5 +1,5 @@
 * {
-   font-family:sans-serif;
+   font-family: 'Roboto', serif;
 }
 
 /*#display {*/
@@ -16,6 +16,8 @@
 
 h1, h2 {
   color:green;
+font-family: 'Roboto Slab', serif;
+
 }
 .node circle {
         stroke: #3a403d;
@@ -25,12 +27,14 @@ h1, h2 {
 
 
 .titlesX{
+    font-family: 'Roboto Slab', serif;
     font-size: 21px;
     fill: #aaa;
     cursor: default;
 }
 
 .titlesY{
+    font-family: 'Roboto Slab', serif;
     font-size: 21px;
     fill: #aaa;
     cursor: default;
