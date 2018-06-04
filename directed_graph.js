@@ -15,56 +15,56 @@ function directed_graph(data, svg){
     //storing custom paths that create arrows.. to be later used in axis
     //was kind of painful to determine these values, but I didn't use math so...
     svg.append('defs').append('marker')
-        .attrs({'id':'arrowhead_right',
-            'viewBox':'-0 -5 10 10',
-            'refX':0,
-            'refY':-.5,
-            'orient':'360',
-            'markerWidth':13,
-            'markerHeight':13,
-            'xoverflow':'visible'})
+        .attr('id','arrowhead_right')
+            .attr('viewBox','-0 -5 10 10')
+            .attr('refX',0)
+            .attr('refY',0)
+            .attr('orient','360')
+            .attr('markerWidth',13)
+            .attr('markerHeight',13)
+            .attr('xoverflow','visible')
         .append('svg:path')
         .attr('d', 'M 0,-5 L 10 ,0 L 0,5')
         .attr('fill', '#999')
         .style('stroke','none');
     
     svg.append('defs').append('marker')
-        .attrs({'id':'arrowhead_top',
-            'viewBox':'-0 -5 10 10',
-            'refX':0,
-            'refY':-.5,
-            'orient':'270',
-            'markerWidth':13,
-            'markerHeight':13,
-            'xoverflow':'visible'})
+        .attr('id','arrowhead_top')
+            .attr('viewBox','-0 -5 10 10')
+            .attr('refX',0)
+            .attr('refY',0)
+            .attr('orient','270')
+            .attr('markerWidth',13)
+            .attr('markerHeight',13)
+            .attr('xoverflow','visible')
         .append('svg:path')
         .attr('d', 'M 0,-5 L 10 ,0 L 0,5')
         .attr('fill', '#999')
         .style('stroke','none');
     
     svg.append('defs').append('marker')
-        .attrs({'id':'arrowhead_left',
-            'viewBox':'-0 -5 10 10',
-            'refX':0,
-            'refY':.5,
-            'orient':'180',
-            'markerWidth':13,
-            'markerHeight':13,
-            'xoverflow':'visible'})
+        .attr('id','arrowhead_left')
+            .attr('viewBox','-0 -5 10 10')
+            .attr('refX',0)
+            .attr('refY',.5)
+            .attr('orient','180')
+            .attr('markerWidth',13)
+            .attr('markerHeight',13)
+            .attr('xoverflow','visible')
         .append('svg:path')
         .attr('d', 'M 0,-5 L 10 ,0 L 0,5')
         .attr('fill', '#999')
         .style('stroke','none');
     
     svg.append('defs').append('marker')
-        .attrs({'id':'arrowhead_bottom',
-            'viewBox':'-0 -5 10 10',
-            'refX':0,
-            'refY':.5,
-            'orient':'90',
-            'markerWidth':13,
-            'markerHeight':13,
-            'xoverflow':'visible'})
+        .attr('id','arrowhead_bottom')
+            .attr('viewBox','-0 -5 10 10')
+            .attr('refX',0)
+            .attr('refY',.5)
+            .attr('orient','90')
+            .attr('markerWidth',13)
+            .attr('markerHeight',13)
+            .attr('xoverflow','visible')
         .append('svg:path')
         .attr('d', 'M 0,-5 L 10 ,0 L 0,5')
         .attr('fill', '#999')
