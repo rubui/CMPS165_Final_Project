@@ -106,12 +106,19 @@ function directed_graph(data, svg){
         high: {y:height/3-50},
         medium:{y:height/2},
         low:{y:2*(height/3)},
-        "Low":{y:5*height/6},
-        "Low to medium":{y:4*height/6},
-        "Medium":{y:3*height/6},
-        "Medium to high":{y:2*height/6},
-        "High":{y:height/6},
+        "Dry":{y:4*height/5},
+        "Nearly dry":{y:3*height/5},
+        "Slightly dry":{y:2*height/5},
+        "Never dry":{y:height/5}
     };
+    
+    var moistureRadius = {                
+        "Low":{radius: 15},
+        "Low to medium":{radius: 20},
+        "Medium":{radius: 25},
+        "Medium to high":{radius: 30},
+        "High":{radius: 35}
+    }
     
     //collision organic (we can also use .collision force)
     function charge(d){
@@ -144,7 +151,7 @@ function directed_graph(data, svg){
             plant_height: d.Plant_Height, 
             toxic_dogs: d.Toxic_Dogs, 
             toxic_cats: d.Toxic_Cats, 
-            radius: radius            
+            radius: radius//moistureRadius[d.Moisture].radius             
         };
     }); 
     
@@ -153,12 +160,12 @@ function directed_graph(data, svg){
 
 //functions called once for each node-- provides the approriate x and y for nodes
     function nodeXPos(d){
-        console.log(d.sun);
         return amountCentersX[d.sun].x;
     }
     function nodeYPos(d){
-        console.log(d.water);
-        return amountCentersY[d.water].y;
+        return amountCentersY[d.soil_ind].y;
+//        console.log(amountCentersSoilY[d.soil_ind]); 
+//        return amountCentersSoilY[d.soil_ind].y; 
     }
 //    simulation.force('x', d3.forceX().strength(forceStrength).x(nodeXPos));
 //    simulation.force('y', d3.forceY().strength(forceStrength).y(nodeYPos));
@@ -179,11 +186,9 @@ function directed_graph(data, svg){
     
 var bubblesE = bubbles.append("circle")
     .classed('bubble',true)
-//      .attr("cx", function(d) { return d.x; })
-//      .attr("cy", function(d) { return d.y; })
-      .attr("r", 0)
-    .style("fill",function(d){return color(d.country)})
-    .style("stroke",function(d){return color(d.country)})
+    .attr("r", 0)
+    .style("fill",function(d){return color(d.water)})
+    .style("stroke",function(d){return color(d.water)})
     .style('stroke-width',2)
     .transition()
             .duration(2000)
@@ -191,8 +196,6 @@ var bubblesE = bubbles.append("circle")
     
 
     var bubble = bubbles.merge(bubblesE);
-
-//    bubble.
 
 
 //adding the axis titles
@@ -203,7 +206,7 @@ var bubblesE = bubbles.append("circle")
 //        .enter().append('text')
 //            .attr('class','titlesX')
 //            .attr('x',function(d){return titlesX[d];})
-//            .attr('y',40)
+//            .attr('y',height - 20)
 //            .attr('text-anchor','middle')
 //            .text(function(d){
 ////                if(d == 'medium')
@@ -308,22 +311,20 @@ var bubblesE = bubbles.append("circle")
     //creating xaxis
     var x_axis = g.append("g")
         .attr("class", "xaxis")
-        .attr("transform", "translate("+-(width-axisPad)/2+"," + 0 + ")")
+        .attr("transform", "translate(" + -(width-axisPad)/2 + "," + (height-axisPad)/2 + ")")
         .call(d3.axisBottom(x).ticks(0).tickSizeOuter(0))
         .style("opacity",1)
         .select('path')
-        .attr('marker-end','url(#arrowhead_right)')
-        .attr('marker-start','url(#arrowhead_left)');
+        .attr('marker-end','url(#arrowhead_right)');
 
     //creating yaxis
     g.append("g")
         .attr("class", "yaxis")
-        .attr("transform", "translate(" + 0 + ","+-(height-axisPad)/2+")")
+        .attr("transform", "translate(" + -(width-axisPad)/2 + ","+-(height-axisPad)/2+")")
         .call(d3.axisLeft(y).ticks(0).tickSizeOuter(0))
         .style("opacity",1)
         .select("path")
-        .attr('marker-end','url(#arrowhead_top)')
-        .attr('marker-start','url(#arrowhead_bottom)');
+        .attr('marker-end','url(#arrowhead_top)');
 
 
 
