@@ -10,7 +10,16 @@
     <div id="main">
         <h1>California Houseplants Care Guide</h1>
         
-        <div id="display" style="margin-top:20px; margin-bottom:20px"></div>
+          <h3>Goal</h3>
+            <p>We wish to create a visualization for various types of plants that are commercially available in the USA.
+            We will focus on basic care such as amount of water needed and amounts of sunlight required.
+            Our goal is for this guide to serve as a quick and easily navigable reference for plant maintence.
+            In doing so, the visualization can also serve as a simple buyer's guide, by showing various plants and
+            their needs to jugde agaisnt your own lifestyle choices. We also plan to include more variables to examine such as
+            tempurature tolerance, humidity, plant types, and ph levels of soil.
+            </p>
+        
+        <div id="display" style="margin-top:20px; margin-bottom:20px " ></div>
         
     </div>    
   
@@ -23,7 +32,7 @@
         //global vars go here:
         //...
         //color will obviously be hardcoded for habits (probably)
-        var color = d3.scaleOrdinal(d3.schemeCategory20);
+        var color = d3.scaleOrdinal(d3.schemeCategory10);
         
         //loading that csv
         d3.csv("plants_clean_38.csv", function(error, d){
