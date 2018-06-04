@@ -93,13 +93,24 @@ function directed_graph(data, svg){
     var amountCentersX = {
         low: {x:width/4},
         medium:{x:width/2},
-        high:{x:2*(width/3)+80}
+        high:{x:2*(width/3)+80},
+        "Full sun":{x:6*width/7},
+        "Full sun to part sun":{x:5*width/7},
+        "Full sun to part shade":{x:4*width/7},
+        "Part sun to part shade":{x:3*width/7},
+        "Part shade":{x:2*width/7},
+        "Part shade to full shade":{x:width/7} 
     };
     
     var amountCentersY = {
         high: {y:height/3-50},
         medium:{y:height/2},
-        low:{y:2*(height/3)}
+        low:{y:2*(height/3)},
+        "Low":{y:height/6},
+        "Low to medium":{y:2*height/6},
+        "Medium":{y:3*height/6},
+        "Medium to high":{y:4*height/6},
+        "High":{y:4*height/6},
     };
     
     //collision organic (we can also use .collision force)
@@ -125,8 +136,8 @@ function directed_graph(data, svg){
             country: d.country,
             gdp: d.gdp,
             continent: d.continent,
-            sun: d.sun,
-            water: d.water,
+            sun: d.Sunlight,
+            water: d.Moisture,
             radius: radius
         };
     }); 
@@ -136,9 +147,11 @@ function directed_graph(data, svg){
 
 //functions called once for each node-- provides the approriate x and y for nodes
     function nodeXPos(d){
+        console.log(d.sun);
         return amountCentersX[d.sun].x;
     }
     function nodeYPos(d){
+        console.log(d.water);
         return amountCentersY[d.water].y;
 
     }
