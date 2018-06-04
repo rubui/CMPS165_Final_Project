@@ -174,8 +174,8 @@ function directed_graph(data, svg){
         .append("g")
         .attr("class", "force-scale-node")
         .on("mouseover", mouseover)
-        .on("mouseout", mouseout);
-//        .on("click", addSelectedFood);
+        .on("mouseout", mouseout)
+        .on("click", function (d) {console.log(d)});
     
 var bubblesE = bubbles.append("circle")
     .classed('bubble',true)
@@ -260,7 +260,7 @@ var bubblesE = bubbles.append("circle")
     
     function mouseover(d)
     {
-        console.log(d);    
+//        console.log(d);    
         var dd = d3.select(this)[0];
         d3.select(this)
             .select("circle")
