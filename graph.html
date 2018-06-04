@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>CMPS165 Final Project Proposal</title>
+  <link href="style.css" rel="stylesheet"/>
+</head>
+<body>
+    
+    <div id="main">
+        <h1>California Houseplants Care Guide</h1>
+        
+        <div id="display" style="margin-top:20px; margin-bottom:20px"></div>
+        
+    </div>    
+  
+    
+    
+<!-- place .js src here   -->
+    <script src="//d3js.org/d3.v4.min.js"></script>
+    <script src="directed_graph.js"></script>
+    <script type="text/javascript">
+        //global vars go here:
+        //...
+        //color will obviously be hardcoded for habits (probably)
+        var color = d3.scaleOrdinal(d3.schemeCategory20);
+        
+        //loading that csv
+        d3.csv("example.csv", function(error, d){
+            var data = d;
+            console.log(d);
+            
+            var svg = d3.select("#display")
+            .append("svg")
+            .attr("class", "force-scale")
+            .attr("width",940)
+            .attr("height",600);
+            
+            //run functions here
+            directed_graph(data, svg);
+            
+        });
+        
+    
+    </script>
+</body>
+</html>
