@@ -2,21 +2,81 @@ function directed_graph(data, svg){
 //    http://bl.ocks.org/ericandrewlewis/dc79d22c74b8046a5512
 //    http://vallandingham.me/bubble_charts_with_d3v4.html
     
+    
     var radius = 20,
         nodePadding = 2.5,
-        forceStrength = .03;
+        forceStrength = .03,
+        axisPad=80,
         width = +svg.attr("width"),
         height = +svg.attr("height"),
         center = {x:width/2,y:height/2},
         g = svg.append("g").attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
 
-//var x = d3.scaleLinear()
-//    .domain(padExtent([1,5]))
-//    .range(padExtent([0, width/2]));
-//    
-//var y = d3.scaleLinear()
-//    .domain(padExtent([1,5]))
-//    .range(padExtent([height/2, 0]));
+    //storing custom paths that create arrows.. to be later used in axis
+    //was kind of painful to determine these values, but I didn't use math so...
+    svg.append('defs').append('marker')
+        .attrs({'id':'arrowhead_right',
+            'viewBox':'-0 -5 10 10',
+            'refX':0,
+            'refY':-.5,
+            'orient':'360',
+            'markerWidth':13,
+            'markerHeight':13,
+            'xoverflow':'visible'})
+        .append('svg:path')
+        .attr('d', 'M 0,-5 L 10 ,0 L 0,5')
+        .attr('fill', '#999')
+        .style('stroke','none');
+    
+    svg.append('defs').append('marker')
+        .attrs({'id':'arrowhead_top',
+            'viewBox':'-0 -5 10 10',
+            'refX':0,
+            'refY':-.5,
+            'orient':'270',
+            'markerWidth':13,
+            'markerHeight':13,
+            'xoverflow':'visible'})
+        .append('svg:path')
+        .attr('d', 'M 0,-5 L 10 ,0 L 0,5')
+        .attr('fill', '#999')
+        .style('stroke','none');
+    
+    svg.append('defs').append('marker')
+        .attrs({'id':'arrowhead_left',
+            'viewBox':'-0 -5 10 10',
+            'refX':0,
+            'refY':.5,
+            'orient':'180',
+            'markerWidth':13,
+            'markerHeight':13,
+            'xoverflow':'visible'})
+        .append('svg:path')
+        .attr('d', 'M 0,-5 L 10 ,0 L 0,5')
+        .attr('fill', '#999')
+        .style('stroke','none');
+    
+    svg.append('defs').append('marker')
+        .attrs({'id':'arrowhead_bottom',
+            'viewBox':'-0 -5 10 10',
+            'refX':0,
+            'refY':.5,
+            'orient':'90',
+            'markerWidth':13,
+            'markerHeight':13,
+            'xoverflow':'visible'})
+        .append('svg:path')
+        .attr('d', 'M 0,-5 L 10 ,0 L 0,5')
+        .attr('fill', '#999')
+        .style('stroke','none');
+    
+    var x = d3.scaleLinear()
+        .domain(padExtent([]))
+        .range(padExtent([0, width-axisPad]));
+
+    var y = d3.scaleLinear()
+        .domain(padExtent([]))
+        .range(padExtent([height-axisPad, 0]));
     
     var titlesX = {
         low: 160,
@@ -117,35 +177,35 @@ var bubblesE = bubbles.append("circle")
 //adding the axis titles
     var myData = d3.keys(titlesX);
     
-    svg.selectAll('.titlesX')
-        .data(myData)
-        .enter().append('text')
-            .attr('class','titlesX')
-            .attr('x',function(d){return titlesX[d];})
-            .attr('y',40)
-            .attr('text-anchor','middle')
-            .text(function(d){
-//                if(d == 'medium')
-//                        {
-//                            return "Lots";
-//                        }
-                return d;
-            });
-    
-        svg.selectAll('.titlesY')
-        .data(myData)
-        .enter().append('text')
-            .attr('class','titlesY')
-            .attr('x',40)
-            .attr('y',function(d){return titlesY[d];})
-            .attr('text-anchor','beginning')
-            .text(function(d){
-//                if(d == 'medium')
-//                        {
-//                            return "low Lots";
-//                        }
-                return d;
-            });
+//    svg.selectAll('.titlesX')
+//        .data(myData)
+//        .enter().append('text')
+//            .attr('class','titlesX')
+//            .attr('x',function(d){return titlesX[d];})
+//            .attr('y',40)
+//            .attr('text-anchor','middle')
+//            .text(function(d){
+////                if(d == 'medium')
+////                        {
+////                            return "Lots";
+////                        }
+//                return d;
+//            });
+//    
+//        svg.selectAll('.titlesY')
+//        .data(myData)
+//        .enter().append('text')
+//            .attr('class','titlesY')
+//            .attr('x',40)
+//            .attr('y',function(d){return titlesY[d];})
+//            .attr('text-anchor','beginning')
+//            .text(function(d){
+////                if(d == 'medium')
+////                        {
+////                            return "low Lots";
+////                        }
+//                return d;
+//            });
     
     //updates the x and y each tick-- 'x' and 'y' are for images 
     //while cx and cy are for the bubbles
@@ -198,22 +258,34 @@ var bubblesE = bubbles.append("circle")
         
 //        d3.select(".food-overview").classed("hidden", true);
     };
+
+    //creating xaxis
+    var x_axis = g.append("g")
+        .attr("class", "xaxis")
+        .attr("transform", "translate("+-(width-axisPad)/2+"," + 0 + ")")
+        .call(d3.axisBottom(x).ticks(0).tickSizeOuter(0))
+        .style("opacity",1)
+        .select('path')
+        .attr('marker-end','url(#arrowhead_right)')
+        .attr('marker-start','url(#arrowhead_left)');
+
+    //creating yaxis
+    g.append("g")
+        .attr("class", "yaxis")
+        .attr("transform", "translate(" + 0 + ","+-(height-axisPad)/2+")")
+        .call(d3.axisLeft(y).ticks(0).tickSizeOuter(0))
+        .style("opacity",1)
+        .select("path")
+        .attr('marker-end','url(#arrowhead_top)')
+        .attr('marker-start','url(#arrowhead_bottom)');
+
+
+
     
-//    g.append("g")
-//      .attr("class", "x axis")
-//      .attr("transform", "translate(0," +  + ")")
-//      .call(d3.axisBottom(x).ticks(0));
-//
-//  g.append("g")
-//      .attr("class", "y axis")
-//      .attr("transform", "translate(" + 0 + ", 0)")
-//      .call(d3.axisLeft(y).ticks(0));
-//
-//    
-//    function padExtent(e, p) {
-//        if (p === undefined) p = 1;
-//        return ([e[0] - p, e[1] + p]);
-//    }
+    function padExtent(e, p) {
+        if (p === undefined) p = 1;
+        return ([e[0] - p, e[1] + p]);
+    }
 //
 //    
 //    var n = 100,

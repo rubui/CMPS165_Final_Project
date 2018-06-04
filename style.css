@@ -33,3 +33,10 @@ h1, h2 {
     fill: #aaa;
     cursor: default;
 }
+
+.xaxis path{
+    stroke:#999;
+}
+.yaxis path{
+    stroke:#999;
+}
