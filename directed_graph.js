@@ -106,11 +106,11 @@ function directed_graph(data, svg){
         high: {y:height/3-50},
         medium:{y:height/2},
         low:{y:2*(height/3)},
-        "Low":{y:height/6},
-        "Low to medium":{y:2*height/6},
+        "Low":{y:5*height/6},
+        "Low to medium":{y:4*height/6},
         "Medium":{y:3*height/6},
-        "Medium to high":{y:4*height/6},
-        "High":{y:4*height/6},
+        "Medium to high":{y:2*height/6},
+        "High":{y:height/6},
     };
     
     //collision organic (we can also use .collision force)
@@ -131,14 +131,20 @@ function directed_graph(data, svg){
 //        .stop();
     simulation.stop();
     
+    
+    // Map data from CSV
     var nodes = data.map(function(d){
         return{
-            country: d.country,
-            gdp: d.gdp,
-            continent: d.continent,
+            sci_name: d.Scientific_Name,
+            nickname: d.Common_Name,             
             sun: d.Sunlight,
             water: d.Moisture,
-            radius: radius
+            soil_ind: d.Soil_Indicator,
+            plant_spread: d.Plant_Spread, 
+            plant_height: d.Plant_Height, 
+            toxic_dogs: d.Toxic_Dogs, 
+            toxic_cats: d.Toxic_Cats, 
+            radius: radius            
         };
     }); 
     
@@ -153,7 +159,6 @@ function directed_graph(data, svg){
     function nodeYPos(d){
         console.log(d.water);
         return amountCentersY[d.water].y;
-
     }
 //    simulation.force('x', d3.forceX().strength(forceStrength).x(nodeXPos));
 //    simulation.force('y', d3.forceY().strength(forceStrength).y(nodeYPos));
@@ -251,10 +256,11 @@ var bubblesE = bubbles.append("circle")
          
         simulation.alpha(1).restart();       
     }
-var temp = radius;
+    var temp = radius;
+    
     function mouseover(d)
     {
-        
+        console.log(d);    
         var dd = d3.select(this)[0];
         d3.select(this)
             .select("circle")
