@@ -3,7 +3,7 @@ function directed_graph(data, svg){
 //    http://vallandingham.me/bubble_charts_with_d3v4.html
     
     
-    var radius = 20,
+    var radius = 15,
         nodePadding = 2.5,
         forceStrength = .03,
         axisPad=80,
@@ -98,8 +98,8 @@ function directed_graph(data, svg){
     
     var amountCentersY = {
         high: {y:height/3},
-        medium:{y:height/2+50},
-        low:{y:2*(height/3)+70}
+        medium:{y:height/2},
+        low:{y:2*(height/3)}
     };
     
     //collision organic (we can also use .collision force)
@@ -211,8 +211,8 @@ var bubblesE = bubbles.append("circle")
     //while cx and cy are for the bubbles
     function ticked(){
         svg.selectAll(".bubble")
-            .attr("x", function(d) { return +d.x - (radius * 4/3); })
-            .attr("y", function(d) { return +d.y - (radius * 4/3); })
+            .attr("x", function(d) { return +d.x - (radius); })
+            .attr("y", function(d) { return +d.y - (radius); })
             .attr("cx", function(d) { return +d.x; })
             .attr("cy", function(d) { return +d.y; });
     }
@@ -221,8 +221,8 @@ var bubblesE = bubbles.append("circle")
     bubbles.append("image")
       .attr("xlink:href", function (d){ return "apple.png"; })
       .attr("class", "bubble")
-      .attr("width", 50)
-      .attr("height", 50);
+      .attr("width", radius*2)
+      .attr("height", radius*2);
     
     simulation.nodes(nodes);
 
@@ -243,7 +243,13 @@ var bubblesE = bubbles.append("circle")
             .select("circle")
             .transition()
             .duration(150)
-            .attr("r", radius*1.3);
+            .attr("r", radius*1.5);
+            
+        d3.select(this).select('image')
+            .transition()
+            .duration(150)
+            .attr("width", 50)
+            .attr("height", 50);
             
 //        getOverview(data,d.index);
     };
@@ -255,6 +261,12 @@ var bubblesE = bubbles.append("circle")
             .transition()
             .duration(150)
             .attr("r", radius);
+        
+        d3.select(this).select('image')
+            .transition()
+            .duration(150)
+            .attr("width", radius*2)
+            .attr("height", radius*2);
         
 //        d3.select(".food-overview").classed("hidden", true);
     };
