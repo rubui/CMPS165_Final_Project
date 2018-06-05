@@ -71,14 +71,70 @@
 							<span class="material-control-indicator"></span>
 							<span class="material-control-description">Can be hung</span>
                 </label>
-                </div>                
-                                                            
+                </div>
+
             </div>
 
         </div>
-        
-        <br><br>
-        
+
+          <h3>Goal</h3>
+            <p>We wish to create a visualization for various types of plants that are commercially available in the USA.
+            We will focus on basic care such as amount of water needed and amounts of sunlight required.
+            Our goal is for this guide to serve as a quick and easily navigable reference for plant maintence.
+            In doing so, the visualization can also serve as a simple buyer's guide, by showing various plants and
+            their needs to jugde agaisnt your own lifestyle choices. We also plan to include more variables to examine such as
+            tempurature tolerance, humidity, plant types, and ph levels of soil.
+            </p>
+
+        <div id="display" style="margin-top:20px; margin-bottom:20px " ></div>
+
+    </div>
+
+
+
+<!-- place .js src here   -->
+    <script src="//d3js.org/d3.v4.min.js"></script>
+    <script src="tooltip.js"></script>
+    <script src="directed_graph.js"></script>
+    <script type="text/javascript">
+        //global vars go here:
+        //...
+        //color will obviously be hardcoded for habits (probably)
+        var color = d3.scaleOrdinal(d3.schemeCategory20);
+
+        //loading that csv
+        d3.csv("plants_clean_38.csv", function(error, d){
+            var data = d;
+            console.log(d);
+
+            var svg = d3.select("#display")
+            .append("svg")
+            .attr("class", "force-scale")
+            .attr("width",940)
+            .attr("height",600);
+
+            //creating the tooltip div
+            var div = d3.select("#display").append("div")
+                .attr("class", "tooltip")
+                .style("opacity", 0);
+                div.append("div")
+                .attr('class','nickname');
+                div.append('div')
+                .attr('class','sci_name');
+//                div.append('span')
+//                    .text('');
+                div.append('div')
+                    .attr('class','soil')
+                div.append('div')
+                    .attr('class','sun');
+                div.append('div')
+                    .attr('class','water');
+
+            //run functions here
+            directed_graph(data, svg);
+
+        });
+
 
 
 
@@ -141,13 +197,3 @@
 
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-

@@ -187,8 +187,8 @@ function directed_graph(data, svg){
 var bubblesE = bubbles.append("circle")
     .classed('bubble',true)
     .attr("r", 0)
-    .style("fill",function(d){return color(d.water)})
-    .style("stroke",function(d){return color(d.water)})
+    .style("fill",function(d){return color(d.soil_ind+d.sun)})
+    .style("stroke",function(d){return color(d.soil_ind+d.sun)})
     .style('stroke-width',2)
     .transition()
             .duration(2000)
@@ -285,6 +285,7 @@ var bubblesE = bubbles.append("circle")
             .attr("y", function(d) { return +d.y - (radius*1.3); });
 
 //        getOverview(data,d.index);
+        tooltip(d,parseFloat(d3.event.pageX),parseFloat(d3.event.pageY));
     };
 
     function mouseout()
@@ -305,7 +306,9 @@ var bubblesE = bubbles.append("circle")
             .attr("x", function(d) { return +d.x - (radius); })
             .attr("y", function(d) { return +d.y - (radius); });
 
-//        d3.select(".food-overview").classed("hidden", true);
+//        d3.select(".tooltip").style('opacity',0);
+
+        d3.select(".tooltip").classed("hidden", true);
     };
 
     //creating xaxis
