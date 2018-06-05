@@ -25,18 +25,23 @@
 <body>
 
     <div id="main"  style="width:1200px; margin:0 auto;">
+        
+        <!-- Title -->
         <h1>California Houseplants Care Guide</h1>
 
-
+        <!-- Summary of project -->
         <p style="text-align: center">We wish to create a visualization for various types of plants that are commercially available in the USA. We will focus on basic care such as amount of water needed and amounts of sunlight required. Our goal is for this guide to serve as a quick and easily navigable reference for plant maintence. In doing so, the visualization can also serve as a simple buyer's guide, by showing various plants and their needs to jugde agaisnt your own lifestyle choices. We also plan to include more variables to examine such as tempurature tolerance, humidity, plant types, and ph levels of soil.
         </p>
 
         <br>
-
+        
+        <!-- Row to handle graph and filters -->
         <div class="row">
-            <div class="col-md-10" id="display">
-            </div>
+            
+            <!-- Draw graph in first column-->
+            <div class="col-md-10" id="display"></div>
 
+            <!-- Sidebar for filters and toggles and tooltip (?) -->
             <div class="col-md-2" id="sidebar">
                 <br>
                 <div class="row">
@@ -92,6 +97,7 @@
 <!-- place .js src here   -->
     <script src="//d3js.org/d3.v4.min.js"></script>
     <script src="tooltip.js"></script>
+    <script src="sidebar.js"></script>
     <script src="directed_graph.js"></script>
     <script type="text/javascript">
         //global vars go here:
