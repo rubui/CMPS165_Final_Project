@@ -119,17 +119,22 @@
                 .attr("class", "tooltip")
                 .style("opacity", 0);
                 div.append("div")
-                .attr('class','nickname');
+                    .attr('class','nickname');
                 div.append('div')
-                .attr('class','sci_name');
+                    .attr('class','sci_name');
+                div.append("div")
+                    .html('<br>');
 //                div.append('span')
 //                    .text('');
                 div.append('div')
-                    .attr('class','soil')
+                    .attr('class','tooltip-text')
+                    .attr('id', 'soil');
                 div.append('div')
-                    .attr('class','sun');
+                    .attr('class','tooltip-text')
+                    .attr('id', 'sun');
                 div.append('div')
-                    .attr('class','water');
+                    .attr('class','tooltip-text')
+                    .attr('id', 'water');
 
             //run functions here
             directed_graph(data, svg);

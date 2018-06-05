@@ -88,18 +88,24 @@ h2 {
     font-size: 15px;
 }
 
-.tooltip-name {
-    font-family: 'Roboto Slab', serif;
-}
-
 .nickname {
+    font-family: 'Roboto Slab', serif;
+    text-align: center;
     font-size: 18px;
     color: springgreen;
 }
 .sci_name{
-    font-size: 14px;
-    font-weight: 50;
+    font-size: 12px;
+    font-style: italic;
+    text-align: center;
 }
+
+.tooltip-text {
+    font-size: 12px;
+}
+
+
+
 .hidden {
     display: none;
 }

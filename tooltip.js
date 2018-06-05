@@ -15,11 +15,11 @@ function tooltip(d, xPosition, yPosition)
             .text(d.nickname);
         tip.select('.sci_name')
             .text(d.sci_name);
-        tip.select('.soil')
+        tip.select('#soil')
             .text('Soil Moisture: '+d.soil_ind);
-        tip.select('.sun')
+        tip.select('#sun')
             .text('Sun-Comfort: '+d.sun);
-        tip.select('.water')
+        tip.select('#water')
             .text('Watering Amounts: '+d.water);
     
 //    tip.style("opacity",'.9');
