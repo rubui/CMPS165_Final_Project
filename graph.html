@@ -1,59 +1,153 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
-  <title>CMPS165 Final Project Proposal</title>
-  <link href="style.css" rel="stylesheet"/>
-    
-  <link href="https://fonts.googleapis.com/css?family=Roboto+Slab" rel="stylesheet">
+    <meta charset="utf-8">
+    <title>Houseplants Care Guide</title>
+
+
+
+    <!--  Google Fonts  -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab" rel="stylesheet">
+
+    <!--  d3.js v4 import  -->
+    <script src="//d3js.org/d3.v4.min.js"></script>
+
+    <!--  Bootstrap import  -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <!--  Custom Sylesheet  -->
+    <link href="style.css" rel="stylesheet" />
 
 </head>
+
 <body>
-    
-    <div id="main">
+
+    <div id="main"  style="width:1400px; margin:0 auto;">
         <h1>California Houseplants Care Guide</h1>
+
+
+        <p style="text-align: center">We wish to create a visualization for various types of plants that are commercially available in the USA. We will focus on basic care such as amount of water needed and amounts of sunlight required. Our goal is for this guide to serve as a quick and easily navigable reference for plant maintence. In doing so, the visualization can also serve as a simple buyer's guide, by showing various plants and their needs to jugde agaisnt your own lifestyle choices. We also plan to include more variables to examine such as tempurature tolerance, humidity, plant types, and ph levels of soil.
+        </p>
+
+        <br><br>
+
+        <div class="row">
+            <div class="col-md-10" id="display">
+            </div>
+
+            <div class="col-md-2" id="sidebar">
+                <br>
+                <div class="row">
+                <div class="btn-group btn-group-toggle btn-group-vertical btn-block" data-toggle="buttons">
+                    <label class="btn btn-secondary active">
+                            <input type="radio" name="options" id="option1" autocomplete="off" checked> Water vs. Sun
+                        </label>
+                    <label class="btn btn-secondary">
+                            <input type="radio" name="options" id="option2" autocomplete="off"> Spread vs. Height
+                        </label>
+                </div>
+                </div>
+
+                <br>
+                <div class="row">
+                    <label class="custom-control material-checkbox">
+							<input type="checkbox" class="material-control-input">
+							<span class="material-control-indicator"></span>
+							<span class="material-control-description">Non-toxic to dogs</span>
+                </label>
+                </div>
+                <div class="row">
+                    <label class="custom-control material-checkbox">
+							<input type="checkbox" class="material-control-input">
+							<span class="material-control-indicator"></span>
+							<span class="material-control-description">Non-toxic to cats</span>
+                </label>
+                </div>
+                <div class="row">
+                    <label class="custom-control material-checkbox">
+							<input type="checkbox" class="material-control-input">
+							<span class="material-control-indicator"></span>
+							<span class="material-control-description">Can be hung</span>
+                </label>
+                </div>                
+                                                            
+            </div>
+
+        </div>
         
-          <h3>Goal</h3>
-            <p>We wish to create a visualization for various types of plants that are commercially available in the USA.
-            We will focus on basic care such as amount of water needed and amounts of sunlight required.
-            Our goal is for this guide to serve as a quick and easily navigable reference for plant maintence.
-            In doing so, the visualization can also serve as a simple buyer's guide, by showing various plants and
-            their needs to jugde agaisnt your own lifestyle choices. We also plan to include more variables to examine such as
-            tempurature tolerance, humidity, plant types, and ph levels of soil.
-            </p>
+        <br><br>
         
-        <div id="display" style="margin-top:20px; margin-bottom:20px " ></div>
-        
-    </div>    
-  
-    
-    
-<!-- place .js src here   -->
-    <script src="//d3js.org/d3.v4.min.js"></script>
-    <script src="directed_graph.js"></script>
-    <script type="text/javascript">
-        //global vars go here:
-        //...
-        //color will obviously be hardcoded for habits (probably)
-        var color = d3.scaleOrdinal(d3.schemeCategory10);
-        
-        //loading that csv
-        d3.csv("plants_clean_38.csv", function(error, d){
-            var data = d;
-            console.log(d);
-            
-            var svg = d3.select("#display")
-            .append("svg")
-            .attr("class", "force-scale")
-            .attr("width",940)
-            .attr("height",600);
-            
-            //run functions here
-            directed_graph(data, svg);
-            
-        });
-        
-    
-    </script>
+
+
+
+
+        <script src="directed_graph.js"></script>
+        <script type="text/javascript">
+            //global vars go here:
+            //...
+            //color will obviously be hardcoded for habits (probably)
+            var color = d3.scaleOrdinal(d3.schemeCategory10);
+
+            //loading that csv
+            d3.csv("plants_clean_38.csv", function(error, d) {
+                var data = d;
+                console.log(d);
+
+                var svg = d3.select("#display")
+                    .append("svg")
+                    .attr("class", "force-scale")
+                    .attr("width", 1100)
+                    .attr("height", 700);
+
+                //run functions here
+                directed_graph(data, svg);
+
+            });
+        </script>
+
+        <!-- Resources -->
+        <div class="row" id="sources">
+            <div class="col-md-3 ">
+                <h4 class="sources_header" style="text-align: center">Files</h4>
+                <ul class="sources_list">
+                    <li>hello this is where we'll put relevant file sources for the project</li>
+                </ul>
+            </div>
+            <div class="col-md-3">
+                <h4 class="sources_header" style="text-align: center">Visual Sources</h4>
+                <ul class="sources_list">
+                    <li>This is where we're going to put our visual inspirations </li>
+                </ul>
+            </div>
+            <div class="col-md-3">
+                <h4 class="sources_header" style="text-align: center">Code Sources</h4>
+                <ul class="sources_list">
+
+                </ul>
+            </div>
+            <div class="col-md-3">
+                <h4 class="sources_header" style="text-align: center">Data Sources</h4>
+                <ul class="sources_list">
+
+                </ul>
+            </div>
+
+
+        </div>
+        <br><br><br>
+    </div>
+
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
