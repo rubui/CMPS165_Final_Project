@@ -27,12 +27,13 @@
     
 <!-- place .js src here   -->
     <script src="//d3js.org/d3.v4.min.js"></script>
+    <script src="tooltip.js"></script>
     <script src="directed_graph.js"></script>
     <script type="text/javascript">
         //global vars go here:
         //...
         //color will obviously be hardcoded for habits (probably)
-        var color = d3.scaleOrdinal(d3.schemeCategory10);
+        var color = d3.scaleOrdinal(d3.schemeCategory20);
         
         //loading that csv
         d3.csv("plants_clean_38.csv", function(error, d){
@@ -44,6 +45,23 @@
             .attr("class", "force-scale")
             .attr("width",940)
             .attr("height",600);
+                
+            //creating the tooltip div
+            var div = d3.select("#display").append("div")	
+                .attr("class", "tooltip")				
+                .style("opacity", 0);
+                div.append("div")
+                .attr('class','nickname');
+                div.append('div')
+                .attr('class','sci_name');
+//                div.append('span')
+//                    .text('');
+                div.append('div')
+                    .attr('class','soil')
+                div.append('div')
+                    .attr('class','sun');
+                div.append('div')
+                    .attr('class','water');
             
             //run functions here
             directed_graph(data, svg);

@@ -60,3 +60,28 @@ h1, h2 {
     display: table; 
     clear: both; 
 }
+
+.tooltip {
+    position: absolute;
+    line-height: 1;
+    font-weight: bold;
+    padding: 8px;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: #fff;
+    border-radius: 10px;
+    font-size: 15px;
+    
+}
+.nickname {
+    font-size: 18px;
+    color: springgreen;
+}
+.sci_name{
+    font-size: 14px;
+    font-weight: 50;
+}
+.hidden {
+    display: none;
+}
+
+
