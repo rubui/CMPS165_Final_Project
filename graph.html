@@ -8,6 +8,7 @@
 
     <!--  Google Fonts  -->
     <link href="https://fonts.googleapis.com/css?family=Roboto+Slab" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 
     <!--  d3.js v4 import  -->
     <script src="//d3js.org/d3.v4.min.js"></script>
@@ -94,7 +95,7 @@
 <!-- place .js src here   -->
     <script src="//d3js.org/d3.v4.min.js"></script>
     <script src="tooltip.js"></script>
-    <script src="sidebar.js"></script>
+<!--    <script src="sidebar.js"></script>-->
     <script src="directed_graph.js"></script>
     <script type="text/javascript">
         //global vars go here:
@@ -135,30 +136,7 @@
 
         });
 
-
-        <script src="directed_graph.js"></script>
-        <script type="text/javascript">
-            //global vars go here:
-            //...
-            //color will obviously be hardcoded for habits (probably)
-            var color = d3.scaleOrdinal(d3.schemeCategory10);
-
-            //loading that csv
-            d3.csv("plants_clean_38.csv", function(error, d) {
-                var data = d;
-                console.log(d);
-
-                var svg = d3.select("#display")
-                    .append("svg")
-                    .attr("class", "force-scale")
-                    .attr("width", 1000)
-                    .attr("height", 700);
-
-                //run functions here
-                directed_graph(data, svg);
-
-            });
-        </script>
+    </script>
 
         <!-- Resources -->
         <div class="row" id="sources">
