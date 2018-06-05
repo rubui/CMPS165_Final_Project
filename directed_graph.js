@@ -3,12 +3,14 @@ function directed_graph(data, svg){
 //    http://vallandingham.me/bubble_charts_with_d3v4.html
 
 
-    var radius = 15,
+    var radius = 20,
         nodePadding = 2.5,
         forceStrength = .03,
-        axisPad=80,
+        axisPad=100,
         width = +svg.attr("width"),
         height = +svg.attr("height"),
+        drawable_width = width; //- axisPad; 
+        drawable_height = height; //- axisPad; 
         center = {x:width/2,y:height/2},
         g = svg.append("g").attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
 
@@ -94,22 +96,22 @@ function directed_graph(data, svg){
         low: {x:width/4},
         medium:{x:width/2},
         high:{x:2*(width/3)+80},
-        "Full sun":{x:6*width/7},
-        "Full sun to part sun":{x:5*width/7},
-        "Full sun to part shade":{x:4*width/7},
-        "Part sun to part shade":{x:3*width/7},
-        "Part shade":{x:2*width/7},
-        "Part shade to full shade":{x:width/7}
+        "Full sun":{x:6*drawable_width/7},
+        "Full sun to part sun":{x:5*drawable_width/7},
+        "Full sun to part shade":{x:4*drawable_width/7},
+        "Part sun to part shade":{x:3*drawable_width/7},
+        "Part shade":{x:2*drawable_width/7},
+        "Part shade to full shade":{x:drawable_width/7}
     };
 
     var amountCentersY = {
         high: {y:height/3-50},
         medium:{y:height/2},
         low:{y:2*(height/3)},
-        "Dry":{y:4*height/5},
-        "Nearly dry":{y:3*height/5},
-        "Slightly dry":{y:2*height/5},
-        "Never dry":{y:height/5}
+        "Dry":{y:4*drawable_height/5},
+        "Nearly dry":{y:3*drawable_height/5},
+        "Slightly dry":{y:2*drawable_height/5},
+        "Never dry":{y:drawable_height/5}
     };
 
     var moistureRadius = {
@@ -158,15 +160,15 @@ function directed_graph(data, svg){
 
 //        console.log(nodes);
 
-//functions called once for each node-- provides the approriate x and y for nodes
+    //functions called once for each node-- provides the approriate x and y for nodes
     function nodeXPos(d){
         return amountCentersX[d.sun].x;
     }
+    
     function nodeYPos(d){
         return amountCentersY[d.soil_ind].y;
-//        console.log(amountCentersSoilY[d.soil_ind]);
-//        return amountCentersSoilY[d.soil_ind].y;
     }
+    
 //    simulation.force('x', d3.forceX().strength(forceStrength).x(nodeXPos));
 //    simulation.force('y', d3.forceY().strength(forceStrength).y(nodeYPos));
 //    simulation.alpha(1).restart();
@@ -184,15 +186,15 @@ function directed_graph(data, svg){
         .on("mouseout", mouseout)
         .on("click", function (d) {console.log(d)});
 
-var bubblesE = bubbles.append("circle")
-    .classed('bubble',true)
-    .attr("r", 0)
-    .style("fill",function(d){return color(d.soil_ind+d.sun)})
-    .style("stroke",function(d){return color(d.soil_ind+d.sun)})
-    .style('stroke-width',2)
-    .transition()
-            .duration(2000)
-            .attr('r',function(d){return d.radius});
+    var bubblesE = bubbles.append("circle")
+        .classed('bubble',true)
+        .attr("r", 0)
+        .style("fill",function(d){return color(d.soil_ind+d.sun)})
+        .style("stroke",function(d){return color(d.soil_ind+d.sun)})
+        .style('stroke-width',2)
+        .transition()
+                .duration(2000)
+                .attr('r',function(d){return d.radius});
 
 
     var bubble = bubbles.merge(bubblesE);
@@ -328,9 +330,7 @@ var bubblesE = bubbles.append("circle")
         .style("opacity",1)
         .select("path")
         .attr('marker-end','url(#arrowhead_top)');
-
-
-
+    
 
     function padExtent(e, p) {
         if (p === undefined) p = 1;
