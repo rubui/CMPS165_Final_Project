@@ -24,5 +24,5 @@ function tooltip(d, xPosition, yPosition)
     
 //    tip.style("opacity",'.9');
     
-    console.log(d);
+//    console.log(d);
 }
