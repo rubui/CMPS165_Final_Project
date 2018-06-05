@@ -5,8 +5,8 @@ function tooltip(d, xPosition, yPosition)
     d3.select(".tooltip").classed("hidden", false);
 
     var tip = d3.select('.tooltip')
-            .style("left", (xPosition) + "px")
-            .style("top", (yPosition) + "px");
+           .style("left", (d.x+50) + "px")
+           .style("top", (d.y) + "px");
     
     tip.transition()
           .duration(100)
