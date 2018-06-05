@@ -6,7 +6,7 @@ function directed_graph(data, svg){
     var radius = 20,
         nodePadding = 2.5,
         forceStrength = .03,
-        axisPad=100,
+        axisPad=50,
         width = +svg.attr("width"),
         height = +svg.attr("height"),
         drawable_width = width; //- axisPad; 
@@ -210,11 +210,8 @@ function directed_graph(data, svg){
 //            .attr('x',function(d){return titlesX[d];})
 //            .attr('y',height - 20)
 //            .attr('text-anchor','middle')
+//            .style("font-size", "13px")
 //            .text(function(d){
-////                if(d == 'medium')
-////                        {
-////                            return "Lots";
-////                        }
 //                return d;
 //            });
 //
@@ -226,10 +223,6 @@ function directed_graph(data, svg){
 //            .attr('y',function(d){return titlesY[d];})
 //            .attr('text-anchor','beginning')
 //            .text(function(d){
-////                if(d == 'medium')
-////                        {
-////                            return "low Lots";
-////                        }
 //                return d;
 //            });
 
