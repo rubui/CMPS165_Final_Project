@@ -171,7 +171,7 @@ function directed_graph(data, svg, button_flag){
 
     //functions called once for each node-- provides the approriate x and y for nodes
     function nodeXPos(d){
-        if(button_flag){
+        if(!button_flag){
             //do something
             
         }
@@ -180,7 +180,7 @@ function directed_graph(data, svg, button_flag){
     
     function nodeYPos(d){
         //if the button is pressed, redefine nodeY (to different parameter)
-        if(button_flag){
+        if(!button_flag){
             return waterCentersTemp[d.water].y;
         }
  

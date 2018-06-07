@@ -138,20 +138,6 @@
                     .attr('class','tooltip-text')
                     .attr('id', 'water');
             
-            d3.select("#option1")
-                .on("click", function(){
-                button_flag = true;
-                console.log(button_flag);
-                start();
-                });
-            d3.select("#option2")
-                .on('click',function(){
-                button_flag=false; 
-                console.log(button_flag)
-            });
-                    
-                
-
             //run functions here
             directed_graph(data, svg, button_flag);
 
