@@ -3,14 +3,15 @@ function directed_graph(data, svg, button_flag){
 //    http://vallandingham.me/bubble_charts_with_d3v4.html
 
 
-    var radius = 20,
+    var radius = 19,
         nodePadding = 2.5,
         forceStrength = .03,
-        axisPad=50,
+        axisPad = 90,
+        nodeOffset = 40, 
         width = +svg.attr("width"),
         height = +svg.attr("height"),
-        drawable_width = width, //- axisPad;
-        drawable_height = height,//- axisPad;
+        drawable_width = width - axisPad;
+        drawable_height = height- axisPad;
         center = {x:width/2,y:height/2},
         mouseover_ready_flag = true;
         g = svg.append("g").attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
@@ -97,22 +98,22 @@ function directed_graph(data, svg, button_flag){
         low: {x:width/4},
         medium:{x:width/2},
         high:{x:2*(width/3)+80},
-        "Full sun":{x:6*drawable_width/7},
-        "Full sun to part sun":{x:5*drawable_width/7},
-        "Full sun to part shade":{x:4*drawable_width/7},
-        "Part sun to part shade":{x:3*drawable_width/7},
-        "Part shade":{x:2*drawable_width/7},
-        "Part shade to full shade":{x:drawable_width/7}
+        "Full sun":{x:6*drawable_width/7 + nodeOffset},
+        "Full sun to part sun":{x:5*drawable_width/7 + nodeOffset},
+        "Full sun to part shade":{x:4*drawable_width/7 + nodeOffset},
+        "Part sun to part shade":{x:3*drawable_width/7 + nodeOffset},
+        "Part shade":{x:2*drawable_width/7 + nodeOffset },
+        "Part shade to full shade":{x:drawable_width/7 + nodeOffset}
     };
 
     var amountCentersY = {
         high: {y:height/3-50},
         medium:{y:height/2},
-        low:{y:2*(height/3)},
-        "Dry":{y:4*drawable_height/5},
-        "Nearly dry":{y:3*drawable_height/5},
-        "Slightly dry":{y:2*drawable_height/5},
-        "Never dry":{y:drawable_height/5}
+        low:{y:2*(height/3) + nodeOffset },
+        "Dry":{y:4*drawable_height/5 + nodeOffset},
+        "Nearly dry":{y:3*drawable_height/5 + nodeOffset},
+        "Slightly dry":{y:2*drawable_height/5 +40},
+        "Never dry":{y:drawable_height/5 + nodeOffset}
     };
 
     var waterCentersTemp = {
@@ -122,14 +123,6 @@ function directed_graph(data, svg, button_flag){
         "Medium to high":{y:2*drawable_height/6},
         "High":{y:drawable_height/6}
     };
-
-    var moistureRadius = {
-        "Low":{radius: 15},
-        "Low to medium":{radius: 20},
-        "Medium":{radius: 25},
-        "Medium to high":{radius: 30},
-        "High":{radius: 35}
-    }
 
     //collision organic (we can also use .collision force)
     function charge(d){
@@ -150,8 +143,15 @@ function directed_graph(data, svg, button_flag){
     simulation.stop();
 
 
-    // Map data from CSV
+    // Map data from CSV + get max values for spread and hegiht 
+    mX = 0; 
+    mY = 0; 
     var nodes = data.map(function(d){
+        mHeight = parseMaxNum(d.Plant_Height); 
+        mSpread = parseMaxNum(d.Plant_Spread);
+        if (mHeight > mX) mX = mHeight; 
+        if (mSpread > mY) mY = mSpread; 
+        
         return{
             sci_name: d.Scientific_Name,
             nickname: d.Common_Name,
@@ -163,31 +163,50 @@ function directed_graph(data, svg, button_flag){
             toxic_dogs: d.Toxic_Dogs,
             toxic_cats: d.Toxic_Cats,
             radius: radius,
-            img: d.img_name
+            img: d.img_name,      
+            max_height: mHeight,
+            max_spread: mSpread
         };
     });
+        
+    
+    // Create scales for plant height vs. spread graphs 
+    var spreadScale = d3.scaleLinear()
+        .domain([0, mX])
+        .range([200, drawable_width]); 
+    
+    var heightScale = d3.scaleLinear()
+        .domain([0, mY])
+        .range([200, drawable_height]);        
+    
+    
+    // Function to parse out max spread and height and return num
+    function parseMaxNum(d) {
+        var arr = d.split(" ");
+        return parseFloat(arr[2]);
+    }
+    
 
-
-//        console.log(nodes);
-
-    //functions called once for each node-- provides the approriate x and y for nodes
+    // Functions to be called once for each node 
+    // Provides the approriate x and y for nodes
+    // Calculates a different x and y position based on our button toggle
     function nodeXPos(d){
-        if(!button_flag){
-            //do something
-
-        }
-        console.log(d.sun)
-        return amountCentersX[d.sun].x;
+        if (!button_flag){
+            return spreadScale(d.max_spread);
+        } else {
+            return amountCentersX[d.sun].x;    
+        }              
     }
 
     function nodeYPos(d){
-        //if the button is pressed, redefine nodeY (to different parameter)
-        if(!button_flag){
-            return waterCentersTemp[d.water].y;
-        }
-
-        return amountCentersY[d.soil_ind].y;
+        if (!button_flag){        
+            return height - heightScale(d.max_height);
+        } else {
+            return amountCentersY[d.soil_ind].y;
+        }        
     }
+    
+
 
 
 //the following code basically creates a 'folder' for both image and circle
@@ -292,13 +311,13 @@ function directed_graph(data, svg, button_flag){
     d3.select("#option1")
         .on("click", function(){
         button_flag = true;
-        console.log(button_flag);
+//        console.log(button_flag);
         start();
         });
     d3.select("#option2")
         .on('click',function(){
         button_flag=false;
-        console.log(button_flag)
+//        console.log(button_flag)
         start();
     });
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
