@@ -304,24 +304,6 @@ function directed_graph(data, svg, button_flag){
     }
 
 
-
-
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    //~~~~~~~~Button Updaters~~~~~~~~~~~~~~
-    d3.select("#option1")
-        .on("click", function(){
-        button_flag = true;
-//        console.log(button_flag);
-        start();
-        });
-    d3.select("#option2")
-        .on('click',function(){
-        button_flag=false;
-//        console.log(button_flag)
-        start();
-    });
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
     function mouseover(d)
     {
         //if we ever get around to fixing the image bug, we will set this flag
@@ -376,11 +358,13 @@ function directed_graph(data, svg, button_flag){
         }
 
     };
+    
+    // Axis labels
 
     var y_label_water = "Soil Moisture";
-    var y_label_height = "Plant Max Height";
+    var y_label_height = "Max Height";
     var x_label_sunlight = "Sunlight";
-    var x_label_spread = "Plant Max Indoor Spread";
+    var x_label_spread = "Max Indoor Spread";
     
     var x_name = x_label_sunlight;
     var y_name = y_label_water;
@@ -389,21 +373,25 @@ function directed_graph(data, svg, button_flag){
     var y_axis_label = g.append("text")
         .attr("class", "y_label")
         .attr("transform", "rotate(-90)")
-        .style("font-family", "georgia")
+        .style("font-family", "Roboto Slab")
         .style("font-size", "16pt")
-        .attr("x", 0)
-        .attr("y", -480)
-        .style("text-anchor", "middle")
-        .text(y_name);
+        .attr("x", 20)
+        .attr("y", -470)
+        .style("font-size", "16px")
+        .style("text-anchor", "middle");
+        
+    y_axis_label.text(y_name);
     
     var x_axis_label = g.append("text")
         .attr("class", "x_label")
-        .style("font-family", "georgia")
+        .style("font-family", "Roboto Slab")
         .style("font-size", "16pt")
         .attr("x", 0)
         .attr("y", 280)
+        .style("font-size", "16px")
         .style("text-anchor", "middle")
-        .text(x_name);
+        
+    x_axis_label.text(x_name);
     
     //creating xaxis
     var x_axis = g.append("g")
@@ -415,9 +403,7 @@ function directed_graph(data, svg, button_flag){
         .attr('marker-end','url(#arrowhead_right)')
         .call(d3.axisBottom(x));
 
-        
-  
-
+ 
     //creating yaxis
     g.append("g")
         .attr("class", "yaxis")
@@ -435,5 +421,27 @@ function directed_graph(data, svg, button_flag){
     }
 
 
-
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    //~~~~~~~~Button Updaters~~~~~~~~~~~~~~
+    d3.select("#option1")
+        .on("click", function(){
+        button_flag = true;
+        var x_name = x_label_sunlight;
+        var y_name = y_label_water;
+        x_axis_label.text(x_name);
+        y_axis_label.text(y_name);
+//        console.log(button_flag);
+        start();
+        });
+    d3.select("#option2")
+        .on('click',function(){
+        button_flag=false;
+        var x_name = x_label_spread;
+        var y_name = y_label_height;
+        x_axis_label.text(x_name);
+        y_axis_label.text(y_name);
+//        console.log(button_flag)
+        start();
+    });
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 }
