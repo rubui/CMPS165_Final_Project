@@ -377,6 +377,34 @@ function directed_graph(data, svg, button_flag){
 
     };
 
+    var y_label_water = "Soil Moisture";
+    var y_label_height = "Plant Max Height";
+    var x_label_sunlight = "Sunlight";
+    var x_label_spread = "Plant Max Indoor Spread";
+    
+    var x_name = x_label_sunlight;
+    var y_name = y_label_water;
+    
+    
+    var y_axis_label = g.append("text")
+        .attr("class", "y_label")
+        .attr("transform", "rotate(-90)")
+        .style("font-family", "georgia")
+        .style("font-size", "16pt")
+        .attr("x", 0)
+        .attr("y", -480)
+        .style("text-anchor", "middle")
+        .text(y_name);
+    
+    var x_axis_label = g.append("text")
+        .attr("class", "x_label")
+        .style("font-family", "georgia")
+        .style("font-size", "16pt")
+        .attr("x", 0)
+        .attr("y", 280)
+        .style("text-anchor", "middle")
+        .text(x_name);
+    
     //creating xaxis
     var x_axis = g.append("g")
         .attr("class", "xaxis")
