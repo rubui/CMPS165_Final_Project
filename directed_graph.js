@@ -384,7 +384,11 @@ function directed_graph(data, svg, button_flag){
         .call(d3.axisBottom(x).ticks(0).tickSizeOuter(0))
         .style("opacity",1)
         .select('path')
-        .attr('marker-end','url(#arrowhead_right)');
+        .attr('marker-end','url(#arrowhead_right)')
+        .call(d3.axisBottom(x));
+
+        
+  
 
     //creating yaxis
     g.append("g")
@@ -393,7 +397,8 @@ function directed_graph(data, svg, button_flag){
         .call(d3.axisLeft(y).ticks(0).tickSizeOuter(0))
         .style("opacity",1)
         .select("path")
-        .attr('marker-end','url(#arrowhead_top)');
+        .attr('marker-end','url(#arrowhead_top)')
+        .call(d3.axisLeft(y));
 
 
     function padExtent(e, p) {
