@@ -1,4 +1,4 @@
-function directed_graph(data, svg){
+function directed_graph(data, svg, button_flag){
 //    http://bl.ocks.org/ericandrewlewis/dc79d22c74b8046a5512
 //    http://vallandingham.me/bubble_charts_with_d3v4.html
 
@@ -9,9 +9,10 @@ function directed_graph(data, svg){
         axisPad=50,
         width = +svg.attr("width"),
         height = +svg.attr("height"),
-        drawable_width = width; //- axisPad; 
-        drawable_height = height; //- axisPad; 
+        drawable_width = width, //- axisPad;
+        drawable_height = height,//- axisPad;
         center = {x:width/2,y:height/2},
+        mouseover_ready_flag = true;
         g = svg.append("g").attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
 
     //storing custom paths that create arrows.. to be later used in axis
@@ -114,6 +115,14 @@ function directed_graph(data, svg){
         "Never dry":{y:drawable_height/5}
     };
 
+    var waterCentersTemp = {
+        "Low":{y:5*drawable_height/6},
+        "Low to medium":{y:4*drawable_height/6},
+        "Medium":{y:3*drawable_height/6},
+        "Medium to high":{y:2*drawable_height/6},
+        "High":{y:drawable_height/6}
+    };
+
     var moistureRadius = {
         "Low":{radius: 15},
         "Low to medium":{radius: 20},
@@ -162,18 +171,21 @@ function directed_graph(data, svg){
 
     //functions called once for each node-- provides the approriate x and y for nodes
     function nodeXPos(d){
+        if(!button_flag){
+            //do something
+
+        }
         return amountCentersX[d.sun].x;
     }
-    
+
     function nodeYPos(d){
+        //if the button is pressed, redefine nodeY (to different parameter)
+        if(!button_flag){
+            return waterCentersTemp[d.water].y;
+        }
+
         return amountCentersY[d.soil_ind].y;
     }
-    
-//    simulation.force('x', d3.forceX().strength(forceStrength).x(nodeXPos));
-//    simulation.force('y', d3.forceY().strength(forceStrength).y(nodeYPos));
-//    simulation.alpha(1).restart();
-//    var node = svg.selectAll('.scale-node')
-//        .data(nodes,function(d){return d.id})
 
 
 //the following code basically creates a 'folder' for both image and circle
@@ -201,7 +213,7 @@ function directed_graph(data, svg){
 
 
 //adding the axis titles
-    var myData = d3.keys(titlesX);
+//    var myData = d3.keys(titlesX);
 
 //    svg.selectAll('.titlesX')
 //        .data(myData)
@@ -248,64 +260,94 @@ function directed_graph(data, svg){
     //tells the simulation to start again
     start();
 
+
+
+
     function start(){
+//        mouseover_ready_flag = false;
         simulation.force('x', d3.forceX().strength(forceStrength).x(nodeXPos));
         simulation.force('y', d3.forceY().strength(forceStrength).y(nodeYPos));
 
         simulation.alpha(1).restart();
+//
+//        setTimeout(function(){
+////            simulation.stop();
+//            mouseover_ready_flag = true;
+//        },2000)
     }
-    var temp = radius;
+
+
+
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    //~~~~~~~~Button Updaters~~~~~~~~~~~~~~
+    d3.select("#option1")
+        .on("click", function(){
+        button_flag = true;
+        console.log(button_flag);
+        start();
+        });
+    d3.select("#option2")
+        .on('click',function(){
+        button_flag=false;
+        console.log(button_flag)
+        start();
+    });
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     function mouseover(d)
     {
-//        console.log(d);
-        var dd = d3.select(this)[0];
-        d3.select(this)
-            .select("circle")
-            .transition()
-            .duration(150)
-            .attr("r", radius*1.3);
-        
-//        simulation.alpha(1).restart();
+        //if we ever get around to fixing the image bug, we will set this flag
+        //to false
+        if(mouseover_ready_flag){
+            //        console.log(d);
+            var dd = d3.select(this)[0];
+            d3.select(this)
+                .select("circle")
+                .transition()
+                .duration(150)
+                .attr("r", radius*1.3);
 
-//        var temp = radius;
-//        radius = radius*5;
+    //        var temp = radius;
+    //        radius = radius*5;
 
-        // simulation.stop();
+            // simulation.stop();
 
-        d3.select(this).select('image')
-            .transition()
-            .duration(150)
-            .attr("width", 50)
-            .attr("height", 50)
-            .attr("x", function(d) { return +d.x - (radius*1.3); })
-            .attr("y", function(d) { return +d.y - (radius*1.3); });
+            d3.select(this).select('image')
+                .transition()
+                .duration(150)
+                .attr("width", 50)
+                .attr("height", 50)
+                .attr("x", function(d) { return +d.x - (radius*1.3); })
+                .attr("y", function(d) { return +d.y - (radius*1.3); });
 
-//        getOverview(data,d.index);
-        tooltip(d,parseFloat(d3.event.pageX),parseFloat(d3.event.pageY));
+    //        getOverview(data,d.index);
+            tooltip(d,parseFloat(d3.event.pageX),parseFloat(d3.event.pageY));
+        }
+
     };
 
     function mouseout()
     {
-//        radius = temp;
+        if(mouseover_ready_flag){
+            d3.select(this)
+                .select("circle")
+                .transition()
+                .duration(150)
+                .attr("r", radius);
 
-        d3.select(this)
-            .select("circle")
-            .transition()
-            .duration(150)
-            .attr("r", radius);
+            d3.select(this).select('image')
+                .transition()
+                .duration(150)
+                .attr("width", radius*2)
+                .attr("height", radius*2)
+                .attr("x", function(d) { return +d.x - (radius); })
+                .attr("y", function(d) { return +d.y - (radius); });
 
-        d3.select(this).select('image')
-            .transition()
-            .duration(150)
-            .attr("width", radius*2)
-            .attr("height", radius*2)
-            .attr("x", function(d) { return +d.x - (radius); })
-            .attr("y", function(d) { return +d.y - (radius); });
+            d3.select(".tooltip").classed("hidden", true);
 
-//        d3.select(".tooltip").style('opacity',0);
+        }
 
-        d3.select(".tooltip").classed("hidden", true);
     };
 
     //creating xaxis
@@ -325,12 +367,13 @@ function directed_graph(data, svg){
         .style("opacity",1)
         .select("path")
         .attr('marker-end','url(#arrowhead_top)');
-    
+
 
     function padExtent(e, p) {
         if (p === undefined) p = 1;
         return ([e[0] - p, e[1] + p]);
     }
+
 
 
 }

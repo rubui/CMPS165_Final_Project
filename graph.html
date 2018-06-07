@@ -47,10 +47,10 @@
                 <br>
                 <div class="row">
                 <div class="btn-group btn-group-toggle btn-group-vertical btn-block" data-toggle="buttons">
-                    <label class="btn btn-secondary active">
+                    <label class="btn btn-secondary active" id="option1">
                             <input type="radio" name="options" id="option1" autocomplete="off" checked> Water vs. Sun
                         </label>
-                    <label class="btn btn-secondary">
+                    <label class="btn btn-secondary" id="option2">
                             <input type="radio" name="options" id="option2" autocomplete="off"> Spread vs. Height
                         </label>
                 </div>
@@ -107,6 +107,8 @@
         d3.csv("plants_clean_38.csv", function(error, d){
             var data = d;
             console.log(d);
+            
+            var button_flag = true;
 
             var svg = d3.select("#display")
             .append("svg")
@@ -135,9 +137,9 @@
                 div.append('div')
                     .attr('class','tooltip-text')
                     .attr('id', 'water');
-
+            
             //run functions here
-            directed_graph(data, svg);
+            directed_graph(data, svg, button_flag);
 
         });
 
