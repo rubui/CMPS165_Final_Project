@@ -162,7 +162,8 @@ function directed_graph(data, svg, button_flag){
             plant_height: d.Plant_Height,
             toxic_dogs: d.Toxic_Dogs,
             toxic_cats: d.Toxic_Cats,
-            radius: radius//moistureRadius[d.Moisture].radius
+            radius: radius,
+            img: d.img_name
         };
     });
 
@@ -175,6 +176,7 @@ function directed_graph(data, svg, button_flag){
             //do something
 
         }
+        console.log(d.sun)
         return amountCentersX[d.sun].x;
     }
 
@@ -250,7 +252,13 @@ function directed_graph(data, svg, button_flag){
 
     //we can modify the get specific images later on
     bubbles.append("image")
-      .attr("xlink:href", function (d){ return "apple.png"; })
+      .attr("xlink:href", function (d){ 
+            if (d.img){
+                return "img/" + d.img; 
+            } else {
+                return "apple.png"
+            }            
+        })
       .attr("class", "bubble")
       .attr("width", radius*2)
       .attr("height", radius*2);
