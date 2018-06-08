@@ -222,9 +222,72 @@ function directed_graph(data, svg, button_flag){
     var bubblesE = bubbles.append("circle")
         .classed('bubble',true)
         .attr("r", 0)
-        .style("fill",function(d){return color(d.soil_ind+d.sun)})
-        .style("stroke",function(d){return color(d.soil_ind+d.sun)})
-        .style('stroke-width',2)
+        .style("fill",function(d){
+// I'm just trying to get it to be viewable right now. I tried and failed at using ANDs and ORs, but will try again later.
+            if (d.soil_ind == "Never dry" && d.sun == "Part shade to full shade"){
+                return d3.color(TopLeftQuad)
+            } else if (d.soil_ind == "Never dry" && d.sun == "Part shade"){
+                return d3.color(TopLeftQuad)
+            } else if (d.soil_ind == "Never dry" && d.sun == "Part sun to part shade"){
+                return d3.color(TopLeftQuad)
+            } else if (d.soil_ind == "Slightly dry" && d.sun == "Part shade to full shade"){
+                return d3.color(TopLeftQuad)
+            } else if (d.soil_ind == "Slightly dry" && d.sun == "Part shade" ){
+                return d3.color(TopLeftQuad)
+            } else if (d.soil_ind == "Slightly dry" && d.sun == "Part sun to part shade"){
+                return d3.color(TopLeftQuad)
+            } else if (d.soil_ind == "Nearly dry" && d.sun == "Part shade to full shade"){
+                return d3.color(BottomLeftQuad)
+            } else if (d.soil_ind == "Nearly dry" && d.sun == "Part shade" ){
+                return d3.color(BottomLeftQuad)
+            } else if (d.soil_ind == "Nearly dry" && d.sun == "Part sun to part shade"){
+                return d3.color(BottomLeftQuad)
+            } else if (d.soil_ind == "Dry" && d.sun == "Part shade to full shade"){
+                return d3.color(BottomLeftQuad)
+            } else if (d.soil_ind == "Dry" && d.sun == "Part shade"){
+                return d3.color(BottomLeftQuad)
+            } else if (d.soil_ind == "Dry" && d.sun == "Part sun to part shade"){
+                return d3.color(BottomLeftQuad)
+            } else if(d.soil_ind == "Never dry" && d.sun == "Full sun to part shade"){
+                return d3.color(TopRightQuad)
+            } else if(d.soil_ind == "Never dry" && d.sun == "Full sun to part sun" ){
+                return d3.color(TopRightQuad)
+            } else if(d.soil_ind == "Never dry" && d.sun == "Full sun"){
+                return d3.color(TopRightQuad)
+            } else if(d.soil_ind == "Slightly dry" && d.sun == "Full sun to part shade"){
+                return d3.color(TopRightQuad)
+            } else if(d.soil_ind == "Slightly dry" && d.sun == "Full sun to part sun"){
+                return d3.color(TopRightQuad)
+            } else if(d.soil_ind == "Slightly dry" && d.sun == "Full sun"){
+                return d3.color(TopRightQuad)
+            } else if(d.soil_ind == "Nearly dry" && d.sun == "Full sun to part shade"){
+                return d3.color(BottomRightQuad)
+            } else if(d.soil_ind == "Nearly dry" && d.sun == "Full sun to part sun"){
+                return d3.color(BottomRightQuad) 
+            } else if(d.soil_ind == "Nearly dry" && d.sun == "Full sun"){
+                return d3.color(BottomRightQuad) 
+            } else if(d.soil_ind == "Dry" && d.sun == "Full sun to part shade"){
+                return d3.color(BottomRightQuad)
+            } else if(d.soil_ind == "Dry" && d.sun == "Full sun to part sun"){
+                return d3.color(BottomRightQuad)
+            } else if(d.soil_ind == "Dry" && d.sun == "Full sun"){
+                return d3.color(BottomRightQuad)
+            }
+        
+//Try this later
+/*             if (d.soil_ind == ("Slightly dry" || "Never dry") && d.sun == ("Part shade to full shade" || "Part shade" || "Part sun to part shade")){
+                return d3.color(TopLeftQuad)
+            } else if (d.soil_ind == ("Nearly dry" || "Dry") && d.sun == ("Part shade to full shade" || "Part shade" || "Part sun to part shade")){
+                return d3.color(BottomLeftQuad)
+            } else if(d.soil_ind == ("Never dry" || "Slightly dry") && d.sun == ("Full sun to part shade" || "Full sun to prt sun" || "Full sun")){
+                return d3.color(TopRightQuad)
+            } else if(d.soil_ind == ("Nearly dry" || "Dry") && d.sun == ("Full sun to part shade" ||"Full sun to part sun" || "Full sun")){
+                return d3.color(BottomRightQuad)
+            }*/
+                                 
+         })
+//        .style("stroke",function(d){return color(d.soil_ind+d.sun)})
+//        .style('stroke-width',2)
         .transition()
                 .duration(2000)
                 .attr('r',function(d){return d.radius});
