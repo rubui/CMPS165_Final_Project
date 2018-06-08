@@ -20,7 +20,7 @@
 
 h1,
 h2 {
-    color: green;
+    color: forestgreen;
     font-family: 'Roboto Slab', serif;
     font-size: 60px;
     text-align: center;
@@ -28,7 +28,7 @@ h2 {
 
 .sources_header {
     font-family: 'Roboto Slab', serif;
-    color: green;
+    color: forestgreen;
 }
 
 .node circle {

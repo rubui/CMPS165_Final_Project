@@ -336,7 +336,7 @@ function directed_graph(data, svg, button_flag){
     // Axis labels
 
     var y_label_water = "Water";
-    var y_label_height = "Max Height";
+    var y_label_height = "Max Indoor Height";
     var x_label_sunlight = "Sunlight";
     var x_label_spread = "Max Indoor Spread";
     
@@ -385,7 +385,7 @@ function directed_graph(data, svg, button_flag){
         .attr("class", "x_label")
         .style("font-family", "Roboto Slab")
         .style("font-size", "16pt")
-        .attr("x", 0)
+        .attr("x", 10)
         .attr("y", 285)
         .style("font-size", "16px")
         .style("text-anchor", "middle");

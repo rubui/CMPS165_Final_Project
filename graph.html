@@ -32,9 +32,11 @@
         <!-- Title -->
         <h1>California Houseplants Care Guide</h1>
 
-        <!-- Summary of project -->
+<!--
+         Summary of project 
         <p style="text-align: center">We wish to create a visualization for various types of plants that are commercially available in the USA. We will focus on basic care such as amount of water needed and amounts of sunlight required. Our goal is for this guide to serve as a quick and easily navigable reference for plant maintence. In doing so, the visualization can also serve as a simple buyer's guide, by showing various plants and their needs to jugde agaisnt your own lifestyle choices. We also plan to include more variables to examine such as tempurature tolerance, humidity, plant types, and ph levels of soil.
         </p>
+-->
 
         <br>
 
@@ -43,18 +45,20 @@
             
             <!-- Left Sidebar -->
             <div class="col-md-2" id="left_sidebar">
-                <p style="text-align: justify">This is where we're going to have information and such about the graph and how to use the information that we're presenting.
+                <div style="font-size: 12px">
+                    <p style="font-size: 12px">This is where we're going to have information and such about the graph and how to use the information that we're presenting.
 
-                <p>Right below this is going to be the static tooltip. </p>
-                <br><br>
-                <div class="row" style="background-color: #efefef"><br><br><br><br><br><br><br><br><br><br><br><br></div>
+                    <p style="font-size: 12px">Right below this is going to be the static tooltip. </p>
+                </div>
+                <br><br><br>
+                <div class="row" style="background-color: #efefef"><br><br><br><br><br><br><br><br><br><br><br><br><br><br></div>
             </div>
 
             <!-- Middle Column -->
             <div class="col-md-8">
                 
                 <!-- Display graph here -->
-                <div class="row" id="display"></div>
+                <div class="row" id="display" style="height=600px"></div>
                 
                 <!--Spacer Row-->
                 <div class="row"><br><br></div>
@@ -65,7 +69,7 @@
         	    <div class="col-md-3">
                     
                     <div class="btn-group btn-group-toggle btn-group-vertical btn-block" data-toggle="buttons">
-                        <label class="btn btn-secondary active" id="option1">
+                        <label class="btn btn-secondary active" style="background-color: forestgreen; border: none" id="option1">
                             <input type="radio" name="options" id="option1" autocomplete="off" checked> Water vs. Sun
                         </label>
                     </div>
@@ -73,7 +77,7 @@
 
                 <div class="col-md-3">
                     <div class="btn-group btn-group-toggle btn-group-vertical btn-block" data-toggle="buttons">
-                        <label class="btn btn-secondary" id="option2">
+                        <label class="btn btn-secondary" style="background-color: forestgreen; border: none" id="option2">
                             <input type="radio" name="options" id="option2" autocomplete="off"> Spread vs. Height
                         </label>
                     </div>
