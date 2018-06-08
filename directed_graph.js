@@ -269,7 +269,7 @@ function directed_graph(data, svg, button_flag){
         simulation.force('x', d3.forceX().strength(forceStrength).x(nodeXPos));
         simulation.force('y', d3.forceY().strength(forceStrength).y(nodeYPos));
 
-        simulation.alpha(1).restart();
+        simulation.alpha(1.75).restart();
 //
 //        setTimeout(function(){
 ////            simulation.stop();
