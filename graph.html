@@ -12,11 +12,13 @@
 
     <!--  d3.js v4 import  -->
     <script src="//d3js.org/d3.v4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.25.6/d3-legend.js"></script>
 
     <!--  Bootstrap import  -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 
     <!--  Custom Sylesheet  -->
     <link href="style.css" rel="stylesheet" />
@@ -25,8 +27,8 @@
 
 <body>
 
-    <div id="main"  style="width:1200px; margin:0 auto;">
-        
+    <div id="main"  style="width:1500px; margin:0 auto;">
+
         <!-- Title -->
         <h1>California Houseplants Care Guide</h1>
 
@@ -35,18 +37,28 @@
         </p>
 
         <br>
-        
+
         <!-- Row to handle graph and filters -->
         <div class="row">
-            
+
+            <div class="col-md-2">
+                <p style="text-align: justify; font-size: 10px">This is where we're going to have information and such about the graph and how to use the information that we're presenting.
+
+                <p>Right below this is going to be the static tooltip. </p>
+                <br><br>
+                <div class="row" style="background-color: #efefef"><br><br><br><br><br><br><br><br><br><br><br><br></div>
+            </div>
+
             <!-- Draw graph in first column-->
-            <div class="col-md-10" id="display"></div>
+            <div class="col-md-8" id="display"></div>
+
             <!-- Sidebar for filters and toggles and tooltip (?) -->
             <div class="col-md-2" id="sidebar">
-				 <div class="row">
-                    <label class="filters">
-						<html>Search Filters</html>
-                	</label>
+                <br>
+                <div class="row">
+                   <label class="filters">
+                     <html>Search Filters</html>
+                 </label>
                 </div>
 
                 <div class="row">
@@ -83,8 +95,8 @@
             </div>
 
         </div>
-		
-		<div class="row">   
+
+		<div class="row">
 			<div class="col-md-2"></div>
         	<div class="col-md-3">
         		<div class="btn-group btn-group-toggle btn-group-vertical btn-block" data-toggle="buttons">
@@ -93,7 +105,7 @@
                 	</label>
 				</div>
         	</div>
-	
+
 			<div class="col-md-3">
         		<div class="btn-group btn-group-toggle btn-group-vertical btn-block" data-toggle="buttons">
                 	<label class="btn btn-secondary" id="option2">
@@ -102,7 +114,7 @@
 				</div>
         	</div>
 		</div>
-            
+
 
 
 
@@ -121,7 +133,7 @@
         d3.csv("plants_clean_40.csv", function(error, d){
             var data = d;
             console.log(d);
-            
+
             var button_flag = true;
 
             var svg = d3.select("#display")
@@ -151,14 +163,14 @@
                 div.append('div')
                     .attr('class','tooltip-text')
                     .attr('id', 'water');
-            
+
             //run functions here
             directed_graph(data, svg, button_flag);
 
         });
 
     </script>
-        
+
         <br><br><br><br><br><br><br><br>
         <br><br><br><br><br><br><br><br>
 
