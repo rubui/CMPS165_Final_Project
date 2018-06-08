@@ -3,11 +3,11 @@ function directed_graph(data, svg, button_flag){
 //    http://vallandingham.me/bubble_charts_with_d3v4.html
 
 
-    var radius = 19,
+    var radius = 22,
         nodePadding = 2.5,
         forceStrength = .03,
         axisPad = 90,
-        nodeOffset = 40, 
+        nodeOffset = 40,
         width = +svg.attr("width"),
         height = +svg.attr("height"),
         drawable_width = width - axisPad;
@@ -116,13 +116,6 @@ function directed_graph(data, svg, button_flag){
         "Never dry":{y:drawable_height/5 + nodeOffset}
     };
 
-    var waterCentersTemp = {
-        "Low":{y:5*drawable_height/6},
-        "Low to medium":{y:4*drawable_height/6},
-        "Medium":{y:3*drawable_height/6},
-        "Medium to high":{y:2*drawable_height/6},
-        "High":{y:drawable_height/6}
-    };
 
     //collision organic (we can also use .collision force)
     function charge(d){
@@ -143,69 +136,69 @@ function directed_graph(data, svg, button_flag){
     simulation.stop();
 
 
-    // Map data from CSV + get max values for spread and hegiht 
-    mX = 0; 
-    mY = 0; 
+    // Map data from CSV + get max values for spread and hegiht
+    var mX = 0;
+    var mY = 0;
     var nodes = data.map(function(d){
-        mHeight = parseMaxNum(d.Plant_Height); 
-        mSpread = parseMaxNum(d.Plant_Spread);
-        if (mHeight > mX) mX = mHeight; 
-        if (mSpread > mY) mY = mSpread; 
-        
+        mHeight = parseMaxNum(d.Indoor_Height);
+        mSpread = parseMaxNum(d.Indoor_Spread);
+        if (mHeight > mX) mX = mHeight;
+        if (mSpread > mY) mY = mSpread;
+
         return{
             sci_name: d.Scientific_Name,
             nickname: d.Common_Name,
             sun: d.Sunlight,
             water: d.Moisture,
             soil_ind: d.Soil_Indicator,
-            plant_spread: d.Plant_Spread,
-            plant_height: d.Plant_Height,
+            plant_spread: d.Indoor_Spread,
+            plant_height: d.Indoor_Height,
             toxic_dogs: d.Toxic_Dogs,
             toxic_cats: d.Toxic_Cats,
             radius: radius,
-            img: d.img_name,      
+            img: d.img_name,
             max_height: mHeight,
             max_spread: mSpread
         };
     });
-        
-    
-    // Create scales for plant height vs. spread graphs 
+
+
+    // Create scales for plant height vs. spread graphs
     var spreadScale = d3.scaleLinear()
         .domain([0, mX])
-        .range([200, drawable_width]); 
-    
+        .range([200, drawable_width]);
+
     var heightScale = d3.scaleLinear()
         .domain([0, mY])
-        .range([200, drawable_height]);        
-    
-    
+        .range([150, drawable_height]);
+
+
     // Function to parse out max spread and height and return num
     function parseMaxNum(d) {
         var arr = d.split(" ");
         return parseFloat(arr[2]);
     }
-    
 
-    // Functions to be called once for each node 
+
+    // Functions to be called once for each node
     // Provides the approriate x and y for nodes
     // Calculates a different x and y position based on our button toggle
     function nodeXPos(d){
         if (!button_flag){
             return spreadScale(d.max_spread);
         } else {
-            return amountCentersX[d.sun].x;    
-        }              
+            return amountCentersX[d.sun].x;
+        }
     }
 
     function nodeYPos(d){
-        if (!button_flag){        
+        if (!button_flag){
             return height - heightScale(d.max_height);
         } else {
             return amountCentersY[d.soil_ind].y;
-        }        
+        }
     }
-    
+
 var TopLeftQuad = "rgb(0, 118, 255)";
 var BottomLeftQuad = "rgb(0, 255, 255)";
 var TopRightQuad = "rgb(255, 150, 0)";
@@ -220,7 +213,11 @@ var BottomRightQuad = "rgb(255, 255, 0)";
         .attr("class", "force-scale-node")
         .on("mouseover", mouseover)
         .on("mouseout", mouseout)
-        .on("click", function (d) {console.log(d)});
+        .on("click", function (d) {
+            console.log(d)
+            console.log("heightScale value: " + heightScale(d.max_height));
+            console.log("normalized value: " + (height - heightScale(d.max_height)))
+        });
 
     var bubblesE = bubbles.append("circle")
         .classed('bubble',true)
@@ -266,9 +263,9 @@ var BottomRightQuad = "rgb(255, 255, 0)";
             } else if(d.soil_ind == "Nearly dry" && d.sun == "Full sun to part shade"){
                 return d3.color(BottomRightQuad)
             } else if(d.soil_ind == "Nearly dry" && d.sun == "Full sun to part sun"){
-                return d3.color(BottomRightQuad) 
+                return d3.color(BottomRightQuad)
             } else if(d.soil_ind == "Nearly dry" && d.sun == "Full sun"){
-                return d3.color(BottomRightQuad) 
+                return d3.color(BottomRightQuad)
             } else if(d.soil_ind == "Dry" && d.sun == "Full sun to part shade"){
                 return d3.color(BottomRightQuad)
             } else if(d.soil_ind == "Dry" && d.sun == "Full sun to part sun"){
@@ -276,7 +273,7 @@ var BottomRightQuad = "rgb(255, 255, 0)";
             } else if(d.soil_ind == "Dry" && d.sun == "Full sun"){
                 return d3.color(BottomRightQuad)
             }
-        
+
 //Try this later
 /*             if (d.soil_ind == ("Slightly dry" || "Never dry") && d.sun == ("Part shade to full shade" || "Part shade" || "Part sun to part shade")){
                 return d3.color(TopLeftQuad)
@@ -287,7 +284,7 @@ var BottomRightQuad = "rgb(255, 255, 0)";
             } else if(d.soil_ind == ("Nearly dry" || "Dry") && d.sun == ("Full sun to part shade" ||"Full sun to part sun" || "Full sun")){
                 return d3.color(BottomRightQuad)
             }*/
-                                 
+
          })
 //        .style("stroke",function(d){return color(d.soil_ind+d.sun)})
 //        .style('stroke-width',2)
@@ -305,18 +302,18 @@ var BottomRightQuad = "rgb(255, 255, 0)";
         svg.selectAll(".bubble")
             .attr("x", function(d) { return +d.x - (radius); })
             .attr("y", function(d) { return +d.y - (radius); })
-            .attr("cx", function(d) { return +d.x; })
-            .attr("cy", function(d) { return +d.y; });
+            .attr("cx", function(d) { return d.x = Math.max(radius, Math.min(width - radius, d.x)); })
+            .attr("cy", function(d) { return d.y = Math.max(radius, Math.min(height -       radius, d.y)); });
     }
 
     //we can modify the get specific images later on
     bubbles.append("image")
-      .attr("xlink:href", function (d){ 
+      .attr("xlink:href", function (d){
             if (d.img){
-                return "img/" + d.img; 
+                return "img/" + d.img;
             } else {
                 return "apple.png"
-            }            
+            }
         })
       .attr("class", "bubble")
       .attr("width", radius*2)
@@ -398,18 +395,18 @@ var BottomRightQuad = "rgb(255, 255, 0)";
         }
 
     };
-    
+
     // Axis labels
 
     var y_label_water = "Water";
     var y_label_height = "Max Indoor Height";
     var x_label_sunlight = "Sunlight";
     var x_label_spread = "Max Indoor Spread";
-    
+
     var x_name = x_label_sunlight;
     var y_name = y_label_water;
-    
-    
+
+
     var y_axis_label = g.append("text")
         .attr("class", "y_label")
         .attr("transform", "rotate(-90)")
@@ -419,9 +416,9 @@ var BottomRightQuad = "rgb(255, 255, 0)";
         .attr("y", -475)
         .style("font-size", "16px")
         .style("text-anchor", "middle");
-        
+
     y_axis_label.text(y_name);
-    
+
     var extra_labels_1 = g.append("text")
         .attr("class", "y_label")
         .attr("transform", "rotate(-90)")
@@ -433,7 +430,7 @@ var BottomRightQuad = "rgb(255, 255, 0)";
         .style("text-anchor", "start")
         .text("Needs Less Water")
         .attr("opacity", 0.5);
-    
+
     var extra_labels_2 = g.append("text")
         .attr("class", "y_label")
         .attr("transform", "rotate(-90)")
@@ -445,8 +442,8 @@ var BottomRightQuad = "rgb(255, 255, 0)";
         .style("text-anchor", "end")
         .text("Needs More Water")
         .attr("opacity", 0.5);
-    
-    
+
+
     var x_axis_label = g.append("text")
         .attr("class", "x_label")
         .style("font-family", "Roboto Slab")
@@ -455,10 +452,10 @@ var BottomRightQuad = "rgb(255, 255, 0)";
         .attr("y", 285)
         .style("font-size", "16px")
         .style("text-anchor", "middle");
-        
+
     x_axis_label.text(x_name);
-    
-    
+
+
     var extra_labels_3 = g.append("text")
         .attr("class", "x_label")
         .style("font-family", "Roboto Slab")
@@ -469,7 +466,7 @@ var BottomRightQuad = "rgb(255, 255, 0)";
         .style("text-anchor", "end")
         .text("Prefers Sun")
         .attr("opacity", 0.5);
-    
+
     var extra_labels_4 = g.append("text")
         .attr("class", "x_label")
         .style("font-family", "Roboto Slab")
@@ -480,10 +477,10 @@ var BottomRightQuad = "rgb(255, 255, 0)";
         .style("text-anchor", "start")
         .text("Prefers Shade")
         .attr("opacity", 0.5);
-    
+
     extra_labels = [extra_labels_1, extra_labels_2, extra_labels_3, extra_labels_4];
-        
-    
+
+
     //creating xaxis
     var x_axis = g.append("g")
         .attr("class", "xaxis")
@@ -494,7 +491,7 @@ var BottomRightQuad = "rgb(255, 255, 0)";
         .attr('marker-end','url(#arrowhead_right)')
         .call(d3.axisBottom(x));
 
- 
+
     //creating yaxis
     g.append("g")
         .attr("class", "yaxis")
@@ -515,14 +512,14 @@ var BottomRightQuad = "rgb(255, 255, 0)";
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     //               Button Updaters
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    
+
     d3.select("#option1")
         .on("click", function(){
         button_flag = true;
-        
+
         x_axis_label.text(x_label_sunlight);
         y_axis_label.text(y_label_water);
-        
+
         for (var i = 0; i < extra_labels.length; i++) {
             extra_labels[i].attr("opacity", 0.5);
         }
@@ -532,10 +529,10 @@ var BottomRightQuad = "rgb(255, 255, 0)";
     d3.select("#option2")
         .on('click',function(){
         button_flag = false;
-        
+
         x_axis_label.text(x_label_spread);
         y_axis_label.text(y_label_height);
-        
+
         for (var i = 0; i < extra_labels.length; i++) {
             extra_labels[i].attr("opacity", 0);
         }
