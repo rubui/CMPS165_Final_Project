@@ -1,3 +1,6 @@
+/*global d3*/
+/*jslint plusplus: true */
+
 function directed_graph(data, svg, button_flag){
 //    http://bl.ocks.org/ericandrewlewis/dc79d22c74b8046a5512
 //    http://vallandingham.me/bubble_charts_with_d3v4.html
@@ -206,7 +209,10 @@ function directed_graph(data, svg, button_flag){
         }        
     }
     
-
+var TopLeftQuad = "rgb(0, 118, 255)";
+var BottomLeftQuad = "rgb(0, 255, 255)";
+var TopRightQuad = "rgb(255, 150, 0)";
+var BottomRightQuad = "rgb(255, 255, 0)";
 
 
 //the following code basically creates a 'folder' for both image and circle
@@ -222,9 +228,72 @@ function directed_graph(data, svg, button_flag){
     var bubblesE = bubbles.append("circle")
         .classed('bubble',true)
         .attr("r", 0)
-        .style("fill",function(d){return color(d.soil_ind+d.sun)})
-        .style("stroke",function(d){return color(d.soil_ind+d.sun)})
-        .style('stroke-width',2)
+        .style("fill",function(d){
+            
+            if (d.soil_ind == "Never dry" && d.sun == "Part shade to full shade"){
+                return d3.color(TopLeftQuad)
+            } else if (d.soil_ind == "Never dry" && d.sun == "Part shade"){
+                return d3.color(TopLeftQuad)
+            } else if (d.soil_ind == "Never dry" && d.sun == "Part sun to part shade"){
+                return d3.color(TopLeftQuad)
+            } else if (d.soil_ind == "Slightly dry" && d.sun == "Part shade to full shade"){
+                return d3.color(TopLeftQuad)
+            } else if (d.soil_ind == "Slightly dry" && d.sun == "Part shade" ){
+                return d3.color(TopLeftQuad)
+            } else if (d.soil_ind == "Slightly dry" && d.sun == "Part sun to part shade"){
+                return d3.color(TopLeftQuad)
+            } else if (d.soil_ind == "Nearly dry" && d.sun == "Part shade to full shade"){
+                return d3.color(BottomLeftQuad)
+            } else if (d.soil_ind == "Nearly dry" && d.sun == "Part shade" ){
+                return d3.color(BottomLeftQuad)
+            } else if (d.soil_ind == "Nearly dry" && d.sun == "Part sun to part shade"){
+                return d3.color(BottomLeftQuad)
+            } else if (d.soil_ind == "Dry" && d.sun == "Part shade to full shade"){
+                return d3.color(BottomLeftQuad)
+            } else if (d.soil_ind == "Dry" && d.sun == "Part shade"){
+                return d3.color(BottomLeftQuad)
+            } else if (d.soil_ind == "Dry" && d.sun == "Part sun to part shade"){
+                return d3.color(BottomLeftQuad)
+            } else if(d.soil_ind == "Never dry" && d.sun == "Full sun to part shade"){
+                return d3.color(TopRightQuad)
+            } else if(d.soil_ind == "Never dry" && d.sun == "Full sun to part sun" ){
+                return d3.color(TopRightQuad)
+            } else if(d.soil_ind == "Never dry" && d.sun == "Full sun"){
+                return d3.color(TopRightQuad)
+            } else if(d.soil_ind == "Slightly dry" && d.sun == "Full sun to part shade"){
+                return d3.color(TopRightQuad)
+            } else if(d.soil_ind == "Slightly dry" && d.sun == "Full sun to part sun"){
+                return d3.color(TopRightQuad)
+            } else if(d.soil_ind == "Slightly dry" && d.sun == "Full sun"){
+                return d3.color(TopRightQuad)
+            } else if(d.soil_ind == "Nearly dry" && d.sun == "Full sun to part shade"){
+                return d3.color(BottomRightQuad)
+            } else if(d.soil_ind == "Nearly dry" && d.sun == "Full sun to part sun"){
+                return d3.color(BottomRightQuad) 
+            } else if(d.soil_ind == "Nearly dry" && d.sun == "Full sun"){
+                return d3.color(BottomRightQuad) 
+            } else if(d.soil_ind == "Dry" && d.sun == "Full sun to part shade"){
+                return d3.color(BottomRightQuad)
+            } else if(d.soil_ind == "Dry" && d.sun == "Full sun to part sun"){
+                return d3.color(BottomRightQuad)
+            } else if(d.soil_ind == "Dry" && d.sun == "Full sun"){
+                return d3.color(BottomRightQuad)
+            }
+        
+
+/*             if (d.soil_ind == ("Slightly dry" || "Never dry") && d.sun == ("Part shade to full shade" || "Part shade" || "Part sun to part shade")){
+                return d3.color(TopLeftQuad)
+            } else if (d.soil_ind == ("Nearly dry" || "Dry") && d.sun == ("Part shade to full shade" || "Part shade" || "Part sun to part shade")){
+                return d3.color(BottomLeftQuad)
+            } else if(d.soil_ind == ("Never dry" || "Slightly dry") && d.sun == ("Full sun to part shade" || "Full sun to prt sun" || "Full sun")){
+                return d3.color(TopRightQuad)
+            } else if(d.soil_ind == ("Nearly dry" || "Dry") && d.sun == ("Full sun to part shade" ||"Full sun to part sun" || "Full sun")){
+                return d3.color(BottomRightQuad)
+            }*/
+            
+        })
+//        .style("stroke",function(d){return color(d.soil_ind+d.sun)})
+//        .style('stroke-width',2)
         .transition()
                 .duration(2000)
                 .attr('r',function(d){return d.radius});
@@ -232,32 +301,6 @@ function directed_graph(data, svg, button_flag){
 
     var bubble = bubbles.merge(bubblesE);
 
-
-//adding the axis titles
-//    var myData = d3.keys(titlesX);
-
-//    svg.selectAll('.titlesX')
-//        .data(myData)
-//        .enter().append('text')
-//            .attr('class','titlesX')
-//            .attr('x',function(d){return titlesX[d];})
-//            .attr('y',height - 20)
-//            .attr('text-anchor','middle')
-//            .style("font-size", "13px")
-//            .text(function(d){
-//                return d;
-//            });
-//
-//        svg.selectAll('.titlesY')
-//        .data(myData)
-//        .enter().append('text')
-//            .attr('class','titlesY')
-//            .attr('x',40)
-//            .attr('y',function(d){return titlesY[d];})
-//            .attr('text-anchor','beginning')
-//            .text(function(d){
-//                return d;
-//            });
 
     //updates the x and y each tick-- 'x' and 'y' are for images
     //while cx and cy are for the bubbles
@@ -303,24 +346,6 @@ function directed_graph(data, svg, button_flag){
 //        },2000)
     }
 
-
-
-
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    //~~~~~~~~Button Updaters~~~~~~~~~~~~~~
-    d3.select("#option1")
-        .on("click", function(){
-        button_flag = true;
-//        console.log(button_flag);
-        start();
-        });
-    d3.select("#option2")
-        .on('click',function(){
-        button_flag=false;
-//        console.log(button_flag)
-        start();
-    });
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     function mouseover(d)
     {
@@ -376,11 +401,13 @@ function directed_graph(data, svg, button_flag){
         }
 
     };
+    
+    // Axis labels
 
-    var y_label_water = "Soil Moisture";
-    var y_label_height = "Plant Max Height";
+    var y_label_water = "Water";
+    var y_label_height = "Max Height";
     var x_label_sunlight = "Sunlight";
-    var x_label_spread = "Plant Max Indoor Spread";
+    var x_label_spread = "Max Indoor Spread";
     
     var x_name = x_label_sunlight;
     var y_name = y_label_water;
@@ -389,21 +416,76 @@ function directed_graph(data, svg, button_flag){
     var y_axis_label = g.append("text")
         .attr("class", "y_label")
         .attr("transform", "rotate(-90)")
-        .style("font-family", "georgia")
+        .style("font-family", "Roboto Slab")
         .style("font-size", "16pt")
         .attr("x", 0)
-        .attr("y", -480)
-        .style("text-anchor", "middle")
-        .text(x_name);
+        .attr("y", -475)
+        .style("font-size", "16px")
+        .style("text-anchor", "middle");
+        
+    y_axis_label.text(y_name);
+    
+    var extra_labels_1 = g.append("text")
+        .attr("class", "y_label")
+        .attr("transform", "rotate(-90)")
+        .style("font-family", "Roboto Slab")
+        .style("font-size", "16pt")
+        .attr("x", -245)
+        .attr("y", -470)
+        .style("font-size", "11px")
+        .style("text-anchor", "start")
+        .text("Needs Less Water")
+        .attr("opacity", 0.5);
+    
+    var extra_labels_2 = g.append("text")
+        .attr("class", "y_label")
+        .attr("transform", "rotate(-90)")
+        .style("font-family", "Roboto Slab")
+        .style("font-size", "16pt")
+        .attr("x", 245)
+        .attr("y", -470)
+        .style("font-size", "11px")
+        .style("text-anchor", "end")
+        .text("Needs More Water")
+        .attr("opacity", 0.5);
+    
     
     var x_axis_label = g.append("text")
         .attr("class", "x_label")
-        .style("font-family", "georgia")
+        .style("font-family", "Roboto Slab")
         .style("font-size", "16pt")
         .attr("x", 0)
+        .attr("y", 285)
+        .style("font-size", "16px")
+        .style("text-anchor", "middle");
+        
+    x_axis_label.text(x_name);
+    
+    
+    var extra_labels_3 = g.append("text")
+        .attr("class", "x_label")
+        .style("font-family", "Roboto Slab")
+        .style("font-size", "16pt")
+        .attr("x", 450)
         .attr("y", 280)
-        .style("text-anchor", "middle")
-        .text(y_name);
+        .style("font-size", "11px")
+        .style("text-anchor", "end")
+        .text("Prefers Sun")
+        .attr("opacity", 0.5);
+    
+    var extra_labels_4 = g.append("text")
+        .attr("class", "x_label")
+        .style("font-family", "Roboto Slab")
+        .style("font-size", "16pt")
+        .attr("x", -450)
+        .attr("y", 280)
+        .style("font-size", "11px")
+        .style("text-anchor", "start")
+        .text("Prefers Shade")
+        .attr("opacity", 0.5);
+    
+    extra_labels = [extra_labels_1, extra_labels_2, extra_labels_3, extra_labels_4];
+        
     
     //creating xaxis
     var x_axis = g.append("g")
@@ -412,8 +494,10 @@ function directed_graph(data, svg, button_flag){
         .call(d3.axisBottom(x).ticks(0).tickSizeOuter(0))
         .style("opacity",1)
         .select('path')
-        .attr('marker-end','url(#arrowhead_right)');
+        .attr('marker-end','url(#arrowhead_right)')
+        .call(d3.axisBottom(x));
 
+ 
     //creating yaxis
     g.append("g")
         .attr("class", "yaxis")
@@ -421,7 +505,8 @@ function directed_graph(data, svg, button_flag){
         .call(d3.axisLeft(y).ticks(0).tickSizeOuter(0))
         .style("opacity",1)
         .select("path")
-        .attr('marker-end','url(#arrowhead_top)');
+        .attr('marker-end','url(#arrowhead_top)')
+        .call(d3.axisLeft(y));
 
 
     function padExtent(e, p) {
@@ -429,6 +514,37 @@ function directed_graph(data, svg, button_flag){
         return ([e[0] - p, e[1] + p]);
     }
 
+    
 
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    //               Button Updaters
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    
+    d3.select("#option1")
+        .on("click", function(){
+        button_flag = true;
+        
+        x_axis_label.text(x_label_sunlight);
+        y_axis_label.text(y_label_water);
+        
+        for (var i = 0; i < extra_labels.length; i++) {
+            extra_labels[i].attr("opacity", 0.5);
+        }
 
+        start();
+        });
+    d3.select("#option2")
+        .on('click',function(){
+        button_flag = false;
+        
+        x_axis_label.text(x_label_spread);
+        y_axis_label.text(y_label_height);
+        
+        for (var i = 0; i < extra_labels.length; i++) {
+            extra_labels[i].attr("opacity", 0);
+        }
+
+        start();
+    });
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 }
