@@ -233,32 +233,6 @@ function directed_graph(data, svg, button_flag){
     var bubble = bubbles.merge(bubblesE);
 
 
-//adding the axis titles
-//    var myData = d3.keys(titlesX);
-
-//    svg.selectAll('.titlesX')
-//        .data(myData)
-//        .enter().append('text')
-//            .attr('class','titlesX')
-//            .attr('x',function(d){return titlesX[d];})
-//            .attr('y',height - 20)
-//            .attr('text-anchor','middle')
-//            .style("font-size", "13px")
-//            .text(function(d){
-//                return d;
-//            });
-//
-//        svg.selectAll('.titlesY')
-//        .data(myData)
-//        .enter().append('text')
-//            .attr('class','titlesY')
-//            .attr('x',40)
-//            .attr('y',function(d){return titlesY[d];})
-//            .attr('text-anchor','beginning')
-//            .text(function(d){
-//                return d;
-//            });
-
     //updates the x and y each tick-- 'x' and 'y' are for images
     //while cx and cy are for the bubbles
     function ticked(){
@@ -361,7 +335,7 @@ function directed_graph(data, svg, button_flag){
     
     // Axis labels
 
-    var y_label_water = "Soil Moisture";
+    var y_label_water = "Water";
     var y_label_height = "Max Height";
     var x_label_sunlight = "Sunlight";
     var x_label_spread = "Max Indoor Spread";
@@ -375,23 +349,74 @@ function directed_graph(data, svg, button_flag){
         .attr("transform", "rotate(-90)")
         .style("font-family", "Roboto Slab")
         .style("font-size", "16pt")
-        .attr("x", 20)
-        .attr("y", -470)
+        .attr("x", 0)
+        .attr("y", -475)
         .style("font-size", "16px")
         .style("text-anchor", "middle");
         
     y_axis_label.text(y_name);
+    
+    var extra_labels_1 = g.append("text")
+        .attr("class", "y_label")
+        .attr("transform", "rotate(-90)")
+        .style("font-family", "Roboto Slab")
+        .style("font-size", "16pt")
+        .attr("x", -245)
+        .attr("y", -470)
+        .style("font-size", "11px")
+        .style("text-anchor", "start")
+        .text("Needs Less Water")
+        .attr("opacity", 0.5);
+    
+    var extra_labels_2 = g.append("text")
+        .attr("class", "y_label")
+        .attr("transform", "rotate(-90)")
+        .style("font-family", "Roboto Slab")
+        .style("font-size", "16pt")
+        .attr("x", 245)
+        .attr("y", -470)
+        .style("font-size", "11px")
+        .style("text-anchor", "end")
+        .text("Needs More Water")
+        .attr("opacity", 0.5);
+    
     
     var x_axis_label = g.append("text")
         .attr("class", "x_label")
         .style("font-family", "Roboto Slab")
         .style("font-size", "16pt")
         .attr("x", 0)
-        .attr("y", 280)
+        .attr("y", 285)
         .style("font-size", "16px")
-        .style("text-anchor", "middle")
+        .style("text-anchor", "middle");
         
     x_axis_label.text(x_name);
+    
+    
+    var extra_labels_3 = g.append("text")
+        .attr("class", "x_label")
+        .style("font-family", "Roboto Slab")
+        .style("font-size", "16pt")
+        .attr("x", 450)
+        .attr("y", 280)
+        .style("font-size", "11px")
+        .style("text-anchor", "end")
+        .text("Prefers Sun")
+        .attr("opacity", 0.5);
+    
+    var extra_labels_4 = g.append("text")
+        .attr("class", "x_label")
+        .style("font-family", "Roboto Slab")
+        .style("font-size", "16pt")
+        .attr("x", -450)
+        .attr("y", 280)
+        .style("font-size", "11px")
+        .style("text-anchor", "start")
+        .text("Prefers Shade")
+        .attr("opacity", 0.5);
+    
+    extra_labels = [extra_labels_1, extra_labels_2, extra_labels_3, extra_labels_4];
+        
     
     //creating xaxis
     var x_axis = g.append("g")
@@ -422,26 +447,34 @@ function directed_graph(data, svg, button_flag){
 
 
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    //~~~~~~~~Button Updaters~~~~~~~~~~~~~~
+    //               Button Updaters
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    
     d3.select("#option1")
         .on("click", function(){
         button_flag = true;
-        var x_name = x_label_sunlight;
-        var y_name = y_label_water;
-        x_axis_label.text(x_name);
-        y_axis_label.text(y_name);
-//        console.log(button_flag);
+        
+        x_axis_label.text(x_label_sunlight);
+        y_axis_label.text(y_label_water);
+        
+        for (var i = 0; i < extra_labels.length; i++) {
+            extra_labels[i].attr("opacity", 0.5);
+        }
+
         start();
         });
     d3.select("#option2")
         .on('click',function(){
-        button_flag=false;
-        var x_name = x_label_spread;
-        var y_name = y_label_height;
-        x_axis_label.text(x_name);
-        y_axis_label.text(y_name);
-//        console.log(button_flag)
+        button_flag = false;
+        
+        x_axis_label.text(x_label_spread);
+        y_axis_label.text(y_label_height);
+        
+        for (var i = 0; i < extra_labels.length; i++) {
+            extra_labels[i].attr("opacity", 0);
+        }
+
         start();
     });
-    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 }
