@@ -102,8 +102,8 @@ h2 {
     position: absolute;
     line-height: 1;
     padding: 8px;
-    background-color: rgba(0, 0, 0, 0.7);
-    color: #fff;
+    background-color: ghostwhite;
+    color: black;
     border-radius: 10px;
     font-size: 15px;
 }
@@ -112,7 +112,8 @@ h2 {
     font-family: 'Roboto Slab', serif;
     text-align: center;
     font-size: 18px;
-    color: springgreen;
+	font-weight: bold;
+    color: black;
 }
 .sci_name{
     font-size: 12px;
@@ -122,9 +123,8 @@ h2 {
 
 .tooltip-text {
     font-size: 12px;
+
 }
-
-
 
 .hidden {
     display: none;
