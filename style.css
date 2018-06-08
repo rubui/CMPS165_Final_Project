@@ -51,6 +51,19 @@ h2 {
     fill: #aaa;
     cursor: default;
 }
+.filters {
+    font-family: 'Roboto Slab', serif;
+    text-align: center;
+    font-size: 18px;
+    color: forestgreen;
+}
+
+.filter-block {
+    font-family: 'Roboto Slab', serif;
+    text-align: center;
+    font-size: 18px;
+    color: forestgreen;
+}
 
 .xaxis path {
     stroke: #999;
@@ -76,6 +89,13 @@ h2 {
     content: "";
     display: table;
     clear: both;
+}
+.rcorners4 {
+    border-radius: 15px;
+    background: #73AD21;
+    padding: 20px; 
+    width: 200px;
+    height: 150px; 
 }
 
 .tooltip {
