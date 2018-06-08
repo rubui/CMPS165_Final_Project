@@ -33,7 +33,7 @@
         <h1>California Houseplants Care Guide</h1>
 
 <!--
-         Summary of project 
+         Summary of project
         <p style="text-align: center">We wish to create a visualization for various types of plants that are commercially available in the USA. We will focus on basic care such as amount of water needed and amounts of sunlight required. Our goal is for this guide to serve as a quick and easily navigable reference for plant maintence. In doing so, the visualization can also serve as a simple buyer's guide, by showing various plants and their needs to jugde agaisnt your own lifestyle choices. We also plan to include more variables to examine such as tempurature tolerance, humidity, plant types, and ph levels of soil.
         </p>
 -->
@@ -42,7 +42,7 @@
 
         <!-- Row to handle graph and filters -->
         <div class="row">
-            
+
             <!-- Left Sidebar -->
             <div class="col-md-2" id="left_sidebar">
                 <br>
@@ -51,28 +51,28 @@
 
                     <p style="font-size: 12px">Right below this is going to be the static tooltip. </p>
                 </div>
-                
-                
+
+
                 <br><br><br>
-                
+
                 <!-- This is the static tooltip -->
                 <div class="row" style="background-color: #ffffff"><br><br><br><br><br><br><br><br><br><br><br><br><br><br></div>
             </div>
 
             <!-- Middle Column -->
             <div class="col-md-8">
-                
+
                 <!-- Display graph here -->
                 <div class="row" id="display" style="height=600px"></div>
-                
+
                 <!--Spacer Row-->
                 <div class="row"><br><br></div>
-                
+
                 <!-- Row for buttons -->
                 <div class="row">
 			    <div class="col-md-3"></div>
         	    <div class="col-md-3">
-                    
+
                     <div class="btn-group btn-group-toggle btn-group-vertical btn-block" data-toggle="buttons">
                         <label class="btn btn-secondary active" style="background-color: forestgreen; border: none" id="option1">
                             <input type="radio" name="options" id="option1" autocomplete="off" checked> Water vs. Sun
@@ -87,12 +87,12 @@
                         </label>
                     </div>
                 </div>
-                
+
                 <div class="col-md-3"></div>
 		      </div>
-            
-            
-            
+
+
+
             </div>
 
             <!-- Sidebar for filters and toggles and tooltip (?) -->
@@ -139,9 +139,6 @@
 
         </div>
 
-		
-
-
 
 
 <!-- place .js src here   -->
@@ -180,12 +177,12 @@
                     .html('<br>');
 //                div.append('span')
 //                    .text('');
+			    div.append('div')
+                    .attr('class','tooltip-text')
+                    .attr('id', 'sun');
                 div.append('div')
                     .attr('class','tooltip-text')
                     .attr('id', 'soil');
-                div.append('div')
-                    .attr('class','tooltip-text')
-                    .attr('id', 'sun');
                 div.append('div')
                     .attr('class','tooltip-text')
                     .attr('id', 'water');
