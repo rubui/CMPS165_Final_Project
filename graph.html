@@ -105,14 +105,14 @@
                 </div>
 
                 <div class="row">
-                    <label class="custom-control material-checkbox">
+                    <label class="custom-control material-checkbox" id="hung">
 							<input type="checkbox" class="material-control-input" name="hung">
 							<span class="material-control-indicator"></span>
 							<span class="material-control-description">Hanging Plants</span>
                 </label>
                 </div>
                 <div class="row">
-                    <label class="custom-control material-checkbox">
+                    <label class="custom-control material-checkbox" id="flowers">
 							<input type="checkbox" class="material-control-input" name="flowers">
 							<span class="material-control-indicator"></span>
 							<span class="material-control-description">Flowers Indoors</span>
@@ -120,14 +120,14 @@
                 </div>
 				<div>
 					<div class="row">
-                    	<label class="custom-control material-checkbox">
+                    	<label class="custom-control material-checkbox" id="dogs">
 							<input type="checkbox" class="material-control-input" name="dogs">
 							<span class="material-control-indicator"></span>
 							<span class="material-control-description">Non-toxic to dogs</span>
                 		</label>
                 	</div>
                 	<div class="row">
-                    	<label class="custom-control material-checkbox">
+                    	<label class="custom-control material-checkbox" id="cats">
 							<input type="checkbox" class="material-control-input" name="cats">
 							<span class="material-control-indicator"></span>
 							<span class="material-control-description">Non-toxic to cats</span>
@@ -187,10 +187,10 @@
                 div.append('div')
                     .attr('class','tooltip-text')
                     .attr('id', 'water');
-
+            var dogs,cats,hung,flowers = true;
             //run functions here
             directed_graph(data, svg, button_flag);
-            select_handler(svg, true,true,true,true);
+            select_handler(svg,flowers, hung, dogs, cats);
 
         });
 
