@@ -146,6 +146,7 @@
     <script src="tooltip.js"></script>
 <!--    <script src="sidebar.js"></script>-->
     <script src="directed_graph.js"></script>
+    <script src="selection.js"></script>
     <script type="text/javascript">
         //global vars go here:
         //...
@@ -189,6 +190,7 @@
 
             //run functions here
             directed_graph(data, svg, button_flag);
+            select_handler(svg, true,true,true,true);
 
         });
 
