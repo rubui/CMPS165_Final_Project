@@ -293,7 +293,7 @@ var BottomRightQuad = "rgb(255, 255, 0)";
             
         })
 //        .style("stroke",function(d){return color(d.soil_ind+d.sun)})
-//        .style('stroke-width',2)
+        .style('stroke-width',2)
         .transition()
                 .duration(2000)
                 .attr('r',function(d){return d.radius});
