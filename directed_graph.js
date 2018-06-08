@@ -206,7 +206,10 @@ function directed_graph(data, svg, button_flag){
         }        
     }
     
-
+var TopLeftQuad = "rgb(0, 118, 255)";
+var BottomLeftQuad = "rgb(0, 255, 255)";
+var TopRightQuad = "rgb(255, 150, 0)";
+var BottomRightQuad = "rgb(255, 255, 0)";
 
 
 //the following code basically creates a 'folder' for both image and circle
