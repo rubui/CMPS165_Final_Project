@@ -16,11 +16,11 @@ function tooltip(d, xPosition, yPosition)
         tip.select('.sci_name')
             .text(d.sci_name);
         tip.select('#soil')
-            .html("<div style=\"float: left\">" + "Soil Moisture: " + "</div>" +  "<div style=\"float:right\">" + d.soil_ind + "</div>");
+            .html("<div style=\"float: left;margin-right:10px\">" + "Soil Moisture: " + "</div>" +  "<div style=\"float:right\">" + d.soil_ind + "</div>");
         tip.select('#sun')
-            .html("<div style=\"float: left\">" + "Sun Comfort: " + "</div>" +  "<div style=\"float:right\"> <text> " + " " + d.sun + " </text></div>");
+            .html("<div style=\"float: left;margin-right:10px\">" + "Sun Comfort: " + "</div>" +  "<div style=\"float:right\">" + d.sun + "</div>");
         tip.select('#water')
-            .html("<div style=\"float: left\">" + "Watering Amount: " + "</div>" +  "<div style=\"float:right\"> " + d.water + "</div>");
+            .html("<div style=\"float: left;margin-right:10px\">" + "Watering Amount: " + "</div>" +  "<div style=\"float:right\"> " + d.water + "</div>");
     
 //    tip.style("opacity",'.9');
     
