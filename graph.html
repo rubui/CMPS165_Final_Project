@@ -27,14 +27,16 @@
 
 <body>
 
-    <div id="main"  style="width:1600px; margin:0 auto;">
+    <div id="main"  style="width:1500px; margin:0 auto;">
 
         <!-- Title -->
         <h1>California Houseplants Care Guide</h1>
 
-        <!-- Summary of project -->
+<!--
+         Summary of project
         <p style="text-align: center">We wish to create a visualization for various types of plants that are commercially available in the USA. We will focus on basic care such as amount of water needed and amounts of sunlight required. Our goal is for this guide to serve as a quick and easily navigable reference for plant maintence. In doing so, the visualization can also serve as a simple buyer's guide, by showing various plants and their needs to jugde agaisnt your own lifestyle choices. We also plan to include more variables to examine such as tempurature tolerance, humidity, plant types, and ph levels of soil.
         </p>
+-->
 
         <br>
 
@@ -64,6 +66,7 @@
 							Spread<br>
 							Indoor Flowering: <br>
 							Bloom Period: <br>
+							Bloom Description: <br>
 							Humidity: <br>
 							Air Purifying: <br>
 							Soil PH:<br>
@@ -71,13 +74,48 @@
 						<div id ="static-tip-data" style="float: right;text-align: right;"> </div>
 				
 				</div>
+
             </div>
 
-            <!-- Draw graph in first column-->
-            <div class="col-md-8" id="display"></div>
+            <!-- Middle Column -->
+            <div class="col-md-8">
+
+                <!-- Display graph here -->
+                <div class="row" id="display" style="height=600px"></div>
+
+                <!--Spacer Row-->
+                <div class="row"><br><br></div>
+
+                <!-- Row for buttons -->
+                <div class="row">
+			    <div class="col-md-3"></div>
+        	    <div class="col-md-3">
+
+                    <div class="btn-group btn-group-toggle btn-group-vertical btn-block" data-toggle="buttons">
+                        <label class="btn btn-secondary active" style="background-color: forestgreen; border: none" id="option1">
+                            <input type="radio" name="options" id="option1" autocomplete="off" checked> Water vs. Sun
+                        </label>
+                    </div>
+        	    </div>
+
+                <div class="col-md-3">
+                    <div class="btn-group btn-group-toggle btn-group-vertical btn-block" data-toggle="buttons">
+                        <label class="btn btn-secondary" style="background-color: forestgreen; border: none" id="option2">
+                            <input type="radio" name="options" id="option2" autocomplete="off"> Height vs. Spread
+                        </label>
+                    </div>
+                </div>
+
+                <div class="col-md-3"></div>
+		      </div>
+
+
+
+            </div>
 
             <!-- Sidebar for filters and toggles and tooltip (?) -->
             <div class="col-md-1" id="sidebar">
+
                 <br>
                 <div class="row">
                    <label class="filters">
@@ -87,14 +125,14 @@
 
                 <div class="row">
                     <label class="custom-control material-checkbox">
-							<input type="checkbox" class="material-control-input" name="hung">
+							<input type="checkbox" class="material-control-input" id="hung">
 							<span class="material-control-indicator"></span>
 							<span class="material-control-description">Hanging Plants</span>
                 </label>
                 </div>
                 <div class="row">
                     <label class="custom-control material-checkbox">
-							<input type="checkbox" class="material-control-input" name="flowers">
+							<input type="checkbox" class="material-control-input" id="flowers">
 							<span class="material-control-indicator"></span>
 							<span class="material-control-description">Flowers Indoors</span>
                 </label>
@@ -102,14 +140,14 @@
 				<div>
 					<div class="row">
                     	<label class="custom-control material-checkbox">
-							<input type="checkbox" class="material-control-input" name="dogs">
+							<input type="checkbox" class="material-control-input" id="dogs">
 							<span class="material-control-indicator"></span>
 							<span class="material-control-description">Non-toxic to dogs</span>
                 		</label>
                 	</div>
                 	<div class="row">
                     	<label class="custom-control material-checkbox">
-							<input type="checkbox" class="material-control-input" name="cats">
+							<input type="checkbox" class="material-control-input" id="cats">
 							<span class="material-control-indicator"></span>
 							<span class="material-control-description">Non-toxic to cats</span>
                 		</label>
@@ -120,30 +158,14 @@
 
         </div>
 
-		<div class="row">
-			<div class="col-md-2"></div>
-        	<div class="col-md-3">
-        		<div class="btn-group btn-group-toggle btn-group-vertical btn-block" data-toggle="buttons">
-            		<label class="btn btn-secondary active" id="option1">
-                		<input type="radio" name="options" id="option1" autocomplete="off" checked> Water vs. Sun
-                	</label>
-				</div>
-        	</div>
 
-			<div class="col-md-3">
-        		<div class="btn-group btn-group-toggle btn-group-vertical btn-block" data-toggle="buttons">
-                	<label class="btn btn-secondary" id="option2">
-                   		<input type="radio" name="options" id="option2" autocomplete="off"> Spread vs. Height
-					</label>
-				</div>
-        	</div>
-		</div>
 
 <!-- place .js src here   -->
     <script src="//d3js.org/d3.v4.min.js"></script>
     <script src="tooltip.js"></script>
 <!--    <script src="sidebar.js"></script>-->
     <script src="directed_graph.js"></script>
+    <script src="selection.js"></script>
     <script type="text/javascript">
         //global vars go here:
         //...
@@ -184,9 +206,9 @@
                 div.append('div')
                     .attr('class','tooltip-text')
                     .attr('id', 'water');
-
             //run functions here
             directed_graph(data, svg, button_flag);
+            select_handler();
 
         });
 
