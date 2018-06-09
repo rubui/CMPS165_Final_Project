@@ -173,11 +173,11 @@ function directed_graph(data, svg, button_flag){
     // Create scales for plant height vs. spread graphs
     var spreadScale = d3.scaleLinear()
         .domain([0, mX])
-        .range([200, drawable_width]);
+        .range([175, width + 125]);
 
     var heightScale = d3.scaleLinear()
         .domain([0, mY])
-        .range([150, drawable_height]);
+        .range([drawable_height - 50, 200]);
 
 
     // Function to parse out max spread and height and return num
@@ -200,7 +200,7 @@ function directed_graph(data, svg, button_flag){
 
     function nodeYPos(d){
         if (!button_flag){
-            return height - heightScale(d.max_height);
+            return heightScale(d.max_height);
         } else {
             return amountCentersY[d.soil_ind].y;
         }
