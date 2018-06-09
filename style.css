@@ -90,6 +90,7 @@ h2 {
     display: table;
     clear: both;
 }
+
 .static-tooltip {
 	font-family: 'Roboto Slab', serif;
 	text-align:center;
@@ -144,7 +145,6 @@ h2 {
 
 .tooltip-text {
     font-size: 14px;
-
 }
 
 .hidden {
@@ -466,4 +466,29 @@ display: block;
 .list-group .list-group-control .custom-control .custom-control-indicator, .list-group .list-group-control .custom-control .material-control-indicator, .list-group .list-group-control .custom-control .fill-control-indicator, .list-group .list-group-control .custom-control .overflow-control-indicator {
 top: 1rem;
 left: 1.25rem;
+}
+
+.legends{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 200px;
+}
+
+.legend{
+    text-align: center;
+    font-family: 'Roboto', serif;
+    font-style: bold;
+    fill: darkgrey;
+    border-radius: 8px;
+    border: 1px solid darkgrey;
+}
+
+.innterLegend{
+    text-align: center;
+    font-family: 'Roboto', serif;
+    font-style: bold;
+    font-size: 16t;
+    fill: darkgrey;
+
 }
