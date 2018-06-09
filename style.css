@@ -482,6 +482,7 @@ left: 1.25rem;
     fill: darkgrey;
     border-radius: 8px;
     border: 1px solid darkgrey;
+    width: 235px;
 }
 
 .innterLegend{
