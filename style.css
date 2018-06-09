@@ -446,19 +446,3 @@ display: block;
 top: 1rem;
 left: 1.25rem;
 }
-
-.legends{
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 200px;
-}
-
-.legend{
-/*    text-align: center;*/
-    font-family: 'Roboto', serif;
-    font-style: bold;
-    fill: darkgrey;
-    border-radius: 8px;
-    border: 1px solid darkgrey;
-}
