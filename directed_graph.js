@@ -217,7 +217,12 @@ function directed_graph(data, svg, button_flag){
         .attr("class", "force-scale-node")
         .on("mouseover", mouseover)
         .on("mouseout", mouseout)
-        .on("click", function (d) {console.log(d)});
+        .on("click", function (d) {
+			console.log(d);
+			d3.select("#plant-head").html(d.nickname + "<br><text style=\"color:darkgrey\">" + d.sci_name + "<br>");
+			d3.select("#static-tip-data").html(d.sun + "<br>" + d.soil_ind + "<br>" +d.plant_height + "<br>" + d.plant_spread +"<br>");
+			d3.select(".resize_fit_center").attr("src", "img/" + d.img );
+		});
 
     var bubblesE = bubbles.append("circle")
         .classed('bubble',true)
