@@ -20,7 +20,7 @@
 
 h1,
 h2 {
-    color: green;
+    color: forestgreen;
     font-family: 'Roboto Slab', serif;
     font-size: 60px;
     text-align: center;
@@ -28,7 +28,7 @@ h2 {
 
 .sources_header {
     font-family: 'Roboto Slab', serif;
-    color: green;
+    color: forestgreen;
 }
 
 .node circle {
@@ -90,12 +90,34 @@ h2 {
     display: table;
     clear: both;
 }
-.rcorners4 {
+
+.static-tooltip {
+	font-family: 'Roboto Slab', serif;
+	text-align:center;
     border-radius: 15px;
-    background: #73AD21;
-    padding: 20px; 
-    width: 200px;
-    height: 150px; 
+	border: 1px solid;
+    padding: 10px;
+    box-shadow: 5px 10px lightgrey;
+    padding: 10px; 
+    width: 350px;
+    height: 500px;
+	padding: 20px;
+}
+
+.pic-container {
+    margin: 10px;
+    width: 100px;
+    height: 100px;
+    line-height: 100px;
+    vertical-align: center;
+    border: 1px solid lightgrey;
+    border-radius: 15px;
+	padding-bottom: 10px; 
+}
+.resize_fit_center {
+    max-width:100%;
+    max-height:100%;
+    vertical-align: middle;
 }
 
 .tooltip {
@@ -116,14 +138,13 @@ h2 {
     color: black;
 }
 .sci_name{
-    font-size: 12px;
+    font-size: 14px;
     font-style: italic;
     text-align: center;
 }
 
 .tooltip-text {
-    font-size: 12px;
-
+    font-size: 14px;
 }
 
 .hidden {
@@ -445,4 +466,29 @@ display: block;
 .list-group .list-group-control .custom-control .custom-control-indicator, .list-group .list-group-control .custom-control .material-control-indicator, .list-group .list-group-control .custom-control .fill-control-indicator, .list-group .list-group-control .custom-control .overflow-control-indicator {
 top: 1rem;
 left: 1.25rem;
+}
+
+.legends{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 200px;
+}
+
+.legend{
+    text-align: center;
+    font-family: 'Roboto', serif;
+    font-style: bold;
+    fill: darkgrey;
+    border-radius: 8px;
+    border: 1px solid darkgrey;
+}
+
+.innterLegend{
+    text-align: center;
+    font-family: 'Roboto', serif;
+    font-style: bold;
+    font-size: 16t;
+    fill: darkgrey;
+
 }

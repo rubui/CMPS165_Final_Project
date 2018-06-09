@@ -4,6 +4,7 @@ var TopLeftQuad = "rgb(93, 166, 255)";
 var BottomLeftQuad = "rgb(193, 240, 255)";
 var TopRightQuad = "rgb(204, 204, 255)";
 var BottomRightQuad = "rgb(255, 241, 137)";
+
 function directed_graph(data, svg, button_flag){
 //    http://bl.ocks.org/ericandrewlewis/dc79d22c74b8046a5512
 //    http://vallandingham.me/bubble_charts_with_d3v4.html
@@ -13,7 +14,7 @@ function directed_graph(data, svg, button_flag){
         nodePadding = 2.5,
         forceStrength = .03,
         axisPad = 90,
-        nodeOffset = 40, 
+        nodeOffset = 40,
         width = +svg.attr("width"),
         height = +svg.attr("height"),
         drawable_width = width - axisPad;
@@ -122,14 +123,6 @@ function directed_graph(data, svg, button_flag){
         "Never dry":{y:drawable_height/5 + nodeOffset}
     };
 
-    var waterCentersTemp = {
-        "Low":{y:5*drawable_height/6},
-        "Low to medium":{y:4*drawable_height/6},
-        "Medium":{y:3*drawable_height/6},
-        "Medium to high":{y:2*drawable_height/6},
-        "High":{y:drawable_height/6}
-    };
-
     //collision organic (we can also use .collision force)
     function charge(d){
         return -Math.pow(d.radius+8, 2.0) * forceStrength;
@@ -149,68 +142,76 @@ function directed_graph(data, svg, button_flag){
     simulation.stop();
 
 
-    // Map data from CSV + get max values for spread and hegiht 
-    mX = 0; 
-    mY = 0; 
+    // Map data from CSV + get max values for spread and hegiht
+    var mX = 0;
+    var mY = 0;
     var nodes = data.map(function(d){
-        mHeight = parseMaxNum(d.Plant_Height); 
-        mSpread = parseMaxNum(d.Plant_Spread);
-        if (mHeight > mX) mX = mHeight; 
-        if (mSpread > mY) mY = mSpread; 
-        
+        mHeight = parseMaxNum(d.Indoor_Height);
+        mSpread = parseMaxNum(d.Indoor_Spread);
+        if (mHeight > mX) mX = mHeight;
+        if (mSpread > mY) mY = mSpread;
+
         return{
             sci_name: d.Scientific_Name,
             nickname: d.Common_Name,
             sun: d.Sunlight,
             water: d.Moisture,
             soil_ind: d.Soil_Indicator,
-            plant_spread: d.Plant_Spread,
-            plant_height: d.Plant_Height,
+
+            plant_spread: d.Indoor_Spread,
+            plant_height: d.Indoor_Height,
             toxic_dogs: d.Toxic_Dogs,
             toxic_cats: d.Toxic_Cats,
             radius: radius,
-            img: d.img_name,      
+            img: d.img_name,
+            hanging: d.Hanging,
+            flowering: d.Indoor_Flowering,
             max_height: mHeight,
-            max_spread: mSpread
+            max_spread: mSpread,
+			humidity: d.Humidity,
+			air: d.Air_Purifying,
+			ph: d.Ph_Soil,
+			bloom_period: d.Bloom_Period
+			
         };
     });
-        
-    
-    // Create scales for plant height vs. spread graphs 
+
+
+    // Create scales for plant height vs. spread graphs
     var spreadScale = d3.scaleLinear()
         .domain([0, mX])
-        .range([200, drawable_width]); 
-    
+        .range([200, drawable_width]);
+
     var heightScale = d3.scaleLinear()
         .domain([0, mY])
-        .range([200, drawable_height]);        
-    
-    
+        .range([150, drawable_height]);
+
     // Function to parse out max spread and height and return num
     function parseMaxNum(d) {
         var arr = d.split(" ");
         return parseFloat(arr[2]);
     }
-    
 
-    // Functions to be called once for each node 
+
+    // Functions to be called once for each node
     // Provides the approriate x and y for nodes
     // Calculates a different x and y position based on our button toggle
     function nodeXPos(d){
         if (!button_flag){
             return spreadScale(d.max_spread);
         } else {
-            return amountCentersX[d.sun].x;    
-        }              
+            return amountCentersX[d.sun].x;
+        }
     }
 
     function nodeYPos(d){
-        if (!button_flag){        
+        if (!button_flag){
             return height - heightScale(d.max_height);
         } else {
             return amountCentersY[d.soil_ind].y;
-        }        
+        }
     }
+
 
 
 //the following code basically creates a 'folder' for both image and circle
@@ -221,13 +222,20 @@ function directed_graph(data, svg, button_flag){
         .attr("class", "force-scale-node")
         .on("mouseover", mouseover)
         .on("mouseout", mouseout)
-        .on("click", function (d) {console.log(d)});
+        .on("click", function (d) {
+
+			console.log(d);
+            console.log("heightScale value: " + heightScale(d.max_height));
+            console.log("normalized value: " + (height - heightScale(d.max_height)));
+			d3.select("#plant-head").html(d.nickname + "<br><text style=\"color:darkgrey\">" + d.sci_name + "<br>");
+			d3.select("#static-tip-data").html(d.sun + "<br>" + d.soil_ind + "<br>" +d.plant_height + "<br>" + d.plant_spread +"<br>"+d.flowering+"<br>"+d.bloom_period +"<br>" + d.humidity +"<br>" +d.air + "<br>" + d.Ph);
+			d3.select(".resize_fit_center").attr("src", "img/" + d.img );
+		});
 
     var bubblesE = bubbles.append("circle")
         .classed('bubble',true)
         .attr("r", 0)
-        .style("fill",function(d){
-        
+        .style("fill",function(d){        
              if ( ( d.soil_ind == "Slightly dry" || d.soil_ind == "Never dry") && (d.sun == "Part shade to full shade" || d.sun == "Part shade" || d.sun == "Part sun to part shade")){
                 return d3.color(TopLeftQuad)
             } else if (( d.soil_ind == "Nearly dry" || d.soil_ind =="Dry") && (d.sun ==  "Part shade to full shade" || d.sun == "Part shade" || d.sun == "Part sun to part shade")){
@@ -239,6 +247,7 @@ function directed_graph(data, svg, button_flag){
             }
                                  
          })
+
         .transition()
                 .duration(2000)
                 .attr('r',function(d){return d.radius});
@@ -253,18 +262,19 @@ function directed_graph(data, svg, button_flag){
         svg.selectAll(".bubble")
             .attr("x", function(d) { return +d.x - (radius); })
             .attr("y", function(d) { return +d.y - (radius); })
-            .attr("cx", function(d) { return +d.x; })
-            .attr("cy", function(d) { return +d.y; });
+            .attr("cx", function(d) { return d.x = Math.max(radius, Math.min(width - radius, d.x)); })
+            .attr("cy", function(d) { return d.y = Math.max(radius, Math.min(height -       radius, d.y)); });
     }
 
     //we can modify the get specific images later on
     bubbles.append("image")
-      .attr("xlink:href", function (d){ 
+
+      .attr("xlink:href", function (d){
             if (d.img){
-                return "img/" + d.img; 
+                return "img/" + d.img;
             } else {
                 return "apple.png"
-            }            
+            }
         })
       .attr("class", "bubble")
       .attr("width", radius*2)
@@ -346,18 +356,17 @@ function directed_graph(data, svg, button_flag){
         }
 
     };
-    
+
     // Axis labels
 
     var y_label_water = "Water";
-    var y_label_height = "Max Height";
+    var y_label_height = "Max Indoor Height";
     var x_label_sunlight = "Sunlight";
     var x_label_spread = "Max Indoor Spread";
-    
+
     var x_name = x_label_sunlight;
     var y_name = y_label_water;
-    
-    
+
     var y_axis_label = g.append("text")
         .attr("class", "y_label")
         .attr("transform", "rotate(-90)")
@@ -367,9 +376,9 @@ function directed_graph(data, svg, button_flag){
         .attr("y", -475)
         .style("font-size", "16px")
         .style("text-anchor", "middle");
-        
+
     y_axis_label.text(y_name);
-    
+
     var extra_labels_1 = g.append("text")
         .attr("class", "y_label")
         .attr("transform", "rotate(-90)")
@@ -381,7 +390,7 @@ function directed_graph(data, svg, button_flag){
         .style("text-anchor", "start")
         .text("Needs Less Water")
         .attr("opacity", 0.5);
-    
+
     var extra_labels_2 = g.append("text")
         .attr("class", "y_label")
         .attr("transform", "rotate(-90)")
@@ -393,20 +402,18 @@ function directed_graph(data, svg, button_flag){
         .style("text-anchor", "end")
         .text("Needs More Water")
         .attr("opacity", 0.5);
-    
-    
+
     var x_axis_label = g.append("text")
         .attr("class", "x_label")
         .style("font-family", "Roboto Slab")
         .style("font-size", "16pt")
-        .attr("x", 0)
+        .attr("x", 10)
         .attr("y", 285)
         .style("font-size", "16px")
         .style("text-anchor", "middle");
-        
+
     x_axis_label.text(x_name);
-    
-    
+
     var extra_labels_3 = g.append("text")
         .attr("class", "x_label")
         .style("font-family", "Roboto Slab")
@@ -417,7 +424,7 @@ function directed_graph(data, svg, button_flag){
         .style("text-anchor", "end")
         .text("Prefers Sun")
         .attr("opacity", 0.5);
-    
+
     var extra_labels_4 = g.append("text")
         .attr("class", "x_label")
         .style("font-family", "Roboto Slab")
@@ -428,10 +435,10 @@ function directed_graph(data, svg, button_flag){
         .style("text-anchor", "start")
         .text("Prefers Shade")
         .attr("opacity", 0.5);
-    
+
     extra_labels = [extra_labels_1, extra_labels_2, extra_labels_3, extra_labels_4];
-        
-    
+
+
     //creating xaxis
     var x_axis = g.append("g")
         .attr("class", "xaxis")
@@ -442,7 +449,6 @@ function directed_graph(data, svg, button_flag){
         .attr('marker-end','url(#arrowhead_right)')
         .call(d3.axisBottom(x));
 
- 
     //creating yaxis
     g.append("g")
         .attr("class", "yaxis")
@@ -463,14 +469,15 @@ function directed_graph(data, svg, button_flag){
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     //               Button Updaters
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    
+
+
     d3.select("#option1")
         .on("click", function(){
         button_flag = true;
-        
+
         x_axis_label.text(x_label_sunlight);
         y_axis_label.text(y_label_water);
-        
+
         for (var i = 0; i < extra_labels.length; i++) {
             extra_labels[i].attr("opacity", 0.5);
         }
@@ -480,20 +487,16 @@ function directed_graph(data, svg, button_flag){
     d3.select("#option2")
         .on('click',function(){
         button_flag = false;
-        
+
         x_axis_label.text(x_label_spread);
         y_axis_label.text(y_label_height);
-        
+
         for (var i = 0; i < extra_labels.length; i++) {
             extra_labels[i].attr("opacity", 0);
         }
 
         start();
     });
-}
-    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-
 
 var chart = d3.select(".innerLegend")
     .append("svg")
@@ -567,5 +570,3 @@ chart.append("text")
 
 //var xScale = d3.scaleBand().domain([0, 1]).range([0,90]);
 //var yScale = d3.scaleLinear().domain([0, 1]).range([0,90]);
-
-

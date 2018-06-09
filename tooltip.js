@@ -20,8 +20,7 @@ function tooltip(d, xPosition, yPosition)
 			.style("color","darkgrey")
             .html("<br>" + d.sci_name);
 		if(d.sun == "Full sun"){
-			fSun = tip.style("width", 200 + "px").select('#sun');
-
+			fSun = tip.style("width", 220 + "px").select('#sun');
 		}else{
 			fSun = tip.style("width", "auto").select('#sun');
 		}
