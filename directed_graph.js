@@ -3,7 +3,7 @@ function directed_graph(data, svg, button_flag){
 //    http://vallandingham.me/bubble_charts_with_d3v4.html
 
 
-    var radius = 22,
+    var radius = 19,
         nodePadding = 2.5,
         forceStrength = .03,
         axisPad = 90,
@@ -160,7 +160,12 @@ function directed_graph(data, svg, button_flag){
             hanging: d.Hanging,
             flowering: d.Indoor_Flowering,
             max_height: mHeight,
-            max_spread: mSpread
+            max_spread: mSpread,
+			humidity: d.Humidity,
+			air: d.Air_Purifying,
+			ph: d.Ph_Soil,
+			bloom_period: d.Bloom_Period
+			
         };
     });
 
@@ -216,10 +221,15 @@ var BottomRightQuad = "rgb(255, 255, 0)";
         .on("mouseover", mouseover)
         .on("mouseout", mouseout)
         .on("click", function (d) {
-            console.log(d)
+
+			console.log(d);
             console.log("heightScale value: " + heightScale(d.max_height));
-            console.log("normalized value: " + (height - heightScale(d.max_height)))
-        });
+            console.log("normalized value: " + (height - heightScale(d.max_height)));
+			d3.select("#plant-head").html(d.nickname + "<br><text style=\"color:darkgrey\">" + d.sci_name + "<br>");
+			d3.select("#static-tip-data").html(d.sun + "<br>" + d.soil_ind + "<br>" +d.plant_height + "<br>" + d.plant_spread +"<br>"+d.flowering+"<br>"+d.bloom_period +"<br>" + d.humidity +"<br>" +d.air + "<br>" + d.Ph);
+			d3.select(".resize_fit_center").attr("src", "img/" + d.img );
+		});
+
 
     var bubblesE = bubbles.append("circle")
         .classed('bubble',true)

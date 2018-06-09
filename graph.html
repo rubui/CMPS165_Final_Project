@@ -43,20 +43,38 @@
         <!-- Row to handle graph and filters -->
         <div class="row">
 
-            <!-- Left Sidebar -->
-            <div class="col-md-2" id="left_sidebar">
-                <br>
-                <div style="font-size: 12px">
-                    <p style="font-size: 12px">This is where we're going to have information and such about the graph and how to use the information that we're presenting.
+            <div class="col-md-3">
+                <p style="font-size: 10px;">This is where we're going to have information and such about the graph and how to use the information that we're presenting.
 
-                    <p style="font-size: 12px">Right below this is going to be the static tooltip. </p>
-                </div>
+                <p>Right below this is going to be the static tooltip. </p>
+             
+                <div class="static-tooltip">
+					<div id="plant-head" class="nickname"> Select a Plant <br><text style="text-align: center; color: darkgray"> Scientific Name<br></text></div>
+						<div style = "height: 150px;padding-left: 10px">
+						<div class="pic-container" style="float:left;">   
+    						<img class='resize_fit_center'/>
+					
+						</div>
+					    <div id="habit-tip" style=" float: center;padding-top:10px"> 
+							Plant Habit <br> Type
+						</div>
+					</div>
+						<div style=" float: left;text-align: left;font-weight:bold;"> 
+							Sunlight: <br>
+							Soil Indicator: <br> 
+							Height: <br>
+							Spread<br>
+							Indoor Flowering: <br>
+							Bloom Period: <br>
+							Bloom Description: <br>
+							Humidity: <br>
+							Air Purifying: <br>
+							Soil PH:<br>
+						</div>
+						<div id ="static-tip-data" style="float: right;text-align: right;"> </div>
+				
+				</div>
 
-
-                <br><br><br>
-
-                <!-- This is the static tooltip -->
-                <div class="row" style="background-color: #ffffff"><br><br><br><br><br><br><br><br><br><br><br><br><br><br></div>
             </div>
 
             <!-- Middle Column -->
@@ -96,7 +114,8 @@
             </div>
 
             <!-- Sidebar for filters and toggles and tooltip (?) -->
-            <div class="col-md-2" id="right_sidebar">
+            <div class="col-md-1" id="sidebar">
+
                 <br>
                 <div class="row">
                    <label class="filters">
