@@ -18,17 +18,18 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    
+
 
     <!--  Custom Sylesheet  -->
     <link href="style.css" rel="stylesheet" />
+    
 
 </head>
 
 <body>
 
-    <div id="main"  style="width:1200px; margin:0 auto;">
-        
+    <div id="main"  style="width:1500px; margin:0 auto;">
+
         <!-- Title -->
         <h1>California Houseplants Care Guide</h1>
 
@@ -37,62 +38,87 @@
         </p>
 
         <br>
-        
+
         <!-- Row to handle graph and filters -->
         <div class="row">
-            
+
+            <div class="col-md-2">
+                <p style="text-align: justify; font-size: 10px">This is where we're going to have information and such about the graph and how to use the information that we're presenting.
+
+                <p>Right below this is going to be the static tooltip. </p>
+                <br><br>
+                <div class="row" style="background-color: springgreen"><br><br><br><br><br><br><br><br><br><br><br><br></div>
+            </div>
+
             <!-- Draw graph in first column-->
-            <div class="col-md-10" id="display"></div>
+            <div class="col-md-8" id="display"></div>
 
             <!-- Sidebar for filters and toggles and tooltip (?) -->
             <div class="col-md-2" id="sidebar">
                 <br>
                 <div class="row">
-                <div class="btn-group btn-group-toggle btn-group-vertical btn-block" data-toggle="buttons">
-                    <label class="btn btn-secondary active" id="option1">
-                            <input type="radio" name="options" id="option1" autocomplete="off" checked> Water vs. Sun
-                        </label>
-                    <label class="btn btn-secondary" id="option2">
-                            <input type="radio" name="options" id="option2" autocomplete="off"> Height vs. Spread
-                        </label>
-                </div>
+                   <label class="filters">
+                     <html>Search Filters</html>
+                 </label>
                 </div>
 
-                <br>
-                <div class="row">
-                    <label class="custom-control material-checkbox">
-							<input type="checkbox" class="material-control-input" name="dogs">
-							<span class="material-control-indicator"></span>
-							<span class="material-control-description">Non-toxic to dogs</span>
-                </label>
-                </div>
-                <div class="row">
-                    <label class="custom-control material-checkbox">
-							<input type="checkbox" class="material-control-input" name="cats">
-							<span class="material-control-indicator"></span>
-							<span class="material-control-description">Non-toxic to cats</span>
-                </label>
-                </div>
                 <div class="row">
                     <label class="custom-control material-checkbox">
 							<input type="checkbox" class="material-control-input" name="hung">
 							<span class="material-control-indicator"></span>
-							<span class="material-control-description">Can be hung</span>
+							<span class="material-control-description">Hanging Plants</span>
                 </label>
                 </div>
                 <div class="row">
                     <label class="custom-control material-checkbox">
 							<input type="checkbox" class="material-control-input" name="flowers">
 							<span class="material-control-indicator"></span>
-							<span class="material-control-description">Flowers indoors</span>
+							<span class="material-control-description">Flowers Indoors</span>
                 </label>
                 </div>
+				<div>
+					<div class="row">
+                    	<label class="custom-control material-checkbox">
+							<input type="checkbox" class="material-control-input" name="dogs">
+							<span class="material-control-indicator"></span>
+							<span class="material-control-description">Non-toxic to dogs</span>
+                		</label>
+                	</div>
+                	<div class="row">
+                    	<label class="custom-control material-checkbox">
+							<input type="checkbox" class="material-control-input" name="cats">
+							<span class="material-control-indicator"></span>
+							<span class="material-control-description">Non-toxic to cats</span>
+                		</label>
+                	</div>
+				</div>
+                <br>
+                
+                
+                <div class = "legend">Legend<img class="legends" src="img/chart.png" ></div>
 
             </div>
 
         </div>
 
+		<div class="row">
+			<div class="col-md-2"></div>
+        	<div class="col-md-3">
+        		<div class="btn-group btn-group-toggle btn-group-vertical btn-block" data-toggle="buttons">
+            		<label class="btn btn-secondary active" id="option1">
+                		<input type="radio" name="options" id="option1" autocomplete="off" checked> Water vs. Sun
+                	</label>
+				</div>
+        	</div>
 
+			<div class="col-md-3">
+        		<div class="btn-group btn-group-toggle btn-group-vertical btn-block" data-toggle="buttons">
+                	<label class="btn btn-secondary" id="option2">
+                   		<input type="radio" name="options" id="option2" autocomplete="off"> Spread vs. Height
+					</label>
+				</div>
+        	</div>
+		</div>
 
 <!-- place .js src here   -->
     <script src="//d3js.org/d3.v4.min.js"></script>
@@ -109,7 +135,7 @@
         d3.csv("plants_clean_40.csv", function(error, d){
             var data = d;
             console.log(d);
-            
+
             var button_flag = true;
 
             var svg = d3.select("#display")
@@ -130,23 +156,23 @@
                     .html('<br>');
 //                div.append('span')
 //                    .text('');
+			    div.append('div')
+                    .attr('class','tooltip-text')
+                    .attr('id', 'sun');
                 div.append('div')
                     .attr('class','tooltip-text')
                     .attr('id', 'soil');
                 div.append('div')
                     .attr('class','tooltip-text')
-                    .attr('id', 'sun');
-                div.append('div')
-                    .attr('class','tooltip-text')
                     .attr('id', 'water');
-            
+
             //run functions here
             directed_graph(data, svg, button_flag);
 
         });
 
     </script>
-        
+
         <br><br><br><br><br><br><br><br>
         <br><br><br><br><br><br><br><br>
 
