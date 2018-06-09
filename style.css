@@ -468,28 +468,14 @@ top: 1rem;
 left: 1.25rem;
 }
 
-.legends{
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 200px;
-}
 
-.legend{
+.row .legend{
     text-align: center;
     font-family: 'Roboto', serif;
     font-style: bold;
     fill: darkgrey;
     border-radius: 8px;
     border: 1px solid darkgrey;
-    width: 235px;
-}
-
-.innterLegend{
-    text-align: center;
-    font-family: 'Roboto', serif;
-    font-style: bold;
-    font-size: 16t;
-    fill: darkgrey;
-
+    height: 200px;
+/*    width: 125px;*/
 }

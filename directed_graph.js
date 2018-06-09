@@ -498,71 +498,74 @@ function directed_graph(data, svg, button_flag){
         start();
     });
 
-var chart = d3.select(".innerLegend")
+var chart = d3.select(".legend")
     .append("svg")
+    .style("width", "125px")
+    .style("height", "170px")
+
 //    .style("background-color", "pink")
-	.attr("width", 310)
-	.attr("height", 150)
     .append("g");
 
 chart.append("rect")
     .attr("x", 5)
-    .attr("y", 20)
-    .attr("width", 20)
-    .attr("height", 20)
+    .attr("y", 15)
+    .attr("width", 10)
+    .attr("height", 10)
     .style("fill", TopLeftQuad);
 chart.append("text")
-    .attr("x", 30)
-    .attr("y", 35)
+    .attr("x", 20)
+    .attr("y", 25)
     .text("More water");
 chart.append("text")
-    .attr("x", 30)
+    .attr("x", 20)
+    .attr("y", 40)
+    .text("More sun");
+
+    
+    
+chart.append("rect")
+    .attr("x", 5)
     .attr("y", 55)
+    .attr("width", 10)
+    .attr("height", 10)
+    .style("fill", BottomLeftQuad);
+chart.append("text")
+    .attr("x", 20)
+    .attr("y", 65)
+    .text("Less water");
+chart.append("text")
+    .attr("x", 20)
+    .attr("y", 80)
+    .text("Less sun");
+
+chart.append("rect")
+    .attr("x", 5)
+    .attr("y", 95)
+    .attr("width", 10)
+    .attr("height", 10)
+    .style("fill", TopRightQuad);
+chart.append("text")
+    .attr("x", 20)
+    .attr("y", 105)
+    .text("More water");
+chart.append("text")
+    .attr("x", 20)
+    .attr("y", 120)
     .text("More sun");
 
 chart.append("rect")
     .attr("x", 5)
-    .attr("y", 90)
-    .attr("width", 20)
-    .attr("height", 20)
-    .style("fill", BottomLeftQuad);
-chart.append("text")
-    .attr("x", 30)
-    .attr("y", 105)
-    .text("Less water");
-chart.append("text")
-    .attr("x", 30)
-    .attr("y", 125)
-    .text("Less sun");
-
-chart.append("rect")
-    .attr("x", 115)
-    .attr("y", 20)
-    .attr("width", 20)
-    .attr("height", 20)
-    .style("fill", TopRightQuad);
-chart.append("text")
-    .attr("x", 140)
-    .attr("y", 35)
-    .text("More water");
-chart.append("text")
-    .attr("x", 140)
-    .attr("y", 55)
-    .text("More sun");
-
-chart.append("rect")
-    .attr("x", 115)
-    .attr("y", 90)
-    .attr("width", 20)
-    .attr("height", 20)
+    .attr("y", 135)
+    .attr("width", 10)
+    .attr("height", 10)
     .style("fill", BottomRightQuad);
 chart.append("text")
-    .attr("x", 140)
-    .attr("y", 105)
+    .attr("x", 20)
+    .attr("y", 145)
     .text("Less water");
 chart.append("text")
-    .attr("x", 140)
-    .attr("y", 125)
+    .attr("x", 20)
+    .attr("y", 160)
     .text("More sun");
 
 }
