@@ -228,7 +228,7 @@ function directed_graph(data, svg, button_flag){
             console.log("heightScale value: " + heightScale(d.max_height));
             console.log("normalized value: " + (height - heightScale(d.max_height)));
 			d3.select("#plant-head").html(d.nickname + "<br><text style=\"color:darkgrey\">" + d.sci_name + "<br>");
-			d3.select("#static-tip-data").html(d.sun + "<br>" + d.soil_ind + "<br>" +d.plant_height + "<br>" + d.plant_spread +"<br>"+d.flowering+"<br>"+d.bloom_period +"<br>" + d.humidity +"<br>" +d.air + "<br>" + d.Ph);
+			d3.select("#static-tip-data").html("<text style=\"font-size: 12pt\">"+d.sun + "<br>" + d.soil_ind + "<br>" +d.plant_height + "<br>" + d.plant_spread +"<br>"+d.flowering+"<br>"+d.bloom_period +"<br>" + d.humidity +"<br>" +d.air + "<br>" + d.Ph);
 			d3.select(".resize_fit_center").attr("src", "img/" + d.img );
 		});
 
