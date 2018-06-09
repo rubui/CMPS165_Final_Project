@@ -1,4 +1,3 @@
-var nodes;
 function directed_graph(data, svg, button_flag){
 //    http://bl.ocks.org/ericandrewlewis/dc79d22c74b8046a5512
 //    http://vallandingham.me/bubble_charts_with_d3v4.html
@@ -140,7 +139,7 @@ function directed_graph(data, svg, button_flag){
     // Map data from CSV + get max values for spread and hegiht
     var mX = 0;
     var mY = 0;
-   nodes = data.map(function(d){
+    var nodes = data.map(function(d){
         mHeight = parseMaxNum(d.Indoor_Height);
         mSpread = parseMaxNum(d.Indoor_Spread);
         if (mHeight > mX) mX = mHeight;
@@ -158,6 +157,8 @@ function directed_graph(data, svg, button_flag){
             toxic_cats: d.Toxic_Cats,
             radius: radius,
             img: d.img_name,
+            hanging: d.Hanging,
+            flowering: d.Indoor_Flowering,
             max_height: mHeight,
             max_spread: mSpread
         };
@@ -212,7 +213,6 @@ var BottomRightQuad = "rgb(255, 255, 0)";
         .enter()
         .append("g")
         .attr("class", "force-scale-node")
-        .attr("id",function(d){return d.sci_name;})
         .on("mouseover", mouseover)
         .on("mouseout", mouseout)
         .on("click", function (d) {
