@@ -565,7 +565,7 @@ chart.append("text")
     .attr("y", 125)
     .text("More sun");
 
-
+}
 //Create scale functions
 
 //var xScale = d3.scaleBand().domain([0, 1]).range([0,90]);
