@@ -1,3 +1,10 @@
+/*global d3*/
+/*jslint plusplus: true */
+var TopLeftQuad = "rgb(93, 166, 255)";
+var BottomLeftQuad = "rgb(193, 240, 255)";
+var TopRightQuad = "rgb(204, 204, 255)";
+var BottomRightQuad = "rgb(255, 241, 137)";
+
 function directed_graph(data, svg, button_flag){
 //    http://bl.ocks.org/ericandrewlewis/dc79d22c74b8046a5512
 //    http://vallandingham.me/bubble_charts_with_d3v4.html
@@ -116,7 +123,6 @@ function directed_graph(data, svg, button_flag){
         "Never dry":{y:drawable_height/5 + nodeOffset}
     };
 
-
     //collision organic (we can also use .collision force)
     function charge(d){
         return -Math.pow(d.radius+8, 2.0) * forceStrength;
@@ -151,6 +157,7 @@ function directed_graph(data, svg, button_flag){
             sun: d.Sunlight,
             water: d.Moisture,
             soil_ind: d.Soil_Indicator,
+
             plant_spread: d.Indoor_Spread,
             plant_height: d.Indoor_Height,
             toxic_dogs: d.Toxic_Dogs,
@@ -179,7 +186,6 @@ function directed_graph(data, svg, button_flag){
         .domain([0, mY])
         .range([150, drawable_height]);
 
-
     // Function to parse out max spread and height and return num
     function parseMaxNum(d) {
         var arr = d.split(" ");
@@ -206,10 +212,6 @@ function directed_graph(data, svg, button_flag){
         }
     }
 
-var TopLeftQuad = "rgb(0, 118, 255)";
-var BottomLeftQuad = "rgb(0, 255, 255)";
-var TopRightQuad = "rgb(255, 150, 0)";
-var BottomRightQuad = "rgb(255, 255, 0)";
 
 
 //the following code basically creates a 'folder' for both image and circle
@@ -230,76 +232,22 @@ var BottomRightQuad = "rgb(255, 255, 0)";
 			d3.select(".resize_fit_center").attr("src", "img/" + d.img );
 		});
 
-
     var bubblesE = bubbles.append("circle")
         .classed('bubble',true)
         .attr("r", 0)
-        .style("fill",function(d){
-// I'm just trying to get it to be viewable right now. I tried and failed at using ANDs and ORs, but will try again later.
-            if (d.soil_ind == "Never dry" && d.sun == "Part shade to full shade"){
+        .style("fill",function(d){        
+             if ( ( d.soil_ind == "Slightly dry" || d.soil_ind == "Never dry") && (d.sun == "Part shade to full shade" || d.sun == "Part shade" || d.sun == "Part sun to part shade")){
                 return d3.color(TopLeftQuad)
-            } else if (d.soil_ind == "Never dry" && d.sun == "Part shade"){
-                return d3.color(TopLeftQuad)
-            } else if (d.soil_ind == "Never dry" && d.sun == "Part sun to part shade"){
-                return d3.color(TopLeftQuad)
-            } else if (d.soil_ind == "Slightly dry" && d.sun == "Part shade to full shade"){
-                return d3.color(TopLeftQuad)
-            } else if (d.soil_ind == "Slightly dry" && d.sun == "Part shade" ){
-                return d3.color(TopLeftQuad)
-            } else if (d.soil_ind == "Slightly dry" && d.sun == "Part sun to part shade"){
-                return d3.color(TopLeftQuad)
-            } else if (d.soil_ind == "Nearly dry" && d.sun == "Part shade to full shade"){
+            } else if (( d.soil_ind == "Nearly dry" || d.soil_ind =="Dry") && (d.sun ==  "Part shade to full shade" || d.sun == "Part shade" || d.sun == "Part sun to part shade")){
                 return d3.color(BottomLeftQuad)
-            } else if (d.soil_ind == "Nearly dry" && d.sun == "Part shade" ){
-                return d3.color(BottomLeftQuad)
-            } else if (d.soil_ind == "Nearly dry" && d.sun == "Part sun to part shade"){
-                return d3.color(BottomLeftQuad)
-            } else if (d.soil_ind == "Dry" && d.sun == "Part shade to full shade"){
-                return d3.color(BottomLeftQuad)
-            } else if (d.soil_ind == "Dry" && d.sun == "Part shade"){
-                return d3.color(BottomLeftQuad)
-            } else if (d.soil_ind == "Dry" && d.sun == "Part sun to part shade"){
-                return d3.color(BottomLeftQuad)
-            } else if(d.soil_ind == "Never dry" && d.sun == "Full sun to part shade"){
+            } else if(( d.soil_ind == "Never dry" || d.soil_ind == "Slightly dry") && (d.sun == "Full sun to part shade" || d.sun == "Full sun to part sun" || d.sun == "Full sun")){
                 return d3.color(TopRightQuad)
-            } else if(d.soil_ind == "Never dry" && d.sun == "Full sun to part sun" ){
-                return d3.color(TopRightQuad)
-            } else if(d.soil_ind == "Never dry" && d.sun == "Full sun"){
-                return d3.color(TopRightQuad)
-            } else if(d.soil_ind == "Slightly dry" && d.sun == "Full sun to part shade"){
-                return d3.color(TopRightQuad)
-            } else if(d.soil_ind == "Slightly dry" && d.sun == "Full sun to part sun"){
-                return d3.color(TopRightQuad)
-            } else if(d.soil_ind == "Slightly dry" && d.sun == "Full sun"){
-                return d3.color(TopRightQuad)
-            } else if(d.soil_ind == "Nearly dry" && d.sun == "Full sun to part shade"){
-                return d3.color(BottomRightQuad)
-            } else if(d.soil_ind == "Nearly dry" && d.sun == "Full sun to part sun"){
-                return d3.color(BottomRightQuad)
-            } else if(d.soil_ind == "Nearly dry" && d.sun == "Full sun"){
-                return d3.color(BottomRightQuad)
-            } else if(d.soil_ind == "Dry" && d.sun == "Full sun to part shade"){
-                return d3.color(BottomRightQuad)
-            } else if(d.soil_ind == "Dry" && d.sun == "Full sun to part sun"){
-                return d3.color(BottomRightQuad)
-            } else if(d.soil_ind == "Dry" && d.sun == "Full sun"){
+            } else if(( d.soil_ind == "Nearly dry" || d.soil_ind == "Dry") && ( d.sun == "Full sun to part shade" || d.sun == "Full sun to part sun" || d.sun == "Full sun")){
                 return d3.color(BottomRightQuad)
             }
-
-//Try this later
-/*             if (d.soil_ind == ("Slightly dry" || "Never dry") && d.sun == ("Part shade to full shade" || "Part shade" || "Part sun to part shade")){
-                return d3.color(TopLeftQuad)
-            } else if (d.soil_ind == ("Nearly dry" || "Dry") && d.sun == ("Part shade to full shade" || "Part shade" || "Part sun to part shade")){
-                return d3.color(BottomLeftQuad)
-            } else if(d.soil_ind == ("Never dry" || "Slightly dry") && d.sun == ("Full sun to part shade" || "Full sun to prt sun" || "Full sun")){
-                return d3.color(TopRightQuad)
-            } else if(d.soil_ind == ("Nearly dry" || "Dry") && d.sun == ("Full sun to part shade" ||"Full sun to part sun" || "Full sun")){
-                return d3.color(BottomRightQuad)
-            }*/
-
+                                 
          })
-//        .style("stroke",function(d){return color(d.soil_ind+d.sun)})
-//        .style('stroke-width',2)
+
         .transition()
                 .duration(2000)
                 .attr('r',function(d){return d.radius});
@@ -320,6 +268,7 @@ var BottomRightQuad = "rgb(255, 255, 0)";
 
     //we can modify the get specific images later on
     bubbles.append("image")
+
       .attr("xlink:href", function (d){
             if (d.img){
                 return "img/" + d.img;
@@ -418,7 +367,6 @@ var BottomRightQuad = "rgb(255, 255, 0)";
     var x_name = x_label_sunlight;
     var y_name = y_label_water;
 
-
     var y_axis_label = g.append("text")
         .attr("class", "y_label")
         .attr("transform", "rotate(-90)")
@@ -455,7 +403,6 @@ var BottomRightQuad = "rgb(255, 255, 0)";
         .text("Needs More Water")
         .attr("opacity", 0.5);
 
-
     var x_axis_label = g.append("text")
         .attr("class", "x_label")
         .style("font-family", "Roboto Slab")
@@ -466,7 +413,6 @@ var BottomRightQuad = "rgb(255, 255, 0)";
         .style("text-anchor", "middle");
 
     x_axis_label.text(x_name);
-
 
     var extra_labels_3 = g.append("text")
         .attr("class", "x_label")
@@ -503,7 +449,6 @@ var BottomRightQuad = "rgb(255, 255, 0)";
         .attr('marker-end','url(#arrowhead_right)')
         .call(d3.axisBottom(x));
 
-
     //creating yaxis
     g.append("g")
         .attr("class", "yaxis")
@@ -524,6 +469,7 @@ var BottomRightQuad = "rgb(255, 255, 0)";
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     //               Button Updaters
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 
     d3.select("#option1")
         .on("click", function(){
@@ -551,5 +497,76 @@ var BottomRightQuad = "rgb(255, 255, 0)";
 
         start();
     });
-    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-}
+
+var chart = d3.select(".innerLegend")
+    .append("svg")
+//    .style("background-color", "pink")
+	.attr("width", 310)
+	.attr("height", 150)
+    .append("g");
+
+chart.append("rect")
+    .attr("x", 5)
+    .attr("y", 20)
+    .attr("width", 20)
+    .attr("height", 20)
+    .style("fill", TopLeftQuad);
+chart.append("text")
+    .attr("x", 30)
+    .attr("y", 35)
+    .text("More water");
+chart.append("text")
+    .attr("x", 30)
+    .attr("y", 55)
+    .text("More sun");
+
+chart.append("rect")
+    .attr("x", 5)
+    .attr("y", 90)
+    .attr("width", 20)
+    .attr("height", 20)
+    .style("fill", BottomLeftQuad);
+chart.append("text")
+    .attr("x", 30)
+    .attr("y", 105)
+    .text("Less water");
+chart.append("text")
+    .attr("x", 30)
+    .attr("y", 125)
+    .text("Less sun");
+
+chart.append("rect")
+    .attr("x", 115)
+    .attr("y", 20)
+    .attr("width", 20)
+    .attr("height", 20)
+    .style("fill", TopRightQuad);
+chart.append("text")
+    .attr("x", 140)
+    .attr("y", 35)
+    .text("More water");
+chart.append("text")
+    .attr("x", 140)
+    .attr("y", 55)
+    .text("More sun");
+
+chart.append("rect")
+    .attr("x", 115)
+    .attr("y", 90)
+    .attr("width", 20)
+    .attr("height", 20)
+    .style("fill", BottomRightQuad);
+chart.append("text")
+    .attr("x", 140)
+    .attr("y", 105)
+    .text("Less water");
+chart.append("text")
+    .attr("x", 140)
+    .attr("y", 125)
+    .text("More sun");
+
+
+//Create scale functions
+
+//var xScale = d3.scaleBand().domain([0, 1]).range([0,90]);
+//var yScale = d3.scaleLinear().domain([0, 1]).range([0,90]);
