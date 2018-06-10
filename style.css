@@ -477,15 +477,19 @@ left: 1.25rem;
 
 .row .legend{
     text-align: center;
-    font-family: 'Roboto', serif;
+    font-family: 'Roboto Slab', serif;
+    font-size: 18px;
     font-style: bold;
     fill: darkgrey;
-    border-radius: 1px;
+    border-radius: 3px;
+    color: forestgreen;
 /*    border: 1px solid lightgrey;*/
     height: 200px;
-/*    width: 125px;*/
+    width: 125px;
 }
 
 .legend-text { 
     font-size: 13px;
+    font-family: 'Roboto';
+    
 }
