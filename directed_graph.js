@@ -523,6 +523,9 @@ g.selectAll(".yaxis > .tick > text").style("opacity", "0");
 
 
         start();
+    
+    });
+    
 
 
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
