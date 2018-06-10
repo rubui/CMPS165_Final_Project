@@ -171,7 +171,8 @@ function directed_graph(data, svg, button_flag){
 			humidity: d.Humidity,
 			air: d.Air_Purifying,
 			ph: d.Ph_Soil,
-			bloom_period: d.Bloom_Period
+			bloom_period: d.Bloom_Period, 
+            bloom_descrip: d.Bloom_Description
 			
         };
     });
@@ -180,7 +181,7 @@ function directed_graph(data, svg, button_flag){
     // Create scales for plant height vs. spread graphs
     var spreadScale = d3.scaleLinear()
         .domain([0, mX])
-        .range([175, width + 125]);
+        .range([160, width + 125]);
 
     var heightScale = d3.scaleLinear()
         .domain([0, mY])
@@ -224,11 +225,11 @@ function directed_graph(data, svg, button_flag){
         .on("mouseout", mouseout)
         .on("click", function (d) {
 
-			console.log(d);
-            console.log("heightScale value: " + heightScale(d.max_height));
-            console.log("normalized value: " + (height - heightScale(d.max_height)));
+			console.log(d);                        
+                
+            
 			d3.select("#plant-head").html(d.nickname + "<br><text style=\"color:darkgrey\">" + d.sci_name + "<br>");
-			d3.select("#static-tip-data").html("<text style=\"font-size: 12pt\">"+d.sun + "<br>" + d.soil_ind + "<br>" +d.plant_height + "<br>" + d.plant_spread +"<br>"+d.flowering+"<br>"+d.bloom_period +"<br>" + d.humidity +"<br>" +d.air + "<br>" + d.Ph);
+			d3.select("#static-tip-data").html("<text style=\"font-size: 11pt\">"+d.sun + "<br>" + d.soil_ind + "<br>" +d.plant_height + "<br>" + d.plant_spread +"<br>"+d.flowering+"<br>"+d.bloom_descrip +"<br>" + d.humidity +"<br>" +d.air + "<br>" + d.Ph);
 			d3.select(".resize_fit_center").attr("src", "img/" + d.img );
 		});
 
@@ -277,8 +278,8 @@ function directed_graph(data, svg, button_flag){
             }
         })
       .attr("class", "bubble")
-      .attr("width", radius*2)
-      .attr("height", radius*2);
+      .attr("width", (radius)*2)
+      .attr("height", (radius)*2);
 
     simulation.nodes(nodes);
 
@@ -314,9 +315,7 @@ function directed_graph(data, svg, button_flag){
                 .transition()
                 .duration(150)
                 .attr("r", radius*1.3);
-
-    //        var temp = radius;
-    //        radius = radius*5;
+    
 
             // simulation.stop();
 
@@ -513,13 +512,15 @@ chart.append("rect")
     .attr("height", 10)
     .style("fill", TopLeftQuad);
 chart.append("text")
-    .attr("x", 20)
+    .attr("class", "legend-text")
+    .attr("x", 30)
     .attr("y", 25)
     .text("More water");
 chart.append("text")
-    .attr("x", 20)
+    .attr("class", "legend-text")
+    .attr("x", 30)
     .attr("y", 40)
-    .text("More sun");
+    .text("More shade");
 
     
     
@@ -530,13 +531,16 @@ chart.append("rect")
     .attr("height", 10)
     .style("fill", BottomLeftQuad);
 chart.append("text")
-    .attr("x", 20)
+    .attr("class", "legend-text")
+    .attr("x", 30)
     .attr("y", 65)
     .text("Less water");
 chart.append("text")
-    .attr("x", 20)
+    .attr("class", "legend-text")
+    .attr("x", 30)
     .attr("y", 80)
-    .text("Less sun");
+    .text("More shade");
+    
 
 chart.append("rect")
     .attr("x", 5)
@@ -545,13 +549,16 @@ chart.append("rect")
     .attr("height", 10)
     .style("fill", TopRightQuad);
 chart.append("text")
-    .attr("x", 20)
+    .attr("class", "legend-text")
+    .attr("x", 30)
     .attr("y", 105)
     .text("More water");
 chart.append("text")
-    .attr("x", 20)
+    .attr("class", "legend-text")
+    .attr("x", 30)
     .attr("y", 120)
     .text("More sun");
+    
 
 chart.append("rect")
     .attr("x", 5)
@@ -560,11 +567,13 @@ chart.append("rect")
     .attr("height", 10)
     .style("fill", BottomRightQuad);
 chart.append("text")
-    .attr("x", 20)
+    .attr("class", "legend-text")
+    .attr("x", 30)
     .attr("y", 145)
     .text("Less water");
 chart.append("text")
-    .attr("x", 20)
+    .attr("class", "legend-text")
+    .attr("x", 30)
     .attr("y", 160)
     .text("More sun");
 

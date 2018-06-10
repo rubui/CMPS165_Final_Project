@@ -95,7 +95,7 @@ h2 {
 	font-family: 'Roboto Slab', serif;
 	text-align:center;
     border-radius: 5px;
-	border: 1px solid;
+	border: 1px solid lightgrey;
     padding: 10px;
     box-shadow: 5px 5px lightgrey;
     padding: 10px; 
@@ -151,6 +151,12 @@ h2 {
     display: none;
 }
 
+
+.material-control-description {
+    font-size: 12px; 
+    text-anchor: middle; 
+    
+}
 
 .custom-control.material-checkbox {
 --color: #26a69a;
@@ -474,8 +480,12 @@ left: 1.25rem;
     font-family: 'Roboto', serif;
     font-style: bold;
     fill: darkgrey;
-    border-radius: 8px;
-    border: 1px solid darkgrey;
+    border-radius: 1px;
+/*    border: 1px solid lightgrey;*/
     height: 200px;
 /*    width: 125px;*/
+}
+
+.legend-text { 
+    font-size: 13px;
 }
