@@ -31,6 +31,10 @@ function select_handler(){
 
 function opacity_macro(flag,type,name,cmp){
     
+        var t = d3.transition()
+            .duration(300)
+            .ease(d3.easeLinear);
+    
         var referenceType ={
             flowers: "flowering",
             hung: "hanging",
@@ -64,7 +68,7 @@ function opacity_macro(flag,type,name,cmp){
              if(x.num==0)
                 {
                       //Select all buble and hide
-                  d3.selectAll(".bubble")
+                  d3.selectAll(".bubble").transition(t)
                   .style("opacity", 0.1)
                   .filter(function(d){
                     return (d[name] == cmp);
@@ -76,7 +80,7 @@ function opacity_macro(flag,type,name,cmp){
                 {
                 //2 buttons pressed, only release if only matches to 1
 //                console.log("num = 2");
-                d3.selectAll(".bubble")
+                d3.selectAll(".bubble").transition(t)
                   .style("opacity", 0.1)
                   .filter(function(d){
 //                    console.log(d[referenceType[x.reg[0]]]==referenceCmp[x.reg[0]]);
@@ -91,7 +95,7 @@ function opacity_macro(flag,type,name,cmp){
                 }
             if(x.num==2)
                 {
-                d3.selectAll(".bubble")
+                d3.selectAll(".bubble").transition(t)
                   .style("opacity",0.1)
                   .filter(function(d){
                     return (d[name]==cmp&&
@@ -104,7 +108,7 @@ function opacity_macro(flag,type,name,cmp){
                 }
             if(x.num==3)
                 {
-                d3.selectAll(".bubble")
+                d3.selectAll(".bubble").transition(t)
                   .style("opacity",0.1)
                   .filter(function(d){
                     return (d[name]==cmp&&
@@ -147,7 +151,7 @@ function opacity_macro(flag,type,name,cmp){
             if(x.num==0)
                 {
                 //only 1 button pressed, release all
-                d3.selectAll(".bubble")
+                d3.selectAll(".bubble").transition(t)
                     .style("opacity",1)
                     .attr("id","");
                 }
@@ -155,7 +159,7 @@ function opacity_macro(flag,type,name,cmp){
                 {
                 //2 buttons pressed, only release if only matches to 1
                 console.log("num = 2");
-                d3.selectAll(".bubble")
+                d3.selectAll(".bubble").transition(t)
                   .filter(function(d){
                     return (d[name]!=cmp&&
                             d[referenceType[x.reg[0]]]==referenceCmp[x.reg[0]]);
@@ -168,7 +172,7 @@ function opacity_macro(flag,type,name,cmp){
                 }
             if(x.num==2)
                 {
-                d3.selectAll(".bubble")
+                d3.selectAll(".bubble").transition(t)
                   .filter(function(d){
                     return (d[name]!=cmp&&
                             d[referenceType[x.reg[0]]]==referenceCmp[x.reg[0]]&&
@@ -180,7 +184,7 @@ function opacity_macro(flag,type,name,cmp){
                 }
             if(x.num==3)
                 {
-                d3.selectAll(".bubble")
+                d3.selectAll(".bubble").transition(t)
                   .filter(function(d){
                     return (d[name]!=cmp&&
                             d[referenceType[x.reg[0]]]==referenceCmp[x.reg[0]]&&

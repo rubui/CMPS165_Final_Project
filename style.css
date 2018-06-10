@@ -94,10 +94,10 @@ h2 {
 .static-tooltip {
 	font-family: 'Roboto Slab', serif;
 	text-align:center;
-    border-radius: 15px;
-	border: 1px solid;
+    border-radius: 5px;
+	border: 1px solid lightgrey;
     padding: 10px;
-    box-shadow: 5px 10px lightgrey;
+    box-shadow: 5px 5px lightgrey;
     padding: 10px; 
     width: 350px;
     height: 500px;
@@ -151,6 +151,12 @@ h2 {
     display: none;
 }
 
+
+.material-control-description {
+    font-size: 12px; 
+    text-anchor: middle; 
+    
+}
 
 .custom-control.material-checkbox {
 --color: #26a69a;
@@ -468,27 +474,40 @@ top: 1rem;
 left: 1.25rem;
 }
 
-.legends{
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 200px;
-}
 
-.legend{
+.row .legend{
     text-align: center;
-    font-family: 'Roboto', serif;
+    font-family: 'Roboto Slab', serif;
+    font-size: 18px;
     font-style: bold;
     fill: darkgrey;
-    border-radius: 8px;
-    border: 1px solid darkgrey;
+    border-radius: 3px;
+    color: forestgreen;
+/*    border: 1px solid lightgrey;*/
+    height: 200px;
+    width: 125px;
 }
 
-.innterLegend{
-    text-align: center;
-    font-family: 'Roboto', serif;
-    font-style: bold;
-    font-size: 16t;
-    fill: darkgrey;
-
+.legend-text { 
+    font-size: 13px;
+    font-family: 'Roboto';
+    
 }
+
+
+/*I can set the opacity to be 0, but getting it back ...*/
+/*This is the tick mark*/
+/*
+.xaxis line {
+    stroke-opacity: 0;
+    stroke: red;
+}
+*/
+
+
+/*This is the text/label */
+/*.xaxis text {
+    opacity: 0;
+    fill: red;
+    
+}*/

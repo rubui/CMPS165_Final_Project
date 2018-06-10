@@ -84,12 +84,13 @@ function directed_graph(data, svg, button_flag) {
         .style('stroke', 'none');
 
     var x = d3.scaleLinear()
-        .domain(padExtent([]))
-        .range(padExtent([0, width - axisPad]));
+        .domain(padExtent([1,6.5]))
+        .range(padExtent([0, width-axisPad]));
+        
 
     var y = d3.scaleLinear()
-        .domain(padExtent([]))
-        .range(padExtent([height - axisPad, 0]));
+        .domain(padExtent([1,9]))
+        .range(padExtent([height-axisPad, 0]));
 
     var titlesX = {
         low: 160,
@@ -305,7 +306,10 @@ function directed_graph(data, svg, button_flag) {
 //        },2000)
     }
 
-
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    // Mouse over
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    
     function mouseover(d)
     {
         //if we ever get around to fixing the image bug, we will set this flag
@@ -449,22 +453,30 @@ function directed_graph(data, svg, button_flag) {
     var x_axis = g.append("g")
         .attr("class", "xaxis")
         .attr("transform", "translate(" + -(width-axisPad)/2 + "," + (height-axisPad)/2 + ")")
-        .call(d3.axisBottom(x).ticks(0).tickSizeOuter(0))
-        .style("opacity",1)
+        .call(d3.axisBottom(x).tickSizeOuter(0))//.ticks(0).tickSizeOuter(0))
+        .style("opacity", 1)
         .select('path')
-        .attr('marker-end','url(#arrowhead_right)')
+        .attr('marker-end', 'url(#arrowhead_right)')
         .call(d3.axisBottom(x));
-
+    
+//g.select(".xaxis > path").style("stroke", "red");
+g.selectAll(".xaxis > .tick > line").style("opacity", "0");
+g.selectAll(".xaxis > .tick > text").style("opacity", "0");
+    
     //yaxis
     var y_axis = g.append("g")
         .attr("class", "yaxis")
         .attr("transform", "translate(" + -(width-axisPad)/2 + ","+-(height-axisPad)/2+")")
-        .call(d3.axisLeft(y).ticks(0).tickSizeOuter(0))
+        .call(d3.axisLeft(y).tickSizeOuter(0))
         .style("opacity",1)
         .select("path")
         .attr('marker-end','url(#arrowhead_top)')
         .call(d3.axisLeft(y));
 
+g.selectAll(".yaxis > .tick > line").style("opacity", "0");
+g.selectAll(".yaxis > .tick > text").style("opacity", "0");
+
+    
 
     function padExtent(e, p) {
         if (p === undefined) p = 1;
@@ -476,7 +488,6 @@ function directed_graph(data, svg, button_flag) {
     //               Button Updaters
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-
     d3.select("#option1")
         .on("click", function(){
         button_flag = true;
@@ -487,6 +498,10 @@ function directed_graph(data, svg, button_flag) {
         for (var i = 0; i < extra_labels.length; i++) {
             extra_labels[i].attr("opacity", 0.5);
         }
+        g.selectAll(".xaxis > .tick > line").style("opacity", "0");
+        g.selectAll(".xaxis > .tick > text").style("opacity", "0");
+        g.selectAll(".yaxis > .tick > line").style("opacity", "0");
+        g.selectAll(".yaxis > .tick > text").style("opacity", "0");
 
         start();
         });
@@ -501,9 +516,17 @@ function directed_graph(data, svg, button_flag) {
         for (var i = 0; i < extra_labels.length; i++) {
             extra_labels[i].attr("opacity", 0);
         }
+        g.selectAll(".xaxis > .tick > line").style("opacity", "1");
+        g.selectAll(".xaxis > .tick > text").style("opacity", "1");
+        g.selectAll(".yaxis > .tick > line").style("opacity", "1");
+        g.selectAll(".yaxis > .tick > text").style("opacity", "1");
+
 
         start();
+    
     });
+    
+
 
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     // Legend
