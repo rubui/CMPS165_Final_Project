@@ -1,11 +1,13 @@
 /*global d3*/
 /*jslint plusplus: true */
+
+//colors for each quadrant
 var TopLeftQuad = "rgb(93, 166, 255)";
 var BottomLeftQuad = "rgb(193, 240, 255)";
 var TopRightQuad = "rgb(204, 204, 255)";
 var BottomRightQuad = "rgb(255, 241, 137)";
 
-function directed_graph(data, svg, button_flag){
+function directed_graph(data, svg, button_flag) {
 //    http://bl.ocks.org/ericandrewlewis/dc79d22c74b8046a5512
 //    http://vallandingham.me/bubble_charts_with_d3v4.html
 
@@ -17,96 +19,96 @@ function directed_graph(data, svg, button_flag){
         nodeOffset = 40,
         width = +svg.attr("width"),
         height = +svg.attr("height"),
-        drawable_width = width - axisPad;
-        drawable_height = height- axisPad;
-        center = {x:width/2,y:height/2},
-        mouseover_ready_flag = true;
+        drawable_width = width - axisPad,
+        drawable_height = height - axisPad,
+        center = {x: width / 2, y: height / 2},
+        mouseover_ready_flag = true,
         g = svg.append("g").attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
 
     //storing custom paths that create arrows.. to be later used in axis
     //was kind of painful to determine these values, but I didn't use math so...
     svg.append('defs').append('marker')
-        .attr('id','arrowhead_right')
-            .attr('viewBox','-0 -5 10 10')
-            .attr('refX',0)
-            .attr('refY',0)
-            .attr('orient','360')
-            .attr('markerWidth',13)
-            .attr('markerHeight',13)
-            .attr('xoverflow','visible')
+        .attr('id', 'arrowhead_right')
+            .attr('viewBox', '-0 -5 10 10')
+            .attr('refX', 0)
+            .attr('refY', 0)
+            .attr('orient', '360')
+            .attr('markerWidth', 13)
+            .attr('markerHeight', 13)
+            .attr('xoverflow', 'visible')
         .append('svg:path')
         .attr('d', 'M 0,-5 L 10 ,0 L 0,5')
         .attr('fill', '#999')
-        .style('stroke','none');
+        .style('stroke', 'none');
 
     svg.append('defs').append('marker')
-        .attr('id','arrowhead_top')
-            .attr('viewBox','-0 -5 10 10')
-            .attr('refX',0)
-            .attr('refY',0)
-            .attr('orient','270')
-            .attr('markerWidth',13)
-            .attr('markerHeight',13)
-            .attr('xoverflow','visible')
+        .attr('id', 'arrowhead_top')
+            .attr('viewBox', '-0 -5 10 10')
+            .attr('refX', 0)
+            .attr('refY', 0)
+            .attr('orient', '270')
+            .attr('markerWidth', 13)
+            .attr('markerHeight', 13)
+            .attr('xoverflow', 'visible')
         .append('svg:path')
         .attr('d', 'M 0,-5 L 10 ,0 L 0,5')
         .attr('fill', '#999')
-        .style('stroke','none');
+        .style('stroke', 'none');
 
     svg.append('defs').append('marker')
-        .attr('id','arrowhead_left')
-            .attr('viewBox','-0 -5 10 10')
-            .attr('refX',0)
-            .attr('refY',.5)
-            .attr('orient','180')
-            .attr('markerWidth',13)
-            .attr('markerHeight',13)
-            .attr('xoverflow','visible')
+        .attr('id', 'arrowhead_left')
+            .attr('viewBox', '-0 -5 10 10')
+            .attr('refX', 0)
+            .attr('refY', .5)
+            .attr('orient', '180')
+            .attr('markerWidth', 13)
+            .attr('markerHeight', 13)
+            .attr('xoverflow', 'visible')
         .append('svg:path')
         .attr('d', 'M 0,-5 L 10 ,0 L 0,5')
         .attr('fill', '#999')
-        .style('stroke','none');
+        .style('stroke', 'none');
 
     svg.append('defs').append('marker')
-        .attr('id','arrowhead_bottom')
-            .attr('viewBox','-0 -5 10 10')
-            .attr('refX',0)
-            .attr('refY',.5)
-            .attr('orient','90')
-            .attr('markerWidth',13)
-            .attr('markerHeight',13)
-            .attr('xoverflow','visible')
+        .attr('id', 'arrowhead_bottom')
+            .attr('viewBox', '-0 -5 10 10')
+            .attr('refX', 0)
+            .attr('refY', .5)
+            .attr('orient', '90')
+            .attr('markerWidth', 13)
+            .attr('markerHeight', 13)
+            .attr('xoverflow', 'visible')
         .append('svg:path')
         .attr('d', 'M 0,-5 L 10 ,0 L 0,5')
         .attr('fill', '#999')
-        .style('stroke','none');
+        .style('stroke', 'none');
 
     var x = d3.scaleLinear()
         .domain(padExtent([]))
-        .range(padExtent([0, width-axisPad]));
+        .range(padExtent([0, width - axisPad]));
 
     var y = d3.scaleLinear()
         .domain(padExtent([]))
-        .range(padExtent([height-axisPad, 0]));
+        .range(padExtent([height - axisPad, 0]));
 
     var titlesX = {
         low: 160,
-        medium: width/2,
+        medium: width  / 2,
         high: width - 160
     };
 
     var titlesY = {
         high: 160,
-        medium: height/2+50,
-        low: height-100
+        medium: height    / 2 + 50,
+        low: height  - 100
     };
 
     var amountCentersX = {
-        low: {x:width/4},
-        medium:{x:width/2},
-        high:{x:2*(width/3)+80},
-        "Full sun":{x:6*drawable_width/7 + nodeOffset},
-        "Full sun to part sun":{x:5*drawable_width/7 + nodeOffset},
+        low: {x: width / 4},
+        medium: {x : width / 2},
+        high: {x : 2 * (width / 3) + 80},
+        "Full sun": {x   :6*drawable_width/7 + nodeOffset},
+        "Full sun to part sun": {x :5*drawable_width/7 + nodeOffset},
         "Full sun to part shade":{x:4*drawable_width/7 + nodeOffset},
         "Part sun to part shade":{x:3*drawable_width/7 + nodeOffset},
         "Part shade":{x:2*drawable_width/7 + nodeOffset },
@@ -146,8 +148,8 @@ function directed_graph(data, svg, button_flag){
     var mX = 0;
     var mY = 0;
     var nodes = data.map(function(d){
-        mHeight = parseMaxNum(d.Indoor_Height);
-        mSpread = parseMaxNum(d.Indoor_Spread);
+        var mHeight = parseMaxNum(d.Indoor_Height);
+        var mSpread = parseMaxNum(d.Indoor_Spread);
         if (mHeight > mX) mX = mHeight;
         if (mSpread > mY) mY = mSpread;
 
@@ -171,7 +173,8 @@ function directed_graph(data, svg, button_flag){
 			humidity: d.Humidity,
 			air: d.Air_Purifying,
 			ph: d.Ph_Soil,
-			bloom_period: d.Bloom_Period
+			bloom_period: d.Bloom_Period, 
+            bloom_descrip: d.Bloom_Description
 			
         };
     });
@@ -180,11 +183,11 @@ function directed_graph(data, svg, button_flag){
     // Create scales for plant height vs. spread graphs
     var spreadScale = d3.scaleLinear()
         .domain([0, mX])
-        .range([200, drawable_width]);
+        .range([160, width + 125]);
 
     var heightScale = d3.scaleLinear()
         .domain([0, mY])
-        .range([150, drawable_height]);
+        .range([drawable_height - 50, 200]);
 
     // Function to parse out max spread and height and return num
     function parseMaxNum(d) {
@@ -206,7 +209,7 @@ function directed_graph(data, svg, button_flag){
 
     function nodeYPos(d){
         if (!button_flag){
-            return height - heightScale(d.max_height);
+            return heightScale(d.max_height);
         } else {
             return amountCentersY[d.soil_ind].y;
         }
@@ -224,11 +227,12 @@ function directed_graph(data, svg, button_flag){
         .on("mouseout", mouseout)
         .on("click", function (d) {
 
-			console.log(d);
-            console.log("heightScale value: " + heightScale(d.max_height));
-            console.log("normalized value: " + (height - heightScale(d.max_height)));
+//d is the data
+			console.log(d);                        
+                
+            
 			d3.select("#plant-head").html(d.nickname + "<br><text style=\"color:darkgrey\">" + d.sci_name + "<br>");
-			d3.select("#static-tip-data").html(d.sun + "<br>" + d.soil_ind + "<br>" +d.plant_height + "<br>" + d.plant_spread +"<br>"+d.flowering+"<br>"+d.bloom_period +"<br>" + d.humidity +"<br>" +d.air + "<br>" + d.Ph);
+			d3.select("#static-tip-data").html("<text style=\"font-size: 11pt\">"+d.sun + "<br>" + d.soil_ind + "<br>" +d.plant_height + "<br>" + d.plant_spread +"<br>"+d.flowering+"<br>"+d.bloom_descrip +"<br>" + d.humidity +"<br>" +d.air + "<br>" + d.Ph);
 			d3.select(".resize_fit_center").attr("src", "img/" + d.img );
 		});
 
@@ -277,8 +281,8 @@ function directed_graph(data, svg, button_flag){
             }
         })
       .attr("class", "bubble")
-      .attr("width", radius*2)
-      .attr("height", radius*2);
+      .attr("width", (radius)*2)
+      .attr("height", (radius)*2);
 
     simulation.nodes(nodes);
 
@@ -314,9 +318,7 @@ function directed_graph(data, svg, button_flag){
                 .transition()
                 .duration(150)
                 .attr("r", radius*1.3);
-
-    //        var temp = radius;
-    //        radius = radius*5;
+    
 
             // simulation.stop();
 
@@ -332,7 +334,7 @@ function directed_graph(data, svg, button_flag){
             tooltip(d,parseFloat(d3.event.pageX),parseFloat(d3.event.pageY));
         }
 
-    };
+    }
 
     function mouseout()
     {
@@ -355,10 +357,11 @@ function directed_graph(data, svg, button_flag){
 
         }
 
-    };
-
+    }
+    
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     // Axis labels
-
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     var y_label_water = "Water";
     var y_label_height = "Max Indoor Height";
     var x_label_sunlight = "Sunlight";
@@ -436,10 +439,13 @@ function directed_graph(data, svg, button_flag){
         .text("Prefers Shade")
         .attr("opacity", 0.5);
 
-    extra_labels = [extra_labels_1, extra_labels_2, extra_labels_3, extra_labels_4];
+    var extra_labels = [extra_labels_1, extra_labels_2, extra_labels_3, extra_labels_4];
 
-
-    //creating xaxis
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    //creating axis
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    
+    //xaxis
     var x_axis = g.append("g")
         .attr("class", "xaxis")
         .attr("transform", "translate(" + -(width-axisPad)/2 + "," + (height-axisPad)/2 + ")")
@@ -449,8 +455,8 @@ function directed_graph(data, svg, button_flag){
         .attr('marker-end','url(#arrowhead_right)')
         .call(d3.axisBottom(x));
 
-    //creating yaxis
-    g.append("g")
+    //yaxis
+    var y_axis = g.append("g")
         .attr("class", "yaxis")
         .attr("transform", "translate(" + -(width-axisPad)/2 + ","+-(height-axisPad)/2+")")
         .call(d3.axisLeft(y).ticks(0).tickSizeOuter(0))
@@ -484,6 +490,7 @@ function directed_graph(data, svg, button_flag){
 
         start();
         });
+    
     d3.select("#option2")
         .on('click',function(){
         button_flag = false;
@@ -498,75 +505,88 @@ function directed_graph(data, svg, button_flag){
         start();
     });
 
-var chart = d3.select(".innerLegend")
-    .append("svg")
-//    .style("background-color", "pink")
-	.attr("width", 310)
-	.attr("height", 150)
-    .append("g");
+    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    // Legend
+    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-chart.append("rect")
-    .attr("x", 5)
-    .attr("y", 20)
-    .attr("width", 20)
-    .attr("height", 20)
-    .style("fill", TopLeftQuad);
-chart.append("text")
-    .attr("x", 30)
-    .attr("y", 35)
-    .text("More water");
-chart.append("text")
-    .attr("x", 30)
-    .attr("y", 55)
-    .text("More sun");
+    var chart = d3.select(".legend")
+        .append("svg")
+        .style("width", "125px")
+        .style("height", "170px")
 
-chart.append("rect")
-    .attr("x", 5)
-    .attr("y", 90)
-    .attr("width", 20)
-    .attr("height", 20)
-    .style("fill", BottomLeftQuad);
-chart.append("text")
-    .attr("x", 30)
-    .attr("y", 105)
-    .text("Less water");
-chart.append("text")
-    .attr("x", 30)
-    .attr("y", 125)
-    .text("Less sun");
+    //    .style("background-color", "pink")
+        .append("g");
 
-chart.append("rect")
-    .attr("x", 115)
-    .attr("y", 20)
-    .attr("width", 20)
-    .attr("height", 20)
-    .style("fill", TopRightQuad);
-chart.append("text")
-    .attr("x", 140)
-    .attr("y", 35)
-    .text("More water");
-chart.append("text")
-    .attr("x", 140)
-    .attr("y", 55)
-    .text("More sun");
-
-chart.append("rect")
-    .attr("x", 115)
-    .attr("y", 90)
-    .attr("width", 20)
-    .attr("height", 20)
-    .style("fill", BottomRightQuad);
-chart.append("text")
-    .attr("x", 140)
-    .attr("y", 105)
-    .text("Less water");
-chart.append("text")
-    .attr("x", 140)
-    .attr("y", 125)
-    .text("More sun");
+    chart.append("rect")
+        .attr("x", 5)
+        .attr("y", 15)
+        .attr("width", 10)
+        .attr("height", 10)
+        .style("fill", TopLeftQuad);
+    chart.append("text")
+        .attr("class", "legend-text")
+        .attr("x", 30)
+        .attr("y", 25)
+        .text("More water");
+    chart.append("text")
+        .attr("class", "legend-text")
+        .attr("x", 30)
+        .attr("y", 40)
+        .text("More shade");
 
 
-//Create scale functions
 
-//var xScale = d3.scaleBand().domain([0, 1]).range([0,90]);
-//var yScale = d3.scaleLinear().domain([0, 1]).range([0,90]);
+    chart.append("rect")
+        .attr("x", 5)
+        .attr("y", 55)
+        .attr("width", 10)
+        .attr("height", 10)
+        .style("fill", BottomLeftQuad);
+    chart.append("text")
+        .attr("class", "legend-text")
+        .attr("x", 30)
+        .attr("y", 65)
+        .text("Less water");
+    chart.append("text")
+        .attr("class", "legend-text")
+        .attr("x", 30)
+        .attr("y", 80)
+        .text("More shade");
+
+
+    chart.append("rect")
+        .attr("x", 5)
+        .attr("y", 95)
+        .attr("width", 10)
+        .attr("height", 10)
+        .style("fill", TopRightQuad);
+    chart.append("text")
+        .attr("class", "legend-text")
+        .attr("x", 30)
+        .attr("y", 105)
+        .text("More water");
+    chart.append("text")
+        .attr("class", "legend-text")
+        .attr("x", 30)
+        .attr("y", 120)
+        .text("More sun");
+
+
+    chart.append("rect")
+        .attr("x", 5)
+        .attr("y", 135)
+        .attr("width", 10)
+        .attr("height", 10)
+        .style("fill", BottomRightQuad);
+    chart.append("text")
+        .attr("class", "legend-text")
+        .attr("x", 30)
+        .attr("y", 145)
+        .text("Less water");
+    chart.append("text")
+        .attr("class", "legend-text")
+        .attr("x", 30)
+        .attr("y", 160)
+        .text("More sun");
+
+    }
