@@ -50,12 +50,13 @@
 					
 						</div>
 					    <div id="habit-tip" style=" float: center;padding-top:10px;"> 
-							<b>Plant Habit </b><br><b>Type</b> <br>
+							<b>Plant Habit </b><br><br><b>Type</b> <br>
 						</div>
 					</div>
 						<div style=" float: left;text-align: left;font-weight:bold; font-size: 10pt"> 
 							Sunlight: <br>
 							Soil Indicator: <br> 
+							Water Amount: <br>
 							Height: <br>
 							Spread<br>
 							Indoor Flowering: <br>
@@ -109,48 +110,66 @@
             <div class="col-md-2" id="sidebar">
 
                 <br>
-                <div class="row">
-                   <label class="filters">
-                     <html>Search Filters</html>
-                 </label>
+                <div class="filters">
+					<text class="filter-block">Search Filters</text>
+       			
+				<div class="row" style="text-align: center;padding-top: 10px">
+                   <label class="sub-filter">
+                   		<html>Characteristics</html>
+                   </label>
+                </div>
+              				
+				<div class="row">
+                    <label class="custom-control material-checkbox">
+						<input type="checkbox" class="material-control-input" id="airp">
+						<span class="material-control-indicator"></span>
+						<span class="material-control-description">Air Purifying</span>
+					</label>
                 </div>
 
                 <div class="row">
                     <label class="custom-control material-checkbox">
-
-							<input type="checkbox" class="material-control-input" id="hung">
-							<span class="material-control-indicator"></span>
-							<span class="material-control-description">Hanging Plants</span>
-                </label>
+						<input type="checkbox" class="material-control-input" id="hung">
+						<span class="material-control-indicator"></span>
+						<span class="material-control-description">Hanging Plants</span>
+                	</label>
                 </div>
-                <div class="row">
+                
+				<div class="row">
                     <label class="custom-control material-checkbox">
-
-							<input type="checkbox" class="material-control-input" id="flowers">
-							<span class="material-control-indicator"></span>
-							<span class="material-control-description">Flowers Indoors</span>
-                </label>
-                </div>
-				<div>
-					<div class="row">
-                    	<label class="custom-control material-checkbox">
-
-							<input type="checkbox" class="material-control-input" id="dogs">
-							<span class="material-control-indicator"></span>
-							<span class="material-control-description">Non-toxic to dogs</span>
-                		</label>
+						<input type="checkbox" class="material-control-input" id="flowers">
+						<span class="material-control-indicator"></span>
+						<span class="material-control-description">Flowers Indoors</span>
+					</label>
+				</div>
+				<div>	
+					<div class="row" style="text-align: center;padding-top: 10px">
+                    	<label class="sub-filter">
+							<html>Pet Friendly</html>
+                 		</label>
                 	</div>
-                	<div class="row">
-                    	<label class="custom-control material-checkbox">
-
-							<input type="checkbox" class="material-control-input" id="cats">
-							<span class="material-control-indicator"></span>
-							<span class="material-control-description">Non-toxic to cats</span>
-                		</label>
+				
+					<div class="row">
+						<div>
+                    		<label class="custom-control material-checkbox">
+								<input type="checkbox" class="material-control-input" id="dogs">
+								<span class="material-control-indicator"></span>
+								<span class="material-control-description">Dogs</span>
+                			</label>
+						</div>
+                	
+						<div style="padding-left:10pt">
+                    		<label class="custom-control material-checkbox">
+								<input type="checkbox" class="material-control-input" id="cats">
+								<span class="material-control-indicator"></span>
+								<span class="material-control-description">Cats</span>
+                			</label>
+						</div>
                 	</div>
 				</div>
+				</div>
                 <br>
-
+                <br>
                 <div class = "row">
                     <div class="legend">Legend</div>
                 </div>

@@ -51,12 +51,7 @@ h2 {
     fill: #aaa;
     cursor: default;
 }
-.filters {
-    font-family: 'Roboto Slab', serif;
-    text-align: center;
-    font-size: 18px;
-    color: forestgreen;
-}
+
 
 .filter-block {
     font-family: 'Roboto Slab', serif;
@@ -102,6 +97,18 @@ h2 {
     width: 350px;
     height: 500px;
 	padding: 20px;
+}
+.filter-seperate {
+	font-family: 'Roboto Slab', serif;
+    border-radius: 5px;
+	border: 1px solid lightgrey;
+}
+
+.sub-filter{
+	color: darkslategray;
+	font-family: 'Roboto Slab', serif;
+	font-size: 11pt;
+
 }
 
 .pic-container {
@@ -481,9 +488,21 @@ left: 1.25rem;
     font-size: 18px;
     font-style: bold;
     fill: darkgrey;
-    border-radius: 3px;
+    border-radius: 5px;
+	border-color: aliceblue;
     color: forestgreen;
-/*    border: 1px solid lightgrey;*/
+    border: 1px solid lightgrey;
+    height: 200px;
+    width: 125px;
+}
+
+.row .filters{
+    text-align: center;
+    font-family: 'Roboto Slab', serif;
+    font-size: 18px;
+    font-style: bold;
+    fill: darkgrey;
+	color:dimgray; 
     height: 200px;
     width: 125px;
 }

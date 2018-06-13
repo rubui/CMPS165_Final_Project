@@ -2,6 +2,7 @@ function select_handler(){
     //put all flags into 1 object
     //because to pass primitives in js by reference isn't allowed ;_;
     var flags = {
+		airp:true,
         flowers:true,
         hung:true,
         dogs:true,
@@ -24,6 +25,10 @@ function select_handler(){
         .on("click",function(){
             opacity_macro(flags,"cats","toxic_cats","No");
         });
+	d3.select('#airp')
+        .on("click",function(){
+            opacity_macro(flags,"airp","air","Yes");
+    });
     
 //    console.log(nodes);
     
@@ -39,14 +44,16 @@ function opacity_macro(flag,type,name,cmp){
             flowers: "flowering",
             hung: "hanging",
             cats: "toxic_cats",
-            dogs: "toxic_dogs"
+            dogs: "toxic_dogs",
+			airp: "air"
         };
     
         var referenceCmp ={
             flowers:("Yes"||"Rarely"),
             hung:"Yes",
             cats:"No",
-            dogs:"No"
+            dogs:"No",
+			airp:"Yes"
         }
     
         if (flag[type]){

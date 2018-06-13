@@ -232,7 +232,7 @@ function directed_graph(data, svg, button_flag) {
         .on("click", function (d) {
 			d3.select("#habit-tip").html("<b>Plant Habit</b> <br>" + d.habit + "<br> <b>Type</b> <br>" + d.type);
 			d3.select("#plant-head").html(d.nickname + "<br><text style=\"font-size:11pt; color:darkgrey\">" + d.sci_name + "<br></text>");
-			d3.select("#static-tip-data").html("<text>"+ d.sun + "<br>" + d.soil_ind + "<br>" +d.plant_height + "<br>" + d.plant_spread +"<br>"+d.flowering+ "<br>" + d.bloom_period + "<br>" + d.bloom_descrip +"<br>" + d.humidity + "<br>" + d.air + "<br>" + d.ph+"</text>");
+			d3.select("#static-tip-data").html("<text>"+ d.sun + "<br>" + d.soil_ind + "<br>" + d.water + "<br>" +d.plant_height + "<br>" + d.plant_spread +"<br>"+d.flowering+ "<br>" + d.bloom_period + "<br>" + d.bloom_descrip +"<br>" + d.humidity + "<br>" + d.air + "<br>" + d.ph+"</text>");
 		
 			d3.select(".resize_fit_center").attr("src", "img/" + d.img );
 		});
