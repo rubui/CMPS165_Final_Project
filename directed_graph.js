@@ -172,7 +172,10 @@ function directed_graph(data, svg, button_flag){
 			air: d.Air_Purifying,
 			ph: d.Ph_Soil,
 			bloom_period: d.Bloom_Period, 
-            bloom_descrip: d.Bloom_Description
+            bloom_descrip: d.Bloom_Description,
+			
+			habit: d.Plant_Habit,
+			type: d.Type
 			
         };
     });
@@ -224,12 +227,9 @@ function directed_graph(data, svg, button_flag){
         .on("mouseover", mouseover)
         .on("mouseout", mouseout)
         .on("click", function (d) {
-
-			console.log(d);                        
-                
-            
-			d3.select("#plant-head").html(d.nickname + "<br><text style=\"color:darkgrey\">" + d.sci_name + "<br>");
-			d3.select("#static-tip-data").html("<text style=\"font-size: 11pt\">"+d.sun + "<br>" + d.soil_ind + "<br>" +d.plant_height + "<br>" + d.plant_spread +"<br>"+d.flowering+"<br>"+d.bloom_descrip +"<br>" + d.humidity +"<br>" +d.air + "<br>" + d.Ph);
+			d3.select("#habit-tip").html("<b>Plant Habit</b> <br>" + d.habit + "<br> <b>Type</b> <br>" + d.type);
+			d3.select("#plant-head").html(d.nickname + "<br><text style=\"font-size:11pt; color:darkgrey\">" + d.sci_name + "<br></text>");
+			d3.select("#static-tip-data").html("<text>"+ d.sun + "<br>" + d.soil_ind + "<br>" +d.plant_height + "<br>" + d.plant_spread +"<br>"+d.flowering+ "<br>" + d.bloom_period + "<br>" + d.bloom_descrip +"<br>" + d.humidity + "<br>" + d.air + "<br>" + d.ph+"</text>");
 			d3.select(".resize_fit_center").attr("src", "img/" + d.img );
 		});
 
@@ -328,7 +328,7 @@ function directed_graph(data, svg, button_flag){
                 .attr("y", function(d) { return +d.y - (radius*1.3); });
 
     //        getOverview(data,d.index);
-            tooltip(d,parseFloat(d3.event.pageX),parseFloat(d3.event.pageY));
+            tooltip(d,parseFloat(d3.event.pageX),parseFloat(d3.event.pageY), width);
         }
 
     };

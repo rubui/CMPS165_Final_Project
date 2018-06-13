@@ -1,4 +1,4 @@
-function tooltip(d, xPosition, yPosition)
+function tooltip(d, xPosition, yPosition, svgWidth)
 {
 //    var xPosition = parseFloat(d3.event.clientX);
 //    var yPosition = parseFloat(d3.event.clientY-50);
@@ -19,13 +19,13 @@ function tooltip(d, xPosition, yPosition)
         tip.select('.sci_name')
 			.style("color","darkgrey")
             .html("<br>" + d.sci_name);
-		if(d.sun == "Full sun"){
-			fSun = tip.style("width", 220 + "px").select('#sun');
+		if((d.sun == "Full sun")){
+			fSun = tip.style("width", 220 + "px");
 		}else{
-			fSun = tip.style("width", "auto").select('#sun');
+			fSun = tip.style("width", "auto");
 		}
 	      
-        fSun.html( divTitle +" Sun Comfort: </div> <div style=\"float:right;\">" + d.sun + "</div></div>");
+        fSun.select("#sun").html( divTitle +" Sun Comfort: </div> <div style=\"float:right;\">" + d.sun + "</div></div>");
         tip.select('#soil')
             .html("<br>" + divTitle +"Soil Level: </div>" +  "<div style=\"float:right;\">" + d.soil_ind + "</div></div><br>");
         tip.select('#water')
