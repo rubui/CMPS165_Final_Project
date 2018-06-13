@@ -89,7 +89,7 @@ function directed_graph(data, svg, button_flag) {
         
 
     var y = d3.scaleLinear()
-        .domain(padExtent([1,8]))
+        .domain(padExtent([1,8.9]))
         .range(padExtent([height-axisPad, 0]));
 
     var titlesX = {
