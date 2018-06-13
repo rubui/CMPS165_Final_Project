@@ -11,7 +11,7 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 
     <!--  d3.js v4 import  -->
-    <script src="//d3js.org/d3.v4.min.js"></script>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.25.6/d3-legend.js"></script>
 
     <!--  Bootstrap import  -->
@@ -31,21 +31,17 @@
 
         <!-- Title -->
         <h1>California Houseplants Care Guide</h1>
-
-<!--
-         Summary of project
+		
         <p style="text-align: center">We wish to create a visualization for various types of plants that are commercially available in the USA. We will focus on basic care such as amount of water needed and amounts of sunlight required. Our goal is for this guide to serve as a quick and easily navigable reference for plant maintence. In doing so, the visualization can also serve as a simple buyer's guide, by showing various plants and their needs to jugde agaisnt your own lifestyle choices. We also plan to include more variables to examine such as tempurature tolerance, humidity, plant types, and ph levels of soil.
         </p>
--->
-        <br>
+        
+		<br>
 
         <!-- Row to handle graph and filters -->
         <div class="row">
 
             <div class="col-md-3">
-                
-                <p>Right below this is going to be the static tooltip. </p>
-             
+
                 <div class="static-tooltip">
 					<div id="plant-head" class="nickname"> Select a Plant <br><text style="text-align: center; color: darkgray"> Scientific Name<br></text></div>
 						<div style = "height: 150px;padding-left: 10px">
@@ -104,7 +100,7 @@
                     </div>
                 </div>
 
-                <div class="col-md-3"></div>
+                    <div class="col-md-3"></div>
 		      </div>
             </div>
                         
@@ -192,6 +188,7 @@
             //creating the tooltip div
             var div = d3.select("#display").append("div")
                 .attr("class", "tooltip")
+				.attr("id", "sun-soil-water")
                 .style("opacity", 0);
                 div.append("div")
                     .attr('class','nickname');
@@ -210,13 +207,30 @@
                 div.append('div')
                     .attr('class','tooltip-text')
                     .attr('id', 'water');
-
+			
+			var div = d3.select("#display").append("div")
+                .attr("class", "tooltip")
+			    .attr("id", "spread-height")
+                .style("opacity", 0);
+                div.append("div")
+                    .attr('class','nickname');
+                div.append('div')
+                    .attr('class','sci_name');
+                div.append("div")
+                    .html('<br>');
+			    div.append('div')
+                    .attr('class','tooltip-text')
+                    .attr('id', 'height');
+                div.append('div')
+                    .attr('class','tooltip-text')
+                    .attr('id', 'spread');
             //run functions here
             directed_graph(data, svg, button_flag);
             select_handler();
 
         });
 
+        
     </script>
 
         <br><br><br><br><br><br><br><br>
@@ -227,30 +241,40 @@
             <div class="col-md-3 ">
                 <h4 class="sources_header" style="text-align: center">Files</h4>
                 <ul class="sources_list">
-                    <li>hello this is where we'll put relevant file sources for the project</li>
+                    <li>index.html</li>
+                    <li>graph.html</li>
+                    <li>directed_graph.js</li>
+                    <li>selections.js</li>
+                    <li>tooltip.js</li>
+                    <li>style.css</li>
+                    <li>plants_clean_40.csv</li>
                 </ul>
             </div>
             <div class="col-md-3">
                 <h4 class="sources_header" style="text-align: center">Visual Sources</h4>
                 <ul class="sources_list">
-                    <li>This is where we're going to put our visual inspirations </li>
+                    <li><a href="https://hannabrahman.github.io/Data-Visualization/">Influential Women</a></li>
+                    <li><a href = "http://zachd.github.io/food-facts/">Food Facts</a></li>
                 </ul>
             </div>
             <div class="col-md-3">
                 <h4 class="sources_header" style="text-align: center">Code Sources</h4>
                 <ul class="sources_list">
-
+                    <li><a href="http://bl.ocks.org/ericandrewlewis/dc79d22c74b8046a5512">Circles on Axis in a Force Layout</a></li>
+                    <li><a href="http://vallandingham.me/bubble_charts_with_d3v4.html">Bubble Charts with D3v4</a></li>
                 </ul>
             </div>
             <div class="col-md-3">
                 <h4 class="sources_header" style="text-align: center">Data Sources</h4>
                 <ul class="sources_list">
-
+                    <li><a href="https://plants.usda.gov/adv_search.html">USDA Plants Dataset</a></li>
+                    <li><a href="https://img.buzzfeed.com/buzzfeed-static/static/2015-03/19/12/enhanced/webdr13/enhanced-1008-1426782359-1.jpg?downsize=715:*&output-format=auto&output-quality=auto">House Plant Watering Chart</a></li>
+                    <li><a href="http://www.missouribotanicalgarden.org/plantfinder/plantfindersearch.aspx">Missouri Botanical Garden Database</a></li>
+                    <li><a href="https://www.bhg.com/">Better Homes Garden</a></li>
+                    <li><a href="https://garden.org/plants/">The National Gardening Association Database</a></li>
+                    <li><a href="https://www.houseplantsexpert.com/">House Plants Expert</a></li>
                 </ul>
             </div>
-
-
-        </div>
         <br><br><br><br><br><br>
     </div>
 
