@@ -380,7 +380,7 @@ function directed_graph(data, svg, button_flag) {
         .style("font-family", "Roboto Slab")
         .style("font-size", "16pt")
         .attr("x", 0)
-        .attr("y", -475)
+        .attr("y", -490)
         .style("font-size", "16px")
         .style("text-anchor", "middle");
 
@@ -392,7 +392,7 @@ function directed_graph(data, svg, button_flag) {
         .style("font-family", "Roboto Slab")
         .style("font-size", "16pt")
         .attr("x", -245)
-        .attr("y", -470)
+        .attr("y", -480)
         .style("font-size", "11px")
         .style("text-anchor", "start")
         .text("Needs Less Water")
@@ -404,7 +404,7 @@ function directed_graph(data, svg, button_flag) {
         .style("font-family", "Roboto Slab")
         .style("font-size", "16pt")
         .attr("x", 245)
-        .attr("y", -470)
+        .attr("y", -480)
         .style("font-size", "11px")
         .style("text-anchor", "end")
         .text("Needs More Water")
@@ -415,7 +415,7 @@ function directed_graph(data, svg, button_flag) {
         .style("font-family", "Roboto Slab")
         .style("font-size", "16pt")
         .attr("x", 10)
-        .attr("y", 285)
+        .attr("y", 290)
         .style("font-size", "16px")
         .style("text-anchor", "middle");
 

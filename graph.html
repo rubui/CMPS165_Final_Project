@@ -27,7 +27,7 @@
 
 <body>
 
-    <div id="main"  style="width:1800px; margin:0 auto;">        
+    <div id="main"  style="width:1750px; margin:0 auto;">        
 
         <!-- Title -->
         <h1>California Houseplants Care Guide</h1>
@@ -39,7 +39,8 @@
 
         <!-- Row to handle graph and filters -->
         <div class="row">
-
+            
+            <!-- Left sidebar (Static Tooltip) -->
             <div class="col-md-3">
 
                 <div class="static-tooltip">
@@ -182,7 +183,7 @@
             var svg = d3.select("#display")
             .append("svg")
             .attr("class", "force-scale")
-            .attr("width",1000)
+            .attr("width",1020)
             .attr("height",600);
 
             //creating the tooltip div
