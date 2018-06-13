@@ -89,7 +89,7 @@ function directed_graph(data, svg, button_flag) {
         
 
     var y = d3.scaleLinear()
-        .domain(padExtent([1,9]))
+        .domain(padExtent([1,8.9]))
         .range(padExtent([height-axisPad, 0]));
 
     var titlesX = {
@@ -380,7 +380,7 @@ function directed_graph(data, svg, button_flag) {
         .style("font-family", "Roboto Slab")
         .style("font-size", "16pt")
         .attr("x", 0)
-        .attr("y", -475)
+        .attr("y", -490)
         .style("font-size", "16px")
         .style("text-anchor", "middle");
 
@@ -392,7 +392,7 @@ function directed_graph(data, svg, button_flag) {
         .style("font-family", "Roboto Slab")
         .style("font-size", "16pt")
         .attr("x", -245)
-        .attr("y", -470)
+        .attr("y", -480)
         .style("font-size", "11px")
         .style("text-anchor", "start")
         .text("Needs Less Water")
@@ -404,7 +404,7 @@ function directed_graph(data, svg, button_flag) {
         .style("font-family", "Roboto Slab")
         .style("font-size", "16pt")
         .attr("x", 245)
-        .attr("y", -470)
+        .attr("y", -480)
         .style("font-size", "11px")
         .style("text-anchor", "end")
         .text("Needs More Water")
@@ -415,7 +415,7 @@ function directed_graph(data, svg, button_flag) {
         .style("font-family", "Roboto Slab")
         .style("font-size", "16pt")
         .attr("x", 10)
-        .attr("y", 285)
+        .attr("y", 290)
         .style("font-size", "16px")
         .style("text-anchor", "middle");
 
@@ -453,12 +453,13 @@ function directed_graph(data, svg, button_flag) {
     var x_axis = g.append("g")
         .attr("class", "xaxis")
         .attr("transform", "translate(" + -(width-axisPad)/2 + "," + (height-axisPad)/2 + ")")
-        .call(d3.axisBottom(x).tickSizeOuter(0))//.ticks(0).tickSizeOuter(0))
+        .call(d3.axisBottom(x).ticks(5).tickSizeOuter(0))//.ticks(0).tickSizeOuter(0))
         .style("opacity", 1)
         .select('path')
         .attr('marker-end', 'url(#arrowhead_right)')
         .call(d3.axisBottom(x));
     
+
 //g.select(".xaxis > path").style("stroke", "red");
 g.selectAll(".xaxis > .tick > line").style("opacity", "0");
 g.selectAll(".xaxis > .tick > text").style("opacity", "0");
@@ -467,7 +468,7 @@ g.selectAll(".xaxis > .tick > text").style("opacity", "0");
     var y_axis = g.append("g")
         .attr("class", "yaxis")
         .attr("transform", "translate(" + -(width-axisPad)/2 + ","+-(height-axisPad)/2+")")
-        .call(d3.axisLeft(y).tickSizeOuter(0))
+        .call(d3.axisLeft(y).ticks(4).tickSizeOuter(0))
         .style("opacity",1)
         .select("path")
         .attr('marker-end','url(#arrowhead_top)')
@@ -520,6 +521,10 @@ g.selectAll(".yaxis > .tick > text").style("opacity", "0");
         g.selectAll(".xaxis > .tick > text").style("opacity", "1");
         g.selectAll(".yaxis > .tick > line").style("opacity", "1");
         g.selectAll(".yaxis > .tick > text").style("opacity", "1");
+        g.selectAll(".xaxis > .tick > line").style("stroke", "#999");
+        g.selectAll(".xaxis > .tick > text").style("fill", "#999");
+        g.selectAll(".yaxis > .tick > line").style("stroke", "#999");
+        g.selectAll(".yaxis > .tick > text").style("fill", "#999");
 
 
         start();
