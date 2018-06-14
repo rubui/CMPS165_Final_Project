@@ -510,6 +510,7 @@ g.selectAll(".yaxis > .tick > text").style("opacity", "0");
     d3.select("#option2")
         .on('click',function(){
         button_flag = false;
+		
 
         x_axis_label.text(x_label_spread);
         y_axis_label.text(y_label_height);

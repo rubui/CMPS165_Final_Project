@@ -89,22 +89,16 @@
 <!--                 Row for buttons -->
                 <div class="row">
 			    <div class="col-md-3"></div>
-        	    <div class="col-md-3">
-                    <div class="btn-group btn-group-toggle btn-group-vertical btn-block" data-toggle="buttons">
-                        <label class="btn btn-secondary active" id="option1">
-                            <input type="radio" name="options" id="option1" autocomplete="off" checked> Water vs. Sun
-                        </label>
-                    </div>
-        	    </div>
-
-                <div class="col-md-3">
-                    <div class="btn-group btn-group-toggle btn-group-vertical btn-block" data-toggle="buttons">
-                        <label class="btn btn-secondary" id="option2">
-                            <input type="radio" name="options" id="option2" autocomplete="off"> Height vs. Spread
-                        </label>
-                    </div>
-                </div>
-
+					<div class="col-md-3 graph-toggle">
+                        
+                        <input type="radio" name="options" id="option1" checked> 
+						<label for="option1" class="btn"> Water vs. Sun</label>
+					</div>
+    
+                    <div class="col-md-3 graph-toggle">
+                        <input type="radio" name="options" id="option2"> 
+						<label for="option2" class="btn"> Height vs. Spread</label>
+					</div>
                     <div class="col-md-3"></div>
 		      </div>
             </div>

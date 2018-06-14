@@ -411,10 +411,8 @@ left: 1.25rem;
 
 .legend-text { 
     font-size: 13px;
-    font-family: 'Roboto';
-    
+    font-family: 'Roboto';    
 }
-
 
 .btn-secondary {
   color: #fff;
@@ -424,8 +422,8 @@ left: 1.25rem;
 
 .btn-secondary:hover {
   color: #fff;
-  background-color: forestgreen;
-  border-color: forestgreen;
+  background-color: darkblue;
+  border-color: darkblue;
 }
 
 .btn-secondary:focus, .btn-secondary.focus {
@@ -441,12 +439,30 @@ left: 1.25rem;
 .btn-secondary:not(:disabled):not(.disabled):active, .btn-secondary:not(:disabled):not(.disabled).active,
 .show > .btn-secondary.dropdown-toggle {
   color: #fff;
-  background-color: forestgreen;
-  border-color: forestgreen;
+  background-color: red;
+  border-color: red;
 }
 
 .btn-secondary:not(:disabled):not(.disabled):active:focus, .btn-secondary:not(:disabled):not(.disabled).active:focus,
 .show > .btn-secondary.dropdown-toggle:focus {
   box-shadow: 0 0 0 10rem rgba(108, 117, 125, 1);
   border-color: darkgreen;
+}
+
+.graph-toggle input[type="radio"] {
+  display: none;
+}
+
+.graph-toggle label {
+	color:white;
+	display: block;
+	width: 100%;
+	background-color: forestgreen;
+	padding: 4px 11px;
+	font-size: 16px;
+	cursor: pointer;
+}
+
+.graph-toggle input[type="radio"]:checked+label {
+  	background-color: darkgreen;
 }
