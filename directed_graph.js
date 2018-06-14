@@ -259,9 +259,16 @@ function directed_graph(data, svg, button_flag) {
             .attr("cx", function(d) { return d.x = Math.max(radius, Math.min(width - radius, d.x)); })
             .attr("cy", function(d) { return d.y = Math.max(radius, Math.min(height - radius, d.y)); });
 		
-		svg.selectAll(".my-select")        
+		svg.selectAll(".my-select")  
+		     .transition()
+             .duration(4)
 			.attr("x", function(d) { return +d.x - (radius*1.3); })
-            .attr("y", function(d) { return +d.y - (radius*1.3); });
+            .attr("y", function(d) { return +d.y - (radius*1.3); })
+			.attr("width", 50)
+			.attr("height", 50);
+		
+
+
     }
 
     //we can modify the get specific images later on
@@ -361,9 +368,7 @@ function directed_graph(data, svg, button_flag) {
                 .attr("height", radius*2)
                 .attr("x", function(d) { return +d.x - (radius); })
                 .attr("y", function(d) { return +d.y - (radius); });
-			 d3.select(this).classed("my-select",false);
-			console.log( d3.select(this).classed("my-select"));
-
+			d3.select(this).classed("my-select",false);
 
             d3.selectAll(".tooltip").classed("hidden", true);
             
