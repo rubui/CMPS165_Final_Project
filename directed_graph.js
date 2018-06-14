@@ -104,7 +104,7 @@ function directed_graph(data, svg, button_flag) {
 
     var amountCentersY = {
         "Dry":{y:4*drawable_height/5 + nodeOffset},
-        "Nearly dry":{y:3*drawable_height/5 + nodeOffset},
+        "Nearly dry":{y:3*drawable_height/5},
         "Slightly dry":{y:2*drawable_height/5 +40},
         "Never dry":{y:drawable_height/5 + nodeOffset}
     };
