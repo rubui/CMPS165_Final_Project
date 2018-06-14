@@ -256,11 +256,15 @@ function directed_graph(data, svg, button_flag) {
             .attr("x", function(d) { return +d.x - (radius); })
             .attr("y", function(d) { return +d.y - (radius); })
             .attr("cx", function(d) { return d.x = Math.max(radius, Math.min(width - radius, d.x)); })
-            .attr("cy", function(d) { return d.y = Math.max(radius, Math.min(height -       radius, d.y)); });
+            .attr("cy", function(d) { return d.y = Math.max(radius, Math.min(height - radius, d.y)); });
+		
+		svg.selectAll(".my-select")        
+			.attr("x", function(d) { return +d.x - (radius*1.3); })
+            .attr("y", function(d) { return +d.y - (radius*1.3); });
     }
 
     //we can modify the get specific images later on
-    bubbles.append("image")
+   var bubbleImage = bubbles.append("svg:image")
 
       .attr("xlink:href", function (d){
             if (d.img){
@@ -272,6 +276,16 @@ function directed_graph(data, svg, button_flag) {
       .attr("class", "bubble")
       .attr("width", (radius)*2)
       .attr("height", (radius)*2);
+	
+	bubbleImage.on("mouseover", mouseover)
+        .on("mouseout", mouseout)
+        .on("click", function (d) {
+			d3.select("#habit-tip").html("<b>Plant Habit</b> <br>" + d.habit + "<br> <b>Type</b> <br>" + d.type);
+			d3.select("#plant-head").html(d.nickname + "<br><text style=\"font-size:11pt; color:darkgrey\">" + d.sci_name + "<br></text>");
+			d3.select("#static-tip-data").html("<text>"+ d.sun + "<br>" + d.soil_ind + "<br>" + d.water + "<br>" +d.plant_height + "<br>" + d.plant_spread +"<br>"+d.flowering+ "<br>" + d.bloom_period + "<br>" + d.bloom_descrip +"<br>" + d.humidity + "<br>" + d.air + "<br>" + d.ph+"</text>");
+		
+			d3.select(".resize_fit_center").attr("src", "img/" + d.img );
+		});
 
     simulation.nodes(nodes);
 
@@ -315,13 +329,14 @@ function directed_graph(data, svg, button_flag) {
 
             // simulation.stop();
 
-            d3.select(this).select('image')
+            d3.select(this)
                 .transition()
                 .duration(150)
+			    .attr("x", function(d) { return +d.x - (radius*1.3); })
+                .attr("y", function(d) { return +d.y - (radius*1.3); })
                 .attr("width", 50)
-                .attr("height", 50)
-                .attr("x", function(d) { return +d.x - (radius*1.3); })
-                .attr("y", function(d) { return +d.y - (radius*1.3); });
+                .attr("height", 50);
+			d3.select(this).classed("my-select", true);
 
     //        getOverview(data,d.index);
             tooltip(d,parseFloat(d3.event.pageX),parseFloat(d3.event.pageY), width, button_flag);
@@ -338,13 +353,15 @@ function directed_graph(data, svg, button_flag) {
                 .duration(150)
                 .attr("r", radius);
 
-            d3.select(this).select('image')
+            d3.select(this)
                 .transition()
                 .duration(150)
                 .attr("width", radius*2)
                 .attr("height", radius*2)
                 .attr("x", function(d) { return +d.x - (radius); })
                 .attr("y", function(d) { return +d.y - (radius); });
+			 d3.select(this).classed("my-select",false);
+			console.log( d3.select(this).classed("my-select"));
 
             d3.selectAll(".tooltip").classed("hidden", true);
 
