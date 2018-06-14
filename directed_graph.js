@@ -271,7 +271,7 @@ function directed_graph(data, svg, button_flag) {
             if (d.img){
                 return "img/" + d.img;
             } else {
-                return "apple.png"
+                return "img/apple.png"
             }
         })
       .attr("class", "bubble")
