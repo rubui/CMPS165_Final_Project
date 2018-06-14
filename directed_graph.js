@@ -12,7 +12,7 @@ function directed_graph(data, svg, button_flag) {
 //    http://vallandingham.me/bubble_charts_with_d3v4.html
 
 
-    var radius = 19,
+    var radius = 24,
         nodePadding = 2.5,
         forceStrength = .03,
         axisPad = 90,
@@ -104,7 +104,7 @@ function directed_graph(data, svg, button_flag) {
 
     var amountCentersY = {
         "Dry":{y:4*drawable_height/5 + nodeOffset},
-        "Nearly dry":{y:3*drawable_height/5 + nodeOffset},
+        "Nearly dry":{y:3*drawable_height/5},
         "Slightly dry":{y:2*drawable_height/5},
         "Never dry":{y:drawable_height/5 + nodeOffset}
     };

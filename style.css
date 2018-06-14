@@ -12,6 +12,7 @@ h2 {
 
 .sources_header {
     font-family: 'Roboto Slab', serif;
+    text-align: center;
     color: #09630C;
 }
 
@@ -252,7 +253,7 @@ left: 1.25rem;
     font-family: 'Roboto Slab', serif;
     font-size: 18px;
     font-style: bold;
-    fill: darkgrey;    
+/*    fill: darkgrey;    */
     color: forestgreen;
     height: 210px;
     width: 190px;
@@ -272,7 +273,7 @@ left: 1.25rem;
 .legend-text { 
     font-size: 13px;
     font-family: 'Roboto';    
-    color: black;
+    color: #696969;
 }
 
 .btn-secondary {
