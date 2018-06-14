@@ -262,8 +262,8 @@ function directed_graph(data, svg, button_flag) {
 		svg.selectAll(".my-select")  
 		     .transition()
              .duration(4)
-			.attr("x", function(d) { return +d.x - (radius*1.4); })
-            .attr("y", function(d) { return +d.y - (radius*1.4); })
+			.attr("x", function(d) { return +d.x - (radius*1.5); })
+            .attr("y", function(d) { return +d.y - (radius*1.5); })
 			.attr("width", 60)
 			.attr("height", 60);
 		
@@ -340,8 +340,8 @@ function directed_graph(data, svg, button_flag) {
             d3.select(this)
                 .transition()
                 .duration(150)
-			    .attr("x", function(d) { return +d.x - (radius*1.4); })
-                .attr("y", function(d) { return +d.y - (radius*1.4); })
+			    .attr("x", function(d) { return +d.x - (radius*1.5); })
+                .attr("y", function(d) { return +d.y - (radius*1.5); })
                 .attr("width", 60)
 				.attr("height", 60);
 				d3.select(this).classed("my-select", true);
