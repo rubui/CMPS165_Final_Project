@@ -9,7 +9,7 @@ function tooltip(d, xPosition, yPosition, svgWidth, flag)
 	}
 	var tip = d3.selectAll(".tooltip")
 			  .style("left", (d.x+50) + "px")
-			  .style("top", (d.y) + "px");
+			  .style("top", (d.y-25) + "px");
  
     var sswtip = d3.select('#sun-soil-water');
 
