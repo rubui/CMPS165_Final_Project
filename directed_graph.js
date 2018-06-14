@@ -16,11 +16,11 @@ function directed_graph(data, svg, button_flag) {
         nodePadding = 2.5,
         forceStrength = .03,
         axisPad = 90,
-        nodeOffset = 40,
+        nodeOffset = -10,
         width = +svg.attr("width"),
         height = +svg.attr("height"),
-        drawable_width = width - axisPad,
-        drawable_height = height - axisPad,
+        drawable_width = width + 50,
+        drawable_height = height + 20,
         center = {x: width / 2, y: height / 2},
         mouseover_ready_flag = true,
         g = svg.append("g").attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
@@ -92,22 +92,7 @@ function directed_graph(data, svg, button_flag) {
         .domain(padExtent([1,8.9]))
         .range(padExtent([height-axisPad, 0]));
 
-    var titlesX = {
-        low: 160,
-        medium: width  / 2,
-        high: width - 160
-    };
-
-    var titlesY = {
-        high: 160,
-        medium: height    / 2 + 50,
-        low: height  - 100
-    };
-
     var amountCentersX = {
-        low: {x: width / 4},
-        medium: {x : width / 2},
-        high: {x : 2 * (width / 3) + 80},
         "Full sun": {x   :6*drawable_width/7 + nodeOffset},
         "Full sun to part sun": {x :5*drawable_width/7 + nodeOffset},
         "Full sun to part shade":{x:4*drawable_width/7 + nodeOffset},
@@ -117,9 +102,6 @@ function directed_graph(data, svg, button_flag) {
     };
 
     var amountCentersY = {
-        high: {y:height/3-50},
-        medium:{y:height/2},
-        low:{y:2*(height/3) + nodeOffset },
         "Dry":{y:4*drawable_height/5 + nodeOffset},
         "Nearly dry":{y:3*drawable_height/5 + nodeOffset},
         "Slightly dry":{y:2*drawable_height/5 +40},
@@ -131,14 +113,14 @@ function directed_graph(data, svg, button_flag) {
         return -Math.pow(d.radius+8, 2.0) * forceStrength;
     }
 
-    var simulation = d3.forceSimulation()
+   var simulation = d3.forceSimulation()
         .velocityDecay(0.2)
         .force('x', d3.forceX().strength(forceStrength).x(center.x))
         .force('y', d3.forceY().strength(forceStrength).y(center.y))
-        .force('charge',d3.forceManyBody().strength(charge))
-//        .force("collide", d3.forceCollide(function(d) {
-//            return d.radius+5
-//        }))
+//        .force('charge',d3.forceManyBody().strength(charge))
+        .force("collide", d3.forceCollide(function(d) {
+            return d.radius+0.5;
+        }))
         .on('tick',ticked);
         //we want the simulation to pause until nodes exist
 //        .stop();
@@ -146,13 +128,16 @@ function directed_graph(data, svg, button_flag) {
 
 
     // Map data from CSV + get max values for spread and hegiht
-    var mX = 0;
+ var mX = 0;
     var mY = 0;
     var nodes = data.map(function(d){
         var mHeight = parseMaxNum(d.Indoor_Height);
         var mSpread = parseMaxNum(d.Indoor_Spread);
-        if (mHeight > mX) mX = mHeight;
-        if (mSpread > mY) mY = mSpread;
+        if (mSpread > mX) mX = mSpread;
+        if (mHeight > mY){
+            mY = mHeight;
+//            console.log(mY);
+        } 
 
         return{
             sci_name: d.Scientific_Name,
@@ -187,15 +172,18 @@ function directed_graph(data, svg, button_flag) {
     // Create scales for plant height vs. spread graphs
     var spreadScale = d3.scaleLinear()
         .domain([0, mX])
-        .range([160, width + 125]);
+        .range([35, width-axisPad]);
 
     var heightScale = d3.scaleLinear()
         .domain([0, mY])
-        .range([drawable_height - 50, 200]);
+        .range([height-axisPad+35, 60]);
 
     // Function to parse out max spread and height and return num
     function parseMaxNum(d) {
         var arr = d.split(" ");
+        if(parseFloat(arr[2])==0){
+            return parseFloat(arr[2])+0.3;
+        }
         return parseFloat(arr[2]);
     }
 
@@ -298,7 +286,8 @@ function directed_graph(data, svg, button_flag) {
         simulation.force('x', d3.forceX().strength(forceStrength).x(nodeXPos));
         simulation.force('y', d3.forceY().strength(forceStrength).y(nodeYPos));
 
-        simulation.alpha(1.75).restart();
+        simulation.alpha(3).restart();
+        simulation.alpha(3);
 //
 //        setTimeout(function(){
 ////            simulation.stop();

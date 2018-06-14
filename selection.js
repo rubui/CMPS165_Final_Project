@@ -61,6 +61,7 @@ function opacity_macro(flag,type,name,cmp){
                 num:0,
                 reg:[]
             };
+            flag[type]=false;
 
             //count the number of tripped flags currently
             Object.keys(flag).map(function(key){
@@ -68,8 +69,7 @@ function opacity_macro(flag,type,name,cmp){
                     x.num++;
                     x.reg=x.reg.concat([key]);
                 }});        
-            console.log(x);
-            flag[type]=false;
+//            console.log(x);
 
             
              if(x.num==0)
@@ -127,6 +127,37 @@ function opacity_macro(flag,type,name,cmp){
                     .attr("id","");
 
                 }
+             if(x.num==4)
+                {
+                d3.selectAll(".bubble").transition(t)
+                  .style("opacity",0.1)
+                  .filter(function(d){
+                    return (d[name]==cmp&&
+                            d[referenceType[x.reg[0]]]==referenceCmp[x.reg[0]]&&
+                            d[referenceType[x.reg[1]]]==referenceCmp[x.reg[1]]&&
+                            d[referenceType[x.reg[2]]]==referenceCmp[x.reg[2]]&&
+                            d[referenceType[x.reg[3]]]==referenceCmp[x.reg[3]]);
+                  })
+                   .style("opacity", 1)
+                    .attr("id","");
+
+                }
+            if(x.num==5)
+                {
+                d3.selectAll(".bubble").transition(t)
+                  .style("opacity",0.1)
+                  .filter(function(d){
+                    return (d[name]==cmp&&
+                            d[referenceType[x.reg[0]]]==referenceCmp[x.reg[0]]&&
+                            d[referenceType[x.reg[1]]]==referenceCmp[x.reg[1]]&&
+                            d[referenceType[x.reg[2]]]==referenceCmp[x.reg[2]]&&
+                            d[referenceType[x.reg[3]]]==referenceCmp[x.reg[3]]&&
+                            d[referenceType[x.reg[4]]]==referenceCmp[x.reg[4]]);
+                  })
+                   .style("opacity", 1)
+                    .attr("id","");
+
+                }
 //            .attr("id","selected");
 //            
 //            d3.selectAll(".bubble")
@@ -154,7 +185,7 @@ function opacity_macro(flag,type,name,cmp){
                 }});
             
 
-            console.log(x);
+//            console.log(x);
             if(x.num==0)
                 {
                 //only 1 button pressed, release all
@@ -202,6 +233,35 @@ function opacity_macro(flag,type,name,cmp){
                     .attr("id","");
 
                 }
+            if(x.num==4)
+                {
+                d3.selectAll(".bubble").transition(t)
+                  .filter(function(d){
+                    return (d[name]!=cmp&&
+                            d[referenceType[x.reg[0]]]==referenceCmp[x.reg[0]]&&
+                            d[referenceType[x.reg[1]]]==referenceCmp[x.reg[1]]&&
+                            d[referenceType[x.reg[2]]]==referenceCmp[x.reg[2]]&&
+                            d[referenceType[x.reg[3]]]==referenceCmp[x.reg[3]]);
+                  })
+                    .style("opacity", 1)
+                    .attr("id","");
+
+                }
+            if(x.num==5)
+                {
+            d3.selectAll(".bubble").transition(t)
+              .filter(function(d){
+                return (d[name]!=cmp&&
+                        d[referenceType[x.reg[0]]]==referenceCmp[x.reg[0]]&&
+                        d[referenceType[x.reg[1]]]==referenceCmp[x.reg[1]]&&
+                        d[referenceType[x.reg[2]]]==referenceCmp[x.reg[2]]&&
+                        d[referenceType[x.reg[3]]]==referenceCmp[x.reg[3]]&&
+                        d[referenceType[x.reg[4]]]==referenceCmp[x.reg[4]]);
+              })
+                   .style("opacity", 1)
+                    .attr("id","");
+
+                }
             
             
 //            d3.selectAll("#not_selected")
@@ -209,7 +269,7 @@ function opacity_macro(flag,type,name,cmp){
             
         }
         
-    console.log(flag);
+//    console.log(flag);
 
 
     }
