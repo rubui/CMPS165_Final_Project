@@ -27,58 +27,51 @@
 
 <body>
 
-    <div id="main"  style="width:1545px; margin:0 auto;">        
+    <div id="main" style="width:1545px; margin:0 auto;">
 
         <!-- Title -->
         <h1 style="padding-top: 20px">California Houseplants Care Guide</h1>
-		
+
         <p style="text-align: center"> Taking care of indoor house plants is an endeavor that many try go get into, but a budding plant enthusiast may be overwhelmed by the plethora of options regarding plant care. Here, we have a simple visualization of some popular indoor house plants and some of the characteristics we thought planters would be interested in knowing. This includes whether the plant purifies air, can be hung, and if it is pet friendly (i.e., non-toxic to dogs and cats). This visualization can also double as a simple buyer's guide by showing various plants and their needs to be judged against their own.
         </p>
-        
-		<br>
+
+        <br>
 
         <!-- Row to handle graph and filters -->
         <div class="row">
-            
+
             <!-- Left sidebar (Static Tooltip) -->
             <div class="col-md-3">
+                
+                <!-- Static tooltip title -->
                 <div class=row>
                     <div class="container">
                         <br>
                         <h3 class="filter-block" style="text-align: center">Detailed Information</h3>
                         <div class="sub-filter" style="padding-top: 5px; padding-bottom: 10px">
-                   		<h6 class="sub-filter" style="color: darkgray">View more details about a selected plant below!</h6>
-                    </div>
+                            <h6 class="sub-filter" style="color: darkgray">View more details about a selected plant below!</h6>
+                        </div>
                     </div>
                 </div>
-
+                
+                <!-- Static Tooltip -->
                 <div class="static-tooltip">
-					<div id="plant-head" class="nickname"> Select a Plant <br><text style="text-align: center; color: darkgray"> Scientific Name<br></text></div>
-						<div style = "height: 150px;padding-left: 10px">
-						<div class="pic-container" style="float:left;">   
-    						<img class='resize_fit_center'/>
-					
-						</div>
-					    <div id="habit-tip" style=" float: center;padding-top:10px;"> 
-							<b>Plant Habit </b><br><br><b>Type</b> <br>
-						</div>
-					</div>
-						<div style=" float: left;text-align: left;font-weight:bold; font-size: 10pt"> 
-							Sunlight: <br>
-							Soil Indicator: <br> 
-							Water Amount: <br>
-							Height: <br>
-							Spread<br>
-							Indoor Flowering: <br>
-							Bloom Period: <br>
-							Bloom Description: <br>
-							Humidity: <br>
-							Air Purifying: <br>
-							Soil PH:<br>
-						</div>
-						<div id ="static-tip-data" style="float: right;text-align: right;font-size: 10pt"> </div>
-				
-				</div>
+                    <div id="plant-head" class="nickname"> Select a Plant <br><text style="text-align: center; color: darkgray"> Scientific Name<br></text></div>
+                    <div style="height: 150px;padding-left: 10px">
+                        <div class="pic-container" style="float:left;">
+                            <img class='resize_fit_center' />
+
+                        </div>
+                        <div id="habit-tip" style=" float: center;padding-top:10px;">
+                            <b>Plant Habit </b><br><br><b>Type</b> <br>
+                        </div>
+                    </div>
+                    <div style=" float: left;text-align: left;font-weight:bold; font-size: 10pt">
+                        Sunlight: <br> Soil Indicator: <br> Water Amount: <br> Height: <br> Spread
+                        <br> Indoor Flowering: <br> Bloom Period: <br> Bloom Description: <br> Humidity: <br> Air Purifying: <br> Soil PH:<br>
+                    </div>
+                    <div id="static-tip-data" style="float: right;text-align: right;font-size: 10pt"> </div>
+                </div>
 
             </div>
 
@@ -89,215 +82,213 @@
                 <div class="row" id="display" style="height=600px"></div>
 
                 <!--Spacer Row-->
-                <div class="row"><br></div>                                       
+                <div class="row"><br></div>
 
                 <!-- Row for buttons -->
                 <div class="row">
-			        <div class="col-md-3"></div>
-					<div class="col-md-3 graph-toggle">                        
-                        <input type="radio" name="options" id="option1" checked> 
-						<label for="option1" class="btn"> Water vs. Sun</label>
-					</div>
-    
-                    <div class="col-md-3 graph-toggle">
-                        <input type="radio" name="options" id="option2"> 
-						<label for="option2" class="btn"> Height vs. Spread</label>
-					</div>
-                                        
                     <div class="col-md-3"></div>
-		        </div>
+                    <div class="col-md-3 graph-toggle">
+                        <input type="radio" name="options" id="option1" checked>
+                        <label for="option1" class="btn"> Water vs. Sun</label>
+                    </div>
+
+                    <div class="col-md-3 graph-toggle">
+                        <input type="radio" name="options" id="option2">
+                        <label for="option2" class="btn"> Height vs. Spread</label>
+                    </div>
+
+                    <div class="col-md-3"></div>
+                </div>
                 
-                  <div class="row">
-			        <div class="col-md-2"></div>
-					<div class="col-md-8 ">                        
-                        <h6 class="sub-filter" style="color: darkgray; padding-top: 10px">Toggle between these two buttons to see  how plants rank in terms of relative care effort and to see how big they'll be in your home! </h6>
-					</div>
-                                        
+                <!-- Row for button description -->
+                <div class="row">
                     <div class="col-md-2"></div>
-		        </div>
+                    <div class="col-md-8 ">
+                        <h6 class="sub-filter" style="color: darkgray; padding-top: 10px">Toggle between these two buttons to see how plants rank in terms of relative care effort and to see how big they'll be in your home! </h6>
+                    </div>
+
+                    <div class="col-md-2"></div>
+                </div>
             </div>
-                        
+
 
             <!-- Sidebar for filters and toggles and tooltip (?) -->
             <div class="col-md-1" id="sidebar">
 
                 <br>
                 <div class="filters">
-					<text class="filter-block">Search Filters</text>       			
-                    
+                    <text class="filter-block">Search Filters</text>
+
                     <!-- Section Title -->
                     <div class="sub-filter" style="padding-top: 10px">
-                   		<h6 class="sub-filter">Characteristics</h6>
+                        <h6 class="sub-filter">Characteristics</h6>
                     </div>
-              				
-				<div class="row" style="padding-left: 10px">
-                    <label class="custom-control material-checkbox">
+                    
+                    <!-- Filter Checkboxes -->
+                    <div class="row" style="padding-left: 10px">
+                        <label class="custom-control material-checkbox">
 						<input type="checkbox" class="material-control-input" id="airp">
 						<span class="material-control-indicator"></span>
 						<span class="material-control-description">Air Purifying</span>
 					</label>
-                </div>
+                    </div>
 
-                <div class="row" style="padding-left: 10px">
-                    <label class="custom-control material-checkbox">
+                    <div class="row" style="padding-left: 10px">
+                        <label class="custom-control material-checkbox">
 						<input type="checkbox" class="material-control-input" id="hung">
 						<span class="material-control-indicator"></span>
 						<span class="material-control-description">Hanging Plants</span>
                 	</label>
-                </div>
-                
-				<div class="row" style="padding-left: 10px">
-                    <label class="custom-control material-checkbox">
+                    </div>
+
+                    <div class="row" style="padding-left: 10px">
+                        <label class="custom-control material-checkbox">
 						<input type="checkbox" class="material-control-input" id="flowers">
 						<span class="material-control-indicator"></span>
 						<span class="material-control-description">Flowers Indoors</span>
 					</label>
-				</div>
-				<div>	  
-                    
-                    <!-- Section Title -->
-                    <div class="sub-filter" style="padding-top: 10px">
-                   		<h6 class="sub-filter">Pet Friendly</h6>
                     </div>
-				
-					<div class="row" style="padding-left: 10px">
-						<div>
-                    		<label class="custom-control material-checkbox">
+                    
+                    <div>
+                        <!-- Section Title -->
+                        <div class="sub-filter" style="padding-top: 10px">
+                            <h6 class="sub-filter">Pet Friendly</h6>
+                        </div>
+
+                        <div class="row" style="padding-left: 10px">
+                            <div>
+                                <label class="custom-control material-checkbox">
 								<input type="checkbox" class="material-control-input" id="dogs">
 								<span class="material-control-indicator"></span>
 								<span class="material-control-description">Dogs</span>
                 			</label>
-						</div>
-                	
-						<div style="padding-left:10pt">
-                    		<label class="custom-control material-checkbox">
+                            </div>
+
+                            <div style="padding-left:10pt">
+                                <label class="custom-control material-checkbox">
 								<input type="checkbox" class="material-control-input" id="cats">
 								<span class="material-control-indicator"></span>
 								<span class="material-control-description">Cats</span>
                 			</label>
-						</div>
-                	</div>
-				</div>
-				</div>
-				
-                <br><br><br><br>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 
-                <div class = "row">
+                <!-- Spacing between filters and legend -->
+                <br><br><br><br>
+
+                <!-- Legend -->
+                <div class="row">
                     <div class="legend" style="padding-top: 5px">Legend</div>
                 </div>
-
-
             </div>
-
         </div>
 
-<!-- place .js src here   -->
-    <script src="//d3js.org/d3.v4.min.js"></script>
-    <script src="tooltip.js"></script>
-<!--    <script src="sidebar.js"></script>-->
-    <script src="directed_graph.js"></script>
-    <script src="selection.js"></script>
-    <script type="text/javascript">
-        //global vars go here:
-        //...
-        //color will obviously be hardcoded for habits (probably)
-        var color = d3.scaleOrdinal(d3.schemeCategory20);
+        <!-- place .js src here   -->
+        <script src="//d3js.org/d3.v4.min.js"></script>
+        <script src="tooltip.js"></script>
+        <script src="directed_graph.js"></script>
+        <script src="selection.js"></script>
+        <script type="text/javascript">
 
-        //loading that csv
-        d3.csv("plants_clean_40.csv", function(error, d){
-            var data = d;
-            console.log(d);
+            // Loading data csv
+            d3.csv("plants_clean_40.csv", function(error, d) {
+                var data = d;
 
-            var button_flag = true;
+                var button_flag = true;
 
-            var svg = d3.select("#display")
-            .append("svg")
-            .attr("class", "force-scale")
-            .attr("width",1020)
-            .attr("height",600);
+                var svg = d3.select("#display")
+                    .append("svg")
+                    .attr("class", "force-scale")
+                    .attr("width", 1020)
+                    .attr("height", 600);
 
-            //creating the tooltip div
-            var div = d3.select("#display").append("div")
-                .attr("class", "tooltip")
-				.attr("id", "sun-soil-water")
-                .style("opacity", 0);
+                //creating the tooltip div
+                var div = d3.select("#display").append("div")
+                    .attr("class", "tooltip")
+                    .attr("id", "sun-soil-water")
+                    .style("opacity", 0);
                 div.append("div")
-                    .attr('class','nickname');
+                    .attr('class', 'nickname');
                 div.append('div')
-                    .attr('class','sci_name');
+                    .attr('class', 'sci_name');
                 div.append("div")
                     .html('<br>');
-//                div.append('span')
-//                    .text('');
-			    div.append('div')
-                    .attr('class','tooltip-text')
+
+                div.append('div')
+                    .attr('class', 'tooltip-text')
                     .attr('id', 'sun');
                 div.append('div')
-                    .attr('class','tooltip-text')
+                    .attr('class', 'tooltip-text')
                     .attr('id', 'soil');
                 div.append('div')
-                    .attr('class','tooltip-text')
+                    .attr('class', 'tooltip-text')
                     .attr('id', 'water');
-			
-			var div = d3.select("#display").append("div")
-                .attr("class", "tooltip")
-			    .attr("id", "spread-height")
-                .style("opacity", 0);
+
+                var div = d3.select("#display").append("div")
+                    .attr("class", "tooltip")
+                    .attr("id", "spread-height")
+                    .style("opacity", 0);
                 div.append("div")
-                    .attr('class','nickname');
+                    .attr('class', 'nickname');
                 div.append('div')
-                    .attr('class','sci_name');
+                    .attr('class', 'sci_name');
                 div.append("div")
                     .html('<br>');
-			    div.append('div')
-                    .attr('class','tooltip-text')
+                div.append('div')
+                    .attr('class', 'tooltip-text')
                     .attr('id', 'height');
                 div.append('div')
-                    .attr('class','tooltip-text')
+                    .attr('class', 'tooltip-text')
                     .attr('id', 'spread');
-            //run functions here
-            directed_graph(data, svg, button_flag);
-            select_handler();
+                
+                // run functions here
+                directed_graph(data, svg, button_flag);
+                select_handler();
 
-        });
-
-        
+            });
         </script>
-        
-        <br>        
-        <hr>        
-        
-        <div class = "group_members">
-            <h3 class = "sources_header" style="line-height: 50px">
-                Group Members</h3>
-            
-            <ul class="list-unstyled" style="text-align: center">
-                    <li>Rebecca Bui (rubui@ucsc.edu)</li>
-                    <li>Melanie Lum (mhlum@ucsc.edu)</li>
-                    <li>Conor Rogers (cojaroge@ucsc.edu)</li>                    
-                    <li>Rishita Roy (riroy@ucsc.edu)</li>
 
-                </ul>
-            
-            <p style="text-align: center; line-height: 8px">In collaboration with Suresh K. Lodha, Karthik Balakrishnan, Christopher Bui, and Janesh Chhabra</p>
-            <br>
-            
-        </div>
-        
-        <div class = "group_members">
-            <h3 class = "sources_header" style="line-height: 50px">
-                Designed For</h3>
-                <p style="text-align: center">CMPS 165: Data Programming for Visualization, Spring 2018</p>      
-                <br>
-        </div>
-        
         <br>
+        <hr>
+        <br>
+        
+        <!-- Group Members  -->
+        <div class="group_members">
+            <h3 class="sources_header" style="line-height: 50px">
+                Group Members</h3>
+
+            <ul class="list-unstyled" style="text-align: center">
+                <li>Rebecca Bui (rubui@ucsc.edu)</li>
+                <li>Melanie Lum (mhlum@ucsc.edu)</li>
+                <li>Conor Rogers (cojaroge@ucsc.edu)</li>
+                <li>Rishita Roy (riroy@ucsc.edu)</li>
+
+            </ul>
+
+            <p style="text-align: center">In collaboration with Suresh K. Lodha, Karthik Balakrishnan, Christopher Bui, and Janesh Chhabra</p>
+
+            <p style="text-align: center; line-height: 8px">Site is hosted on GitHub Pages <a href="rubui.github.io/graph.html">here</a>. </p>
+            <br>
+        </div>
+
+        <!-- Designed For -->
+        <div class="group_members">
+            <h3 class="sources_header" style="line-height: 50px">
+                Designed For</h3>
+            <p style="text-align: center">CMPS 165: Data Programming for Visualization, Spring 2018</p>
+            <br>
+        </div>
+
+        <br>
+        
         <!-- Resources -->
         <div class="row" id="sources">
             <div class="col-md-3 ">
                 <h4 class="sources_header" style="text-align: center">Files</h4>
                 <ul class="sources_list">
-                    <li><a href="https://github.com/rubui/CMPS165_Final_Project">GitHub Link</a></li>
+                    <li><a href="https://github.com/rubui/CMPS165_Final_Project">GitHub Repository Link</a></li>
                     <li>index.html</li>
                     <li>graph.html</li>
                     <li>directed_graph.js</li>
@@ -311,7 +302,7 @@
                 <h4 class="sources_header" style="text-align: center">Visual Sources</h4>
                 <ul class="sources_list">
                     <li><a href="https://hannabrahman.github.io/Data-Visualization/">Influential Women</a></li>
-                    <li><a href = "http://zachd.github.io/food-facts/">Food Facts</a></li>
+                    <li><a href="http://zachd.github.io/food-facts/">Food Facts</a></li>
                 </ul>
             </div>
             <div class="col-md-3">
@@ -319,8 +310,9 @@
                 <ul class="sources_list">
                     <li><a href="http://bl.ocks.org/ericandrewlewis/dc79d22c74b8046a5512">Circles on Axis in a Force Layout</a></li>
                     <li><a href="http://vallandingham.me/bubble_charts_with_d3v4.html">Bubble Charts with D3v4</a></li>
-	                <li><a href="http://bl.ocks.org/tomgp/d59de83f771ca2b6f1d4">SVG arrow heads</a></li>
+                    <li><a href="http://bl.ocks.org/tomgp/d59de83f771ca2b6f1d4">SVG arrow heads</a></li>
                     <li><a href="https://bazinga612.github.io/CMPS263FinalProject-EndangeredSpecies/">Endangered Species Spotlight</a></li>
+                    <li><a href="https://bootsnipp.com/snippets/aM32E">Material Checkboxes</a></li>
                 </ul>
             </div>
             <div class="col-md-3">
@@ -335,13 +327,11 @@
                     <li><a href="https://www.rhs.org.uk/">RHS</a></li>
                     <li><a href="https://www.aspca.org/pet-care/animal-poison-control/toxic-and-non-toxic-plants">ASPCA</a></li>
                     <li><a href="https://ntrs.nasa.gov/archive/nasa/casi.ntrs.nasa.gov/19930073077.pdf">Interior Landscape Plants for Indoor Air Pollution Abatement</a></li>
-
-
                 </ul>
             </div>
-        <br><br><br><br><br><br>
+            <br><br><br><br><br><br>
+        </div>
+        <br>
     </div>
-    <br>
-</div>
 </body>
 </html>
