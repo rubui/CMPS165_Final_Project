@@ -25,6 +25,7 @@ function directed_graph(data, svg, button_flag) {
         mouseover_ready_flag = true,
         g = svg.append("g").attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
 
+    var image_size = radius*2;
     //storing custom paths that create arrows.. to be later used in axis
     //was kind of painful to determine these values, but I didn't use math so...
     svg.append('defs').append('marker')
@@ -136,7 +137,7 @@ function directed_graph(data, svg, button_flag) {
         if (mSpread > mX) mX = mSpread;
         if (mHeight > mY){
             mY = mHeight;
-            console.log(mY);
+//            console.log(mY);
         } 
 
         return{
@@ -252,14 +253,33 @@ function directed_graph(data, svg, button_flag) {
     //updates the x and y each tick-- 'x' and 'y' are for images
     //while cx and cy are for the bubbles
     function ticked(){
-        svg.selectAll(".bubble")
-            .attr("x", function(d) { return +d.x - (radius); })
-            .attr("y", function(d) { return +d.y - (radius); })
-            .attr("cx", function(d) { return d.x = Math.max(radius, Math.min(width - radius, d.x)); })
-            .attr("cy", function(d) { return d.y = Math.max(radius, Math.min(height -       radius, d.y)); });
+        if(mouseover_ready_flag){
+            svg.selectAll(".bubble")
+                .attr("x", function(d) { return +d.x - (radius); })
+                .attr("y", function(d) { return +d.y - (radius); })
+                .attr("cx", function(d) { return d.x = Math.max(radius, Math.min(width - radius, d.x)); })
+                .attr("cy", function(d) { return d.y = Math.max(radius, Math.min(height -       radius, d.y)); });
+        }
+        else{
+             svg.selectAll(".bubble")
+                .attr("x", function(d) { return +d.x - (radius); })
+                .attr("y", function(d) { return +d.y - (radius); })
+                .attr("cx", function(d) { return d.x = Math.max(radius, Math.min(width - radius, d.x)); })
+                .attr("cy", function(d) { return d.y = Math.max(radius, Math.min(height -       radius, d.y)); });
+
+           
+        }
+        
     }
 
-    //we can modify the get specific images later on
+    //we can modify the get specific images later 
+//    svg.selectAll(null)
+//        .data(nodes)
+//        .enter()
+//        .append("image")
+//        .attr("id",function(d){
+//        return d.id;
+//    })
     bubbles.append("image")
 
       .attr("xlink:href", function (d){
@@ -270,8 +290,8 @@ function directed_graph(data, svg, button_flag) {
             }
         })
       .attr("class", "bubble")
-      .attr("width", (radius)*2)
-      .attr("height", (radius)*2);
+      .attr("width", image_size)
+      .attr("height", image_size);
 
     simulation.nodes(nodes);
 
@@ -290,9 +310,9 @@ function directed_graph(data, svg, button_flag) {
         simulation.alpha(3);
 //
 //        setTimeout(function(){
-////            simulation.stop();
-//            mouseover_ready_flag = true;
-//        },2000)
+//            simulation.stop();
+////            mouseover_ready_flag = true;
+//        },1000)
     }
 
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -303,7 +323,7 @@ function directed_graph(data, svg, button_flag) {
     {
         //if we ever get around to fixing the image bug, we will set this flag
         //to false
-        if(mouseover_ready_flag){
+//        if(mouseover_ready_flag){
             //        console.log(d);
             var dd = d3.select(this)[0];
             d3.select(this)
@@ -314,24 +334,27 @@ function directed_graph(data, svg, button_flag) {
     
 
             // simulation.stop();
-
+            
+            mouseover_ready_flag = false;
+            
             d3.select(this).select('image')
                 .transition()
                 .duration(150)
                 .attr("width", 50)
                 .attr("height", 50)
                 .attr("x", function(d) { return +d.x - (radius*1.3); })
-                .attr("y", function(d) { return +d.y - (radius*1.3); });
-
+                .attr("y", function(d) { return +d.y - (radius*1.3); })
+        
     //        getOverview(data,d.index);
             tooltip(d,parseFloat(d3.event.pageX),parseFloat(d3.event.pageY), width, button_flag);
-        }
+//        }
 
     }
 
     function mouseout()
     {
-        if(mouseover_ready_flag){
+//        if(mouseover_ready_flag){
+
             d3.select(this)
                 .select("circle")
                 .transition()
@@ -346,9 +369,19 @@ function directed_graph(data, svg, button_flag) {
                 .attr("x", function(d) { return +d.x - (radius); })
                 .attr("y", function(d) { return +d.y - (radius); });
 
-            d3.selectAll(".tooltip").classed("hidden", true);
 
-        }
+            d3.selectAll(".tooltip").classed("hidden", true);
+            
+//            setTimeout(function(){
+//                    mouseover_ready_flag = true;
+//
+//                       },200);
+
+
+//        }
+        mouseover_ready_flag = true;
+//        ticked();
+
 
     }
     
@@ -499,6 +532,7 @@ g.selectAll(".yaxis > .tick > text").style("opacity", "0");
     d3.select("#option2")
         .on('click',function(){
         button_flag = false;
+		
 
         x_axis_label.text(x_label_spread);
         y_axis_label.text(y_label_height);
