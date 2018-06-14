@@ -11,7 +11,6 @@ function directed_graph(data, svg, button_flag) {
 //    http://bl.ocks.org/ericandrewlewis/dc79d22c74b8046a5512
 //    http://vallandingham.me/bubble_charts_with_d3v4.html
 
-
     var radius = 22,
         nodePadding = 2.5,
         forceStrength = .03,
@@ -22,11 +21,10 @@ function directed_graph(data, svg, button_flag) {
         drawable_width = width + 50,
         drawable_height = height + 20,
         center = {x: width / 2, y: height / 2},
-        mouseover_ready_flag = true,
         g = svg.append("g").attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
 
     var image_size = radius*2;
-    //storing custom paths that create arrows.. to be later used in axis
+    //storing custom paths that create arrows to be later used in axis
     //was kind of painful to determine these values, but I didn't use math so...
     svg.append('defs').append('marker')
         .attr('id', 'arrowhead_right')
@@ -118,17 +116,17 @@ function directed_graph(data, svg, button_flag) {
         .velocityDecay(0.2)
         .force('x', d3.forceX().strength(forceStrength).x(center.x))
         .force('y', d3.forceY().strength(forceStrength).y(center.y))
-//        .force('charge',d3.forceManyBody().strength(charge))
         .force("collide", d3.forceCollide(function(d) {
             return d.radius+0.5;
         }))
         .on('tick',ticked);
         //we want the simulation to pause until nodes exist
-//        .stop();
-    simulation.stop();
+ 
+		
+		simulation.stop();
 
 
-    // Map data from CSV + get max values for spread and hegiht
+ // Map data from CSV + get max values for spread and hegiht
  var mX = 0;
     var mY = 0;
     var nodes = data.map(function(d){
@@ -137,7 +135,6 @@ function directed_graph(data, svg, button_flag) {
         if (mSpread > mX) mX = mSpread;
         if (mHeight > mY){
             mY = mHeight;
-//            console.log(mY);
         } 
 
         return{
@@ -187,7 +184,6 @@ function directed_graph(data, svg, button_flag) {
         }
         return parseFloat(arr[2]);
     }
-
 
     // Functions to be called once for each node
     // Provides the approriate x and y for nodes
@@ -266,12 +262,9 @@ function directed_graph(data, svg, button_flag) {
             .attr("y", function(d) { return +d.y - (radius*1.4); })
 			.attr("width", 60)
 			.attr("height", 60);
-		
-
-
     }
-
-    //we can modify the get specific images later on
+   
+   //apple.png was taken from the Foods project listed in our sources. Used as place holder image.
    var bubbleImage =
 	   bubbles.append("svg:image")
       .attr("xlink:href", function (d){
@@ -304,84 +297,55 @@ function directed_graph(data, svg, button_flag) {
 
 
     function start(){
-//        mouseover_ready_flag = false;
         simulation.force('x', d3.forceX().strength(forceStrength).x(nodeXPos));
         simulation.force('y', d3.forceY().strength(forceStrength).y(nodeYPos));
 
         simulation.alpha(3).restart();
         simulation.alpha(3);
-//
-//        setTimeout(function(){
-//            simulation.stop();
-////            mouseover_ready_flag = true;
-//        },1000)
     }
 
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     // Mouse over
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     
-    function mouseover(d)
-    {
-        //if we ever get around to fixing the image bug, we will set this flag
-        //to false
-//        if(mouseover_ready_flag){
-            //        console.log(d);
-            var dd = d3.select(this)[0];
-            d3.select(this)
-                .select("circle")
-                .transition()
-                .duration(150)
-                .attr("r", radius*1.3);
-    
+    function mouseover(d){
+    	var dd = d3.select(this)[0];
+       	d3.select(this)
+          .select("circle")
+          .transition()
+          .duration(150)
+          .attr("r", radius*1.3);
 
-            // simulation.stop();
-
-            d3.select(this)
-                .transition()
-                .duration(150)
-			    .attr("x", function(d) { return +d.x - (radius*1.4); })
-                .attr("y", function(d) { return +d.y - (radius*1.4); })
-                .attr("width", 60)
-				.attr("height", 60);
-				d3.select(this).classed("my-select", true);
-    //        getOverview(data,d.index);
-            tooltip(d,parseFloat(d3.event.pageX),parseFloat(d3.event.pageY), width, button_flag);
-//        }
+        d3.select(this)
+          .transition()
+          .duration(150)
+		  .attr("x", function(d) { return +d.x - (radius*1.4); })
+          .attr("y", function(d) { return +d.y - (radius*1.4); })
+          .attr("width", 60)
+		  .attr("height", 60);
+		d3.select(this).classed("my-select", true);
+        
+		tooltip(d,parseFloat(d3.event.pageX),parseFloat(d3.event.pageY), width, button_flag);
 
     }
 
-    function mouseout()
-    {
-//        if(mouseover_ready_flag){
+    function mouseout() {
+        d3.select(this)
+          .select("circle")
+          .transition()
+          .duration(150)
+          .attr("r", radius);
 
-            d3.select(this)
-                .select("circle")
-                .transition()
-                .duration(150)
-                .attr("r", radius);
+        d3.select(this)
+          .transition()
+          .duration(150)
+          .attr("width", radius*2)
+          .attr("height", radius*2)
+          .attr("x", function(d) { return +d.x - (radius); })
+          .attr("y", function(d) { return +d.y - (radius); });
+		d3.select(this).classed("my-select",false);
 
-            d3.select(this)
-                .transition()
-                .duration(150)
-                .attr("width", radius*2)
-                .attr("height", radius*2)
-                .attr("x", function(d) { return +d.x - (radius); })
-                .attr("y", function(d) { return +d.y - (radius); });
-			d3.select(this).classed("my-select",false);
-
-            d3.selectAll(".tooltip").classed("hidden", true);
-            
-//            setTimeout(function(){
-//                    mouseover_ready_flag = true;
-//
-//                       },200);
-
-
-//        }
-        mouseover_ready_flag = true;
-//        ticked();
-
+        d3.selectAll(".tooltip").classed("hidden", true);
 
     }
     
@@ -475,16 +439,15 @@ function directed_graph(data, svg, button_flag) {
     var x_axis = g.append("g")
         .attr("class", "xaxis")
         .attr("transform", "translate(" + -(width-axisPad)/2 + "," + (height-axisPad)/2 + ")")
-        .call(d3.axisBottom(x).ticks(5).tickSizeOuter(0))//.ticks(0).tickSizeOuter(0))
+        .call(d3.axisBottom(x).ticks(5).tickSizeOuter(0))
         .style("opacity", 1)
         .select('path')
         .attr('marker-end', 'url(#arrowhead_right)')
         .call(d3.axisBottom(x));
     
 
-//g.select(".xaxis > path").style("stroke", "red");
-g.selectAll(".xaxis > .tick > line").style("opacity", "0");
-g.selectAll(".xaxis > .tick > text").style("opacity", "0");
+	g.selectAll(".xaxis > .tick > line").style("opacity", "0");
+	g.selectAll(".xaxis > .tick > text").style("opacity", "0");
     
     //yaxis
     var y_axis = g.append("g")
@@ -496,8 +459,8 @@ g.selectAll(".xaxis > .tick > text").style("opacity", "0");
         .attr('marker-end','url(#arrowhead_top)')
         .call(d3.axisLeft(y));
 
-g.selectAll(".yaxis > .tick > line").style("opacity", "0");
-g.selectAll(".yaxis > .tick > text").style("opacity", "0");
+	g.selectAll(".yaxis > .tick > line").style("opacity", "0");
+	g.selectAll(".yaxis > .tick > text").style("opacity", "0");
 
     
 
@@ -564,8 +527,6 @@ g.selectAll(".yaxis > .tick > text").style("opacity", "0");
         .append("svg")
         .style("width", "150px")
         .style("height", "170px")
-
-//        .style("background-color", "pink")
         .append("g");
     
     var squareSize = 25; 

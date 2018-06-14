@@ -1,7 +1,5 @@
 function tooltip(d, xPosition, yPosition, svgWidth, flag)
-{
-//    var xPosition = parseFloat(d3.event.clientX);
-//    var yPosition = parseFloat(d3.event.clientY-50);
+{;
 	if(flag){
 	    d3.select("#sun-soil-water").classed("hidden", false);
 		d3.select("#spread-height").classed("hidden", true);
@@ -53,7 +51,4 @@ function tooltip(d, xPosition, yPosition, svgWidth, flag)
         tip.select('#spread')
             .html("<br>" + divTitle +"Spread: </div>" +  "<div style=\"float:right;\">" + d.plant_spread + "</div></div><br>");
 
-//    tip.style("opacity",'.9');
-    
-//    console.log(d);
 }

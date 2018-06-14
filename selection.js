@@ -29,9 +29,6 @@ function select_handler(){
         .on("click",function(){
             opacity_macro(flags,"airp","air","Yes");
     });
-    
-//    console.log(nodes);
-    
 }
 
 function opacity_macro(flag,type,name,cmp){
@@ -69,34 +66,30 @@ function opacity_macro(flag,type,name,cmp){
                     x.num++;
                     x.reg=x.reg.concat([key]);
                 }});        
-//            console.log(x);
 
-            
              if(x.num==0)
                 {
-                      //Select all buble and hide
+                   //Select all buble and hide
                   d3.selectAll(".bubble").transition(t)
                   .style("opacity", 0.1)
                   .filter(function(d){
                     return (d[name] == cmp);
                   })
                     //Make this line seen
-                   .style("opacity", 1);
+                  .style("opacity", 1);
                 }
-            if(x.num==1)
-                {
+             if(x.num==1)
+          		{
                 //2 buttons pressed, only release if only matches to 1
-//                console.log("num = 2");
                 d3.selectAll(".bubble").transition(t)
                   .style("opacity", 0.1)
                   .filter(function(d){
-//                    console.log(d[referenceType[x.reg[0]]]==referenceCmp[x.reg[0]]);
-                    return (d[name]==cmp&&
-                            d[referenceType[x.reg[0]]]==referenceCmp[x.reg[0]]);
+                  return (d[name]==cmp&&
+                          d[referenceType[x.reg[0]]]==referenceCmp[x.reg[0]]);
                   })
                     //Make this line seen
-                   .style("opacity", 1)
-                    .attr("id","");
+                  .style("opacity", 1)
+                  .attr("id","");
                 
                     
                 }
@@ -113,6 +106,7 @@ function opacity_macro(flag,type,name,cmp){
                    .style("opacity", 1)
                     .attr("id","");
                 }
+			
             if(x.num==3)
                 {
                 d3.selectAll(".bubble").transition(t)
@@ -127,6 +121,7 @@ function opacity_macro(flag,type,name,cmp){
                     .attr("id","");
 
                 }
+			
              if(x.num==4)
                 {
                 d3.selectAll(".bubble").transition(t)
@@ -158,17 +153,6 @@ function opacity_macro(flag,type,name,cmp){
                     .attr("id","");
 
                 }
-//            .attr("id","selected");
-//            
-//            d3.selectAll(".bubble")
-//                .filter(function(d){
-//                    return d3.select(this).attr("id") != "selected";
-//                })
-//                    .attr("id","not_selected");
-            
-//            
-//            d3.selectAll("#not_selected")
-//                .style("opacity",0.1);
         }
         else{
             var x={
@@ -263,13 +247,6 @@ function opacity_macro(flag,type,name,cmp){
 
                 }
             
-            
-//            d3.selectAll("#not_selected")
-//                .style("opacity",0.1);
-            
         }
-        
-//    console.log(flag);
-
 
     }

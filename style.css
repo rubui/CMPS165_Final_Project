@@ -276,41 +276,6 @@ left: 1.25rem;
     color: #696969;
 }
 
-.btn-secondary {
-  color: #fff;
-  background-color: forestgreen;
-  border-color: forestgreen;
-}
-
-.btn-secondary:hover {
-  color: #fff;
-  background-color: darkblue;
-  border-color: darkblue;
-}
-
-.btn-secondary:focus, .btn-secondary.focus {
-  box-shadow: 0 0 0 0.2rem rgba(108, 117, 125, 0.5);
-}
-
-.btn-secondary.disabled, .btn-secondary:disabled {
-  color: #fff;
-  background-color: forestgreen;
-  border-color: forestgreen;
-}
-
-.btn-secondary:not(:disabled):not(.disabled):active, .btn-secondary:not(:disabled):not(.disabled).active,
-.show > .btn-secondary.dropdown-toggle {
-  color: #fff;
-  background-color: red;
-  border-color: red;
-}
-
-.btn-secondary:not(:disabled):not(.disabled):active:focus, .btn-secondary:not(:disabled):not(.disabled).active:focus,
-.show > .btn-secondary.dropdown-toggle:focus {
-  box-shadow: 0 0 0 10rem rgba(108, 117, 125, 1);
-  border-color: darkgreen;
-}
-
 .graph-toggle input[type="radio"] {
   display: none;
 }
