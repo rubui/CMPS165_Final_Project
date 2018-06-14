@@ -12,7 +12,7 @@ function directed_graph(data, svg, button_flag) {
 //    http://vallandingham.me/bubble_charts_with_d3v4.html
 
 
-    var radius = 22,
+    var radius = 24,
         nodePadding = 2.5,
         forceStrength = .03,
         axisPad = 90,
