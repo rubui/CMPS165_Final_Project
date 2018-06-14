@@ -69,7 +69,7 @@ function opacity_macro(flag,type,name,cmp){
                     x.num++;
                     x.reg=x.reg.concat([key]);
                 }});        
-            console.log(x);
+//            console.log(x);
 
             
              if(x.num==0)
@@ -185,7 +185,7 @@ function opacity_macro(flag,type,name,cmp){
                 }});
             
 
-            console.log(x);
+//            console.log(x);
             if(x.num==0)
                 {
                 //only 1 button pressed, release all
@@ -269,7 +269,7 @@ function opacity_macro(flag,type,name,cmp){
             
         }
         
-    console.log(flag);
+//    console.log(flag);
 
 
     }
