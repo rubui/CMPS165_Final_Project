@@ -12,7 +12,7 @@ function directed_graph(data, svg, button_flag) {
 //    http://vallandingham.me/bubble_charts_with_d3v4.html
 
 
-    var radius = 24,
+    var radius = 22,
         nodePadding = 2.5,
         forceStrength = .03,
         axisPad = 90,
@@ -262,10 +262,10 @@ function directed_graph(data, svg, button_flag) {
 		svg.selectAll(".my-select")  
 		     .transition()
              .duration(4)
-			.attr("x", function(d) { return +d.x - (radius*1.3); })
-            .attr("y", function(d) { return +d.y - (radius*1.3); })
-			.attr("width", 50)
-			.attr("height", 50);
+			.attr("x", function(d) { return +d.x - (radius*1.4); })
+            .attr("y", function(d) { return +d.y - (radius*1.4); })
+			.attr("width", 60)
+			.attr("height", 60);
 		
 
 
@@ -340,10 +340,10 @@ function directed_graph(data, svg, button_flag) {
             d3.select(this)
                 .transition()
                 .duration(150)
-			    .attr("x", function(d) { return +d.x - (radius*1.3); })
-                .attr("y", function(d) { return +d.y - (radius*1.3); })
-                .attr("width", 50)
-				.attr("height", 50);
+			    .attr("x", function(d) { return +d.x - (radius*1.4); })
+                .attr("y", function(d) { return +d.y - (radius*1.4); })
+                .attr("width", 60)
+				.attr("height", 60);
 				d3.select(this).classed("my-select", true);
     //        getOverview(data,d.index);
             tooltip(d,parseFloat(d3.event.pageX),parseFloat(d3.event.pageY), width, button_flag);
