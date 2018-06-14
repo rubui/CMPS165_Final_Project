@@ -261,18 +261,12 @@ function directed_graph(data, svg, button_flag) {
                 .attr("cy", function(d) { return d.y = Math.max(radius, Math.min(height -       radius, d.y)); });
         }
         else{
-//             svg.selectAll(".bubble")
-//                .attr("x", function(d) { return +d.x - (radius); })
-//                .attr("y", function(d) { return +d.y - (radius); })
-//                .attr("cx", function(d) { return d.x = Math.max(radius, Math.min(width - radius, d.x)); })
-//                .attr("cy", function(d) { return d.y = Math.max(radius, Math.min(height -       radius, d.y)); });
-//            d3.select(this).select('image')
-//                .transition()
-//                .duration(150)
-//                .attr("width", 50)
-//                .attr("height", 50)
-//                .attr("x", function(d) { return +d.x - (radius*1.3); })
-//                .attr("y", function(d) { return +d.y - (radius*1.3); });
+             svg.selectAll(".bubble")
+                .attr("x", function(d) { return +d.x - (radius); })
+                .attr("y", function(d) { return +d.y - (radius); })
+                .attr("cx", function(d) { return d.x = Math.max(radius, Math.min(width - radius, d.x)); })
+                .attr("cy", function(d) { return d.y = Math.max(radius, Math.min(height -       radius, d.y)); });
+
            
         }
         
@@ -340,9 +334,9 @@ function directed_graph(data, svg, button_flag) {
                 .transition()
                 .duration(150)
                 .attr("width", 50)
-                .attr("height", 50)
-                .attr("x", function(d) { return +d.x - (radius*1.3); })
-                .attr("y", function(d) { return +d.y - (radius*1.3); });
+                .attr("height", 50);
+//                .attr("x", function(d) { return +d.x - (radius*1.3); })
+//                .attr("y", function(d) { return +d.y - (radius*1.3); });
         
     //        getOverview(data,d.index);
             tooltip(d,parseFloat(d3.event.pageX),parseFloat(d3.event.pageY), width, button_flag);
@@ -362,11 +356,11 @@ function directed_graph(data, svg, button_flag) {
 
             d3.select(this).select('image')
                 .transition()
-                .duration(0)
+                .duration(150)
                 .attr("width", radius*2)
-                .attr("height", radius*2)
-                .attr("x", function(d) { return +d.x - (radius); })
-                .attr("y", function(d) { return +d.y - (radius); });
+                .attr("height", radius*2);
+//                .attr("x", function(d) { return +d.x - (radius); })
+//                .attr("y", function(d) { return +d.y - (radius); });
 
 
             d3.selectAll(".tooltip").classed("hidden", true);
