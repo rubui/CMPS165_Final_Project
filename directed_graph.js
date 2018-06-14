@@ -272,7 +272,14 @@ function directed_graph(data, svg, button_flag) {
         
     }
 
-    //we can modify the get specific images later on
+    //we can modify the get specific images later 
+//    svg.selectAll(null)
+//        .data(nodes)
+//        .enter()
+//        .append("image")
+//        .attr("id",function(d){
+//        return d.id;
+//    })
     bubbles.append("image")
 
       .attr("xlink:href", function (d){
@@ -334,9 +341,9 @@ function directed_graph(data, svg, button_flag) {
                 .transition()
                 .duration(150)
                 .attr("width", 50)
-                .attr("height", 50);
-//                .attr("x", function(d) { return +d.x - (radius*1.3); })
-//                .attr("y", function(d) { return +d.y - (radius*1.3); });
+                .attr("height", 50)
+                .attr("x", function(d) { return +d.x - (radius*1.3); })
+                .attr("y", function(d) { return +d.y - (radius*1.3); })
         
     //        getOverview(data,d.index);
             tooltip(d,parseFloat(d3.event.pageX),parseFloat(d3.event.pageY), width, button_flag);
@@ -358,9 +365,9 @@ function directed_graph(data, svg, button_flag) {
                 .transition()
                 .duration(150)
                 .attr("width", radius*2)
-                .attr("height", radius*2);
-//                .attr("x", function(d) { return +d.x - (radius); })
-//                .attr("y", function(d) { return +d.y - (radius); });
+                .attr("height", radius*2)
+                .attr("x", function(d) { return +d.x - (radius); })
+                .attr("y", function(d) { return +d.y - (radius); });
 
 
             d3.selectAll(".tooltip").classed("hidden", true);
@@ -373,7 +380,7 @@ function directed_graph(data, svg, button_flag) {
 
 //        }
         mouseover_ready_flag = true;
-        ticked();
+//        ticked();
 
 
     }
