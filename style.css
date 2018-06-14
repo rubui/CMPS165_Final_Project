@@ -12,7 +12,7 @@ h2 {
 
 .sources_header {
     font-family: 'Roboto Slab', serif;
-    color: forestgreen;
+    color: #09630C;
 }
 
 .node circle {
@@ -76,8 +76,8 @@ h2 {
     padding: 10px;
     box-shadow: 5px 5px lightgrey;
     padding: 10px; 
-    width: 350px;
-    height: 500px;
+    width: 360px;
+    height: 450px;
 	padding: 20px;
 }
 .filter-seperate {
@@ -87,10 +87,10 @@ h2 {
 }
 
 .sub-filter{
-	color: darkslategray;
+	color: #09630C;
 	font-family: 'Roboto Slab', serif;
-	font-size: 11pt;
-
+	font-size: 12pt;
+    text-align: center;
 }
 
 .pic-container {
@@ -142,7 +142,7 @@ h2 {
 
 
 .material-control-description {
-    font-size: 12px; 
+    font-size: 15px; 
     text-anchor: middle; 
     
 }
@@ -207,143 +207,6 @@ left: -1px;
 background: #fdfdfd;
 box-shadow: 0 2px 10px #aaa;
 }
-.custom-control.ios-switch {
---color: #4cd964;
-padding-left: 0;
-}
-.custom-control.ios-switch .ios-switch-control-input {
-display: none;
-}
-.custom-control.ios-switch .ios-switch-control-input:active ~ .ios-switch-control-indicator::after {
-width: 20px;
-}
-.custom-control.ios-switch .ios-switch-control-input:checked ~ .ios-switch-control-indicator {
-border: 10px solid var(--color);
-}
-.custom-control.ios-switch .ios-switch-control-input:checked ~ .ios-switch-control-indicator::after {
-top: -8px;
-left: 4px;
-}
-.custom-control.ios-switch .ios-switch-control-input:checked:active ~ .ios-switch-control-indicator::after {
-left: 0px;
-}
-.custom-control.ios-switch .ios-switch-control-indicator {
-display: inline-block;
-position: relative;
-margin: 0 10px;
-top: 4px;
-width: 32px;
-height: 20px;
-background: #fff;
-border-radius: 16px;
-transition: .3s;
-border: 2px solid #ddd;
-}
-.custom-control.ios-switch .ios-switch-control-indicator::after {
-content: '';
-display: block;
-position: absolute;
-width: 16px;
-height: 16px;
-border-radius: 16px;
-transition: .3s;
-top: 0px;
-left: 0px;
-background: #fff;
-box-shadow: 0 0 2px #aaa, 0 2px 5px #999;
-}
-.custom-control.border-switch {
---color: #4cd964;
-padding-left: 0;
-}
-.custom-control.border-switch .border-switch-control-input {
-display: none;
-}
-.custom-control.border-switch .border-switch-control-input:checked ~ .border-switch-control-indicator {
-border-color: var(--color);
-}
-.custom-control.border-switch .border-switch-control-input:checked ~ .border-switch-control-indicator::after {
-left: 14px;
-background-color: var(--color);
-}
-.custom-control.border-switch .border-switch-control-indicator {
-display: inline-block;
-position: relative;
-margin: 0 10px;
-top: 4px;
-width: 32px;
-height: 20px;
-background: #fff;
-border-radius: 16px;
-transition: .3s;
-border: 2px solid #ccc;
-}
-.custom-control.border-switch .border-switch-control-indicator::after {
-content: '';
-display: block;
-position: absolute;
-width: 12px;
-height: 12px;
-border-radius: 50%;
-transition: .3s;
-top: 2px;
-left: 2px;
-background: #ccc;
-}
-.custom-control.teleport-switch {
---color: #4cd964;
-padding-left: 0;
-}
-.custom-control.teleport-switch .teleport-switch-control-input {
-display: none;
-}
-.custom-control.teleport-switch .teleport-switch-control-input:checked ~ .teleport-switch-control-indicator {
-border-color: var(--color);
-}
-.custom-control.teleport-switch .teleport-switch-control-input:checked ~ .teleport-switch-control-indicator::after {
-left: -14px;
-}
-.custom-control.teleport-switch .teleport-switch-control-input:checked ~ .teleport-switch-control-indicator::before {
-right: 2px;
-background-color: var(--color);
-}
-.custom-control.teleport-switch .teleport-switch-control-indicator {
-display: inline-block;
-position: relative;
-margin: 0 10px;
-top: 4px;
-width: 32px;
-height: 20px;
-background: #fff;
-border-radius: 16px;
-transition: .3s;
-border: 2px solid #ccc;
-overflow: hidden;
-}
-.custom-control.teleport-switch .teleport-switch-control-indicator::after {
-content: '';
-display: block;
-position: absolute;
-width: 12px;
-height: 12px;
-border-radius: 50%;
-transition: .3s;
-top: 2px;
-left: 2px;
-background: #ccc;
-}
-.custom-control.teleport-switch .teleport-switch-control-indicator::before {
-content: '';
-display: block;
-position: absolute;
-width: 12px;
-height: 12px;
-border-radius: 50%;
-transition: .3s;
-top: 2px;
-right: -14px;
-background: #ccc;
-}
 
 .list-group:first-child .list-group-control:first-child {
 border-top-left-radius: .25rem;
@@ -389,13 +252,10 @@ left: 1.25rem;
     font-family: 'Roboto Slab', serif;
     font-size: 18px;
     font-style: bold;
-    fill: darkgrey;
-    border-radius: 5px;
-	border-color: aliceblue;
+    fill: darkgrey;    
     color: forestgreen;
-    border: 1px solid lightgrey;
-    height: 200px;
-    width: 125px;
+    height: 210px;
+    width: 190px;
 }
 
 .row .filters{
@@ -412,6 +272,7 @@ left: 1.25rem;
 .legend-text { 
     font-size: 13px;
     font-family: 'Roboto';    
+    color: black;
 }
 
 .btn-secondary {
@@ -465,4 +326,8 @@ left: 1.25rem;
 
 .graph-toggle input[type="radio"]:checked+label {
   	background-color: darkgreen;
+}
+
+a {
+    color: seagreen;
 }

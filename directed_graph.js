@@ -25,6 +25,7 @@ function directed_graph(data, svg, button_flag) {
         mouseover_ready_flag = true,
         g = svg.append("g").attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
 
+    var image_size = radius*2;
     //storing custom paths that create arrows.. to be later used in axis
     //was kind of painful to determine these values, but I didn't use math so...
     svg.append('defs').append('marker')
@@ -264,8 +265,8 @@ function directed_graph(data, svg, button_flag) {
     }
 
     //we can modify the get specific images later on
-   var bubbleImage = bubbles.append("svg:image")
-
+   var bubbleImage =
+	   bubbles.append("svg:image")
       .attr("xlink:href", function (d){
             if (d.img){
                 return "img/" + d.img;
@@ -304,9 +305,9 @@ function directed_graph(data, svg, button_flag) {
         simulation.alpha(3);
 //
 //        setTimeout(function(){
-////            simulation.stop();
-//            mouseover_ready_flag = true;
-//        },2000)
+//            simulation.stop();
+////            mouseover_ready_flag = true;
+//        },1000)
     }
 
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -317,7 +318,7 @@ function directed_graph(data, svg, button_flag) {
     {
         //if we ever get around to fixing the image bug, we will set this flag
         //to false
-        if(mouseover_ready_flag){
+//        if(mouseover_ready_flag){
             //        console.log(d);
             var dd = d3.select(this)[0];
             d3.select(this)
@@ -335,18 +336,18 @@ function directed_graph(data, svg, button_flag) {
 			    .attr("x", function(d) { return +d.x - (radius*1.3); })
                 .attr("y", function(d) { return +d.y - (radius*1.3); })
                 .attr("width", 50)
-                .attr("height", 50);
-			d3.select(this).classed("my-select", true);
-
+				.attr("height", 50);
+				d3.select(this).classed("my-select", true);
     //        getOverview(data,d.index);
             tooltip(d,parseFloat(d3.event.pageX),parseFloat(d3.event.pageY), width, button_flag);
-        }
+//        }
 
     }
 
     function mouseout()
     {
-        if(mouseover_ready_flag){
+//        if(mouseover_ready_flag){
+
             d3.select(this)
                 .select("circle")
                 .transition()
@@ -363,9 +364,19 @@ function directed_graph(data, svg, button_flag) {
 			 d3.select(this).classed("my-select",false);
 			console.log( d3.select(this).classed("my-select"));
 
-            d3.selectAll(".tooltip").classed("hidden", true);
 
-        }
+            d3.selectAll(".tooltip").classed("hidden", true);
+            
+//            setTimeout(function(){
+//                    mouseover_ready_flag = true;
+//
+//                       },200);
+
+
+//        }
+        mouseover_ready_flag = true;
+//        ticked();
+
 
     }
     
@@ -373,9 +384,9 @@ function directed_graph(data, svg, button_flag) {
     // Axis labels
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     var y_label_water = "Water";
-    var y_label_height = "Max Indoor Height";
+    var y_label_height = "Max Indoor Height (ft)";
     var x_label_sunlight = "Sunlight";
-    var x_label_spread = "Max Indoor Spread";
+    var x_label_spread = "Max Indoor Spread (ft)";
 
     var x_name = x_label_sunlight;
     var y_name = y_label_water;
@@ -420,7 +431,7 @@ function directed_graph(data, svg, button_flag) {
         .attr("class", "x_label")
         .style("font-family", "Roboto Slab")
         .style("font-size", "16pt")
-        .attr("x", 10)
+        .attr("x", 15)
         .attr("y", 290)
         .style("font-size", "16px")
         .style("text-anchor", "middle");
@@ -431,7 +442,7 @@ function directed_graph(data, svg, button_flag) {
         .attr("class", "x_label")
         .style("font-family", "Roboto Slab")
         .style("font-size", "16pt")
-        .attr("x", 450)
+        .attr("x", 455)
         .attr("y", 280)
         .style("font-size", "11px")
         .style("text-anchor", "end")
@@ -442,7 +453,7 @@ function directed_graph(data, svg, button_flag) {
         .attr("class", "x_label")
         .style("font-family", "Roboto Slab")
         .style("font-size", "16pt")
-        .attr("x", -450)
+        .attr("x", -455)
         .attr("y", 280)
         .style("font-size", "11px")
         .style("text-anchor", "start")
@@ -546,82 +557,85 @@ g.selectAll(".yaxis > .tick > text").style("opacity", "0");
 
     var chart = d3.select(".legend")
         .append("svg")
-        .style("width", "125px")
+        .style("width", "150px")
         .style("height", "170px")
 
-    //    .style("background-color", "pink")
+//        .style("background-color", "pink")
         .append("g");
+    
+    var squareSize = 25; 
+    var legendTextX = 40; 
 
     chart.append("rect")
         .attr("x", 5)
-        .attr("y", 15)
-        .attr("width", 10)
-        .attr("height", 10)
+        .attr("y", 15)        
+        .attr("width", squareSize)
+        .attr("height", squareSize)
         .style("fill", TopLeftQuad);
     chart.append("text")
         .attr("class", "legend-text")
-        .attr("x", 30)
+        .attr("x", legendTextX)
         .attr("y", 25)
-        .text("More water");
+        .text("Needs more water");
     chart.append("text")
         .attr("class", "legend-text")
-        .attr("x", 30)
+        .attr("x", legendTextX)
         .attr("y", 40)
-        .text("More shade");
+        .text("Prefers shade");
 
 
 
     chart.append("rect")
         .attr("x", 5)
         .attr("y", 55)
-        .attr("width", 10)
-        .attr("height", 10)
+        .attr("width", squareSize)
+        .attr("height", squareSize)
         .style("fill", BottomLeftQuad);
     chart.append("text")
         .attr("class", "legend-text")
-        .attr("x", 30)
+        .attr("x", legendTextX)
         .attr("y", 65)
-        .text("Less water");
+        .text("Needs less water");
     chart.append("text")
         .attr("class", "legend-text")
-        .attr("x", 30)
+        .attr("x", legendTextX)
         .attr("y", 80)
-        .text("More shade");
+        .text("Prefers shade");
 
 
     chart.append("rect")
         .attr("x", 5)
         .attr("y", 95)
-        .attr("width", 10)
-        .attr("height", 10)
+        .attr("width", squareSize)
+        .attr("height", squareSize)
         .style("fill", TopRightQuad);
     chart.append("text")
         .attr("class", "legend-text")
-        .attr("x", 30)
+        .attr("x", legendTextX)
         .attr("y", 105)
-        .text("More water");
+        .text("Needs more water");
     chart.append("text")
         .attr("class", "legend-text")
-        .attr("x", 30)
+        .attr("x", legendTextX)
         .attr("y", 120)
-        .text("More sun");
+        .text("Prefers sun");
 
 
     chart.append("rect")
         .attr("x", 5)
         .attr("y", 135)
-        .attr("width", 10)
-        .attr("height", 10)
+        .attr("width", squareSize)
+        .attr("height", squareSize)
         .style("fill", BottomRightQuad);
     chart.append("text")
         .attr("class", "legend-text")
-        .attr("x", 30)
+        .attr("x", legendTextX)
         .attr("y", 145)
-        .text("Less water");
+        .text("Needs more water");
     chart.append("text")
         .attr("class", "legend-text")
-        .attr("x", 30)
+        .attr("x", legendTextX)
         .attr("y", 160)
-        .text("More sun");
+        .text("Prefers sun");
 
     }
