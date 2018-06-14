@@ -87,10 +87,10 @@ h2 {
 }
 
 .sub-filter{
-	color: darkslategray;
+	color: darkolivegreen;
 	font-family: 'Roboto Slab', serif;
-	font-size: 11pt;
-
+	font-size: 12pt;
+    text-align: center;
 }
 
 .pic-container {
@@ -142,7 +142,7 @@ h2 {
 
 
 .material-control-description {
-    font-size: 12px; 
+    font-size: 15px; 
     text-anchor: middle; 
     
 }
