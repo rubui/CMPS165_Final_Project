@@ -389,9 +389,9 @@ function directed_graph(data, svg, button_flag) {
     // Axis labels
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     var y_label_water = "Water";
-    var y_label_height = "Max Indoor Height";
+    var y_label_height = "Max Indoor Height (ft)";
     var x_label_sunlight = "Sunlight";
-    var x_label_spread = "Max Indoor Spread";
+    var x_label_spread = "Max Indoor Spread (ft)";
 
     var x_name = x_label_sunlight;
     var y_name = y_label_water;
@@ -436,7 +436,7 @@ function directed_graph(data, svg, button_flag) {
         .attr("class", "x_label")
         .style("font-family", "Roboto Slab")
         .style("font-size", "16pt")
-        .attr("x", 10)
+        .attr("x", 15)
         .attr("y", 290)
         .style("font-size", "16px")
         .style("text-anchor", "middle");
@@ -447,7 +447,7 @@ function directed_graph(data, svg, button_flag) {
         .attr("class", "x_label")
         .style("font-family", "Roboto Slab")
         .style("font-size", "16pt")
-        .attr("x", 450)
+        .attr("x", 455)
         .attr("y", 280)
         .style("font-size", "11px")
         .style("text-anchor", "end")
@@ -458,7 +458,7 @@ function directed_graph(data, svg, button_flag) {
         .attr("class", "x_label")
         .style("font-family", "Roboto Slab")
         .style("font-size", "16pt")
-        .attr("x", -450)
+        .attr("x", -455)
         .attr("y", 280)
         .style("font-size", "11px")
         .style("text-anchor", "start")
@@ -562,82 +562,85 @@ g.selectAll(".yaxis > .tick > text").style("opacity", "0");
 
     var chart = d3.select(".legend")
         .append("svg")
-        .style("width", "125px")
+        .style("width", "150px")
         .style("height", "170px")
 
-    //    .style("background-color", "pink")
+//        .style("background-color", "pink")
         .append("g");
+    
+    var squareSize = 25; 
+    var legendTextX = 40; 
 
     chart.append("rect")
         .attr("x", 5)
-        .attr("y", 15)
-        .attr("width", 10)
-        .attr("height", 10)
+        .attr("y", 15)        
+        .attr("width", squareSize)
+        .attr("height", squareSize)
         .style("fill", TopLeftQuad);
     chart.append("text")
         .attr("class", "legend-text")
-        .attr("x", 30)
+        .attr("x", legendTextX)
         .attr("y", 25)
-        .text("More water");
+        .text("Needs more water");
     chart.append("text")
         .attr("class", "legend-text")
-        .attr("x", 30)
+        .attr("x", legendTextX)
         .attr("y", 40)
-        .text("More shade");
+        .text("Prefers shade");
 
 
 
     chart.append("rect")
         .attr("x", 5)
         .attr("y", 55)
-        .attr("width", 10)
-        .attr("height", 10)
+        .attr("width", squareSize)
+        .attr("height", squareSize)
         .style("fill", BottomLeftQuad);
     chart.append("text")
         .attr("class", "legend-text")
-        .attr("x", 30)
+        .attr("x", legendTextX)
         .attr("y", 65)
-        .text("Less water");
+        .text("Needs less water");
     chart.append("text")
         .attr("class", "legend-text")
-        .attr("x", 30)
+        .attr("x", legendTextX)
         .attr("y", 80)
-        .text("More shade");
+        .text("Prefers shade");
 
 
     chart.append("rect")
         .attr("x", 5)
         .attr("y", 95)
-        .attr("width", 10)
-        .attr("height", 10)
+        .attr("width", squareSize)
+        .attr("height", squareSize)
         .style("fill", TopRightQuad);
     chart.append("text")
         .attr("class", "legend-text")
-        .attr("x", 30)
+        .attr("x", legendTextX)
         .attr("y", 105)
-        .text("More water");
+        .text("Needs more water");
     chart.append("text")
         .attr("class", "legend-text")
-        .attr("x", 30)
+        .attr("x", legendTextX)
         .attr("y", 120)
-        .text("More sun");
+        .text("Prefers sun");
 
 
     chart.append("rect")
         .attr("x", 5)
         .attr("y", 135)
-        .attr("width", 10)
-        .attr("height", 10)
+        .attr("width", squareSize)
+        .attr("height", squareSize)
         .style("fill", BottomRightQuad);
     chart.append("text")
         .attr("class", "legend-text")
-        .attr("x", 30)
+        .attr("x", legendTextX)
         .attr("y", 145)
-        .text("Less water");
+        .text("Needs more water");
     chart.append("text")
         .attr("class", "legend-text")
-        .attr("x", 30)
+        .attr("x", legendTextX)
         .attr("y", 160)
-        .text("More sun");
+        .text("Prefers sun");
 
     }
