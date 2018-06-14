@@ -136,7 +136,7 @@ function directed_graph(data, svg, button_flag) {
         if (mSpread > mX) mX = mSpread;
         if (mHeight > mY){
             mY = mHeight;
-            console.log(mY);
+//            console.log(mY);
         } 
 
         return{
